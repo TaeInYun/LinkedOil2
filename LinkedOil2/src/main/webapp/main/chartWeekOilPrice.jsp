@@ -7,9 +7,9 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script type="text/javascript">
  
-    var arr = [['date','휘발유','고급휘발유','등유','경유','LPG']];
+    var arr = [['date','휘발유']];
     $(function(){
-    	$.ajax({url:"listWeekOilPrice.jsp",success:function(data){
+    	$.ajax({url:"main/listWeekOilPrice.jsp",success:function(data){
     		console.log(data);
     		i=0;
     		$.each(data, function(index,item){
@@ -20,7 +20,7 @@
     			}
     			row.push(item['price']);
     			i++;
-    			if(i == 5){
+    			if(i == 1){
     				arr.push(row);
     				i=0;
     			}
@@ -37,9 +37,17 @@
         var data = google.visualization.arrayToDataTable(arr);
 
         var options = {
-          title: '최근 7일간 일일 유가 평균가격',
-          curveType: 'function',
-          legend: { position: 'bottom' }
+	          title: '최근 7일간 일일 유가 평균가격',
+	          curveType: 'function',
+	          legend: { position: 'bottom' },
+	          responsive: false,
+	          scales: {
+				yAxes: [{
+					ticks: {
+						stepSize : 10
+					}
+				}]
+			}
         };
 
         var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
@@ -49,6 +57,6 @@
     </script>
   </head>
   <body>
-    <div id="curve_chart" style="width: 350px; height: 200px"></div>
+    <div id="curve_chart" style="width: 600px; height: 350px"></div>
   </body>
 </html>

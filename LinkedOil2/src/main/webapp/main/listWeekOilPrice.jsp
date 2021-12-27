@@ -20,12 +20,19 @@
    		}	
 	%>
 	<%
+		
   	 	ArrayList<WeekAvgOilPriceVO> list = new ArrayList<WeekAvgOilPriceVO>(); 
 		String serviceKey = "F211201253";
 	try {
+    		String url="https://www.opinet.co.kr/api/avgRecentPrice.do?out=xml&code="+serviceKey+"&prodcd=D047";
+			
+    		if((String)request.getAttribute("oil_code") != null){
+				String re = (String)request.getAttribute("oil_code");
+				String prodcd = re.substring(1, 5);
+    			url="https://www.opinet.co.kr/api/avgRecentPrice.do?out=xml&code="+serviceKey+"&prodcd="+prodcd;
+			}
+    		
     	//open api url	
-    	String url="http://www.opinet.co.kr/api/avgRecentPrice.do?out=xml&code="+serviceKey;
-
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder dBuilder  = dbFactory.newDocumentBuilder();
         Document doc = dBuilder.parse(url);
@@ -42,13 +49,29 @@
             if(nNode.getNodeType()==Node.ELEMENT_NODE){
                
             	Element element = (Element) nNode;
-            	
-            	String date = getTagValue("DATE", element);
             	String oil_code = getTagValue("PRODCD", element);
-            	String price = getTagValue("PRICE", element);
+	            String price = getTagValue("PRICE", element);
+            	String month = getTagValue("DATE", element).substring(4, 6);
+            	String date = getTagValue("DATE", element).substring(6, 8);
+            	String str = month + "/" + date;
             	
-            	WeekAvgOilPriceVO vo = new WeekAvgOilPriceVO(date, oil_code, Double.parseDouble(price));
-            	list.add(vo);
+            	if(oil_code.equals("B027")){
+            		oil_code="휘발유";
+	            	WeekAvgOilPriceVO vo = new WeekAvgOilPriceVO(str, oil_code, Double.parseDouble(price));
+	            	list.add(vo);
+            	}else if(oil_code.equals("D047")){
+            		oil_code="경유";
+	            	WeekAvgOilPriceVO vo = new WeekAvgOilPriceVO(str, oil_code, Double.parseDouble(price));
+	            	list.add(vo);
+            	}else if(oil_code.equals("B034")){
+            		oil_code="고급휘발유";
+	            	WeekAvgOilPriceVO vo = new WeekAvgOilPriceVO(str, oil_code, Double.parseDouble(price));
+	            	list.add(vo);
+            	}else if(oil_code.equals("K015")){
+            		oil_code = "LPG";
+	            	WeekAvgOilPriceVO vo = new WeekAvgOilPriceVO(str, oil_code, Double.parseDouble(price));
+	            	list.add(vo);
+            	}
             }//if
 
         }//for nodelist
