@@ -3,7 +3,8 @@ package com.linkedoil.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
-import com.linkedoil.db.ConnectionProvider;
+import com.linked.db.ConnectionProvider;
+
 
 public class OilDAO {
 	
