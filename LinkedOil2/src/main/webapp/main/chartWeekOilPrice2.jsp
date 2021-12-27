@@ -11,6 +11,7 @@
     $(function(){
     	$.ajax({url:"listWeekOilPrice.jsp",success:function(data){
     		console.log(data);
+    		console.log("----------------------------------");
     		i=0;
     		$.each(data, function(index,item){
     			
@@ -26,8 +27,9 @@
     			}
     		
     		});
-    		 google.charts.load('current', {'packages':['corechart']});
-    		 google.charts.setOnLoadCallback(drawChart);
+    		console.log(arr);
+    		google.charts.load('current', {'packages':['corechart']});
+    		google.charts.setOnLoadCallback(drawChart);
     	}});
     	
     });
@@ -37,18 +39,17 @@
         var data = google.visualization.arrayToDataTable(arr);
 
         var options = {
-          title: '최근 7일간 일일 유가 평균가격',
-          curveType: 'function',
-          legend: { position: 'bottom' }
+                title: 'Company Performance',
+                hAxis: {title: 'Year',  titleTextStyle: {color: '#333'}},
+                vAxis: {minValue: 0}
         };
 
-        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
-
+        var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
         chart.draw(data, options);
       }
     </script>
   </head>
   <body>
-    <div id="curve_chart" style="width: 350px; height: 200px"></div>
+    <div id="chart_div" style="width: 100%; height: 500px;"></div>
   </body>
 </html>
