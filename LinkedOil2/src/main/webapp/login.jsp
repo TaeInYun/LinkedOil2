@@ -10,8 +10,6 @@
 <body>
 	<h2>LINKED OIL</h2>
 	 
-	
-	 
 	<form action="loginOK.do" method="post">
 			아이디 : <input type="text" name ="email"> <br>
 			비밀번호 : <input type="password" name ="pwd"><br>

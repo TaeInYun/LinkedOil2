@@ -7,7 +7,13 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h2>아이디 찾기</h2>
+
+	<h2>아이디 찾기</h2>	 
+	 <form action="idFind.do" method="post">	 
+	 		이름 : <input type="text" name ="email"> <br>
+			닉네임 : <input type="password" name ="pwd"><br>
+			<input type="submit" value="아이디 찾기"><br>
+	 </form>
 	 
 </body>
 </html>
