@@ -21,7 +21,6 @@ public class ListTodayOilInfoAction implements LinkedOilAction {
 			throws ServletException, IOException {
 		
 		dao = new TodayOilPriceDAO();
-		System.out.println("¿€µø");
 		ArrayList<TodayOilVO> list = dao.listTodayOil();
 		request.setAttribute("list", list);
 		return "index.jsp";

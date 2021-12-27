@@ -14,7 +14,9 @@
 		<tr>
 			<td>${t.oil_name }</td>
 			<td>${t.price }</td>
-			<td>${t.api_diff }</td>
+			<td>어제보다 ${t.api_diff }원</td>
+			<td>지난주보다 ${t.week_diff }원</td>
+			<td>지난달보다 ${t.month_diff }원</td>
 		</tr>
 		
 	</c:forEach>
