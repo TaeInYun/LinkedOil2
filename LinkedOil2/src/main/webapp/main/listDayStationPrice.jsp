@@ -1,9 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript"  src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
@@ -20,15 +20,15 @@ $(function(){
                switch(prodcd){
         		case 'B027' :
         			var bPrice = $("<p></p>").html(price);
-        			var bDiff = $("<p></p>").html(diff);
+        			var bDiff = $("<p></p>").html("어제보다 " + diff);
     				break;
         		case 'D047' :
         			var dPrice = $("<p></p>").html( price );
-        			var dDiff = $("<p></p>").html(diff);
+        			var dDiff = $("<p></p>").html("어제보다 " + diff);
     				break;
         		case 'K015' :
         			var cPrice = $("<p></p>").html( price);
-        			var cDiff = $("<p></p>").html(diff);
+        			var cDiff = $("<p></p>").html("어제보다 " + diff);
     				break;       				
         	}
 
@@ -51,9 +51,9 @@ $(function(){
   
 	<table>
 		<tr>
-			<td>�ֹ���</td>
-			<td>����</td>
-			<td>LPG</td>
+			<th>휘발유</th>
+			<th>경유</th>
+			<th>LPG</th>
 		</tr>
 		<tr>
 			<td> <div id="bPrice"></div></td>

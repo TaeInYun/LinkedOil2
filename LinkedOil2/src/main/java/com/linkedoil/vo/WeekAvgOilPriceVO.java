@@ -15,6 +15,13 @@ public class WeekAvgOilPriceVO {
 			super();
 			// TODO Auto-generated constructor stub
 		}
+		
+		public WeekAvgOilPriceVO(String week, String oil_code, double price) {
+			super();
+			this.week = week;
+			this.oil_code = oil_code;
+			this.price = price;
+		}
 
 		public WeekAvgOilPriceVO(String week, double premium_gas_price, double gas_price, double diesel_price) {
 			super();

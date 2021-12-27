@@ -45,7 +45,7 @@ public class ReadWeekAvgOilPrice {
 
         try {
             	//open api url	
-            	String url="https://www.opinet.co.kr/api/avgRecentPrice.do?out=xml&code=F211201253";
+            	String url="https://www.opinet.co.kr/api/avgRecentPrice.do?out=xml&code="+serviceKey;
 
                 DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
                 DocumentBuilder dBuilder  = dbFactory.newDocumentBuilder();
