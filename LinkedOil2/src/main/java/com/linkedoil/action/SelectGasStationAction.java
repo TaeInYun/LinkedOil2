@@ -45,45 +45,46 @@ public class SelectGasStationAction implements LinkedOilAction {
 			 System.out.println("검색 유종: "+oil);
 			 
 			 
-					if(sido1 == null && session.getAttribute("sido1")!=null) {				
-						user_brand = (String)session.getAttribute("user_brand");
-						sido1 = (String)session.getAttribute("sido1");
-					}
-					if(gugun1 == null && session.getAttribute("gugun1")!=null) {				
-						user_brand = (String)session.getAttribute("user_brand");
-						sido1 = (String)session.getAttribute("sido1");
-						gugun1 = (String)session.getAttribute("gugun1");
-					}
-					 
-					if(oil == null && session.getAttribute("oil") != null) {
-						oil = (String)session.getAttribute("oil");
-					}
+				
+			 
+				if(sido1 == null && session.getAttribute("sido1")!=null) {				
+					user_brand = (String)session.getAttribute("user_brand");
+					sido1 = (String)session.getAttribute("sido1");
+				}
+				if(gugun1 == null && session.getAttribute("gugun1")!=null) {				
+					user_brand = (String)session.getAttribute("user_brand");
+					sido1 = (String)session.getAttribute("sido1");
+					gugun1 = (String)session.getAttribute("gugun1");
+				}
+				 
+				if(oil == null && session.getAttribute("oil") != null) {
+					oil = (String)session.getAttribute("oil");
+				}
+		
+		 	int pageNUM=1;
+			 
+			if(request.getParameter("pageNUM")!=null) {			
+				pageNUM =Integer.parseInt(request.getParameter("pageNUM"));
+			}
 			
-			 	int pageNUM=1;
-				 
-				if(request.getParameter("pageNUM")!=null) {			
-					pageNUM =Integer.parseInt(request.getParameter("pageNUM"));
-				}
-				
-				System.out.println("pageNUM:"+pageNUM);
-				ArrayList<GasStationVO>list = dao.listgas(pageNUM,sido1,gugun1,user_brand,oil);
-			 	request.setAttribute("totalPage", GasDAO.totalPage);		
-				request.setAttribute("list", list);
-				 
-				
+			System.out.println("pageNUM:"+pageNUM);
+			ArrayList<GasStationVO>list = dao.listgas(pageNUM,sido1,gugun1,user_brand,oil);
+		 	request.setAttribute("totalPage", GasDAO.totalPage);		
+			request.setAttribute("list", list);
 			 
-				if(sido1 != null && gugun1!=null) {
-					
-					session.setAttribute("sido1", sido1);
-					session.setAttribute("gugun1", gugun1);
-					session.setAttribute("user_brand", user_brand);
-				}
+			
+		 
+			if(sido1 != null && gugun1!=null) {
 				
-				if(oil != null) {
-					session.setAttribute("oil", oil);
-				}
-			 
-				return "selectGasStation.jsp";
+				session.setAttribute("sido1", sido1);
+				session.setAttribute("gugun1", gugun1);
+				session.setAttribute("user_brand", user_brand);
+			}
+			
+			if(oil != null) {
+				session.setAttribute("oil", oil);
+			}return "selectGasStation.jsp";			
+ 
 			}
 
 	}

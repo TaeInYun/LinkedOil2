@@ -12,6 +12,8 @@ public class IdFindAction implements LinkedOilAction {
 	public String proRequest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		
+		
 		return "idFind.jsp";
 	}
 
