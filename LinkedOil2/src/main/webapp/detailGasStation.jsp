@@ -11,7 +11,9 @@
  <a href="likeStation.do">관심주유소 등록하기</a>
  <div>
  <div class="left">
+ 
 	<h2>주유소 상세 페이지</h2>
+	
 	<hr>
 		주유소 번호 : ${g.no1}<br>	
 		주유소 고유번호 : ${g.no2}<br>
@@ -24,6 +26,7 @@
 		휘발유 가격:${g.oil_price_b027 }<br>
 		경유 가격:	${g.oil_price_d047 }<br>				
 		실내등유 가격:	 ${g.oil_price_c004}<br>
+		
 </div>
  <div id="map" style="width:100%;height:350px;" class="right">
 
