@@ -1,16 +1,34 @@
 <%@page import="java.util.ArrayList"%>
-<%@page import="com.sist.dao.GasDAO"%>
-<%@page import="com.sist.vo.GasStationVO"%>
+ 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"   
 pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
+
 <meta charset="UTF-8">  
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script> 
 <!--  시도 선택을 위한 js-->
 <script language="javascript">
+//내 위치 불러오기 
+function getLocation() {
+	  if (navigator.geolocation) { // GPS를 지원하면
+	    navigator.geolocation.getCurrentPosition(function(position) {
+	      alert(position.coords.latitude + ' ' + position.coords.longitude);
+	      //위도 경도를 불러옴
+	    }, function(error) {
+	      console.error(error);
+	    }, {
+	      enableHighAccuracy: false,
+	      maximumAge: 0,
+	      timeout: Infinity
+	    });
+	  } else {
+	    alert('GPS를 지원하지 않습니다');
+	  }
+	}
+	getLocation();
 
  
 $('document').ready(function() {
@@ -127,11 +145,10 @@ listData.forEach(function(addr, index) {
 		</select>
 			
 		<select name="oil" id="oil" >		 
-				<option value="oil_price_b027" selected="selected">휘발유</option>		
-				<option value="oil_price_d047">경유</option>				 
+				<option value="oil_b027" selected="selected">휘발유</option>		
+				<option value="oil_d047">경유</option>				 
 		</select>
-		 <input type='checkbox' name='yososu' value='yososu' />요소수
-		
+	 
 					   
 		<input type="submit" value="검색">
 </form>
@@ -163,15 +180,15 @@ listData.forEach(function(addr, index) {
 		 <c:forEach var="g" items="${list }"> 
 		 	<tr>
 		 	  				
-			 	<td>${g.local } </td>				
+			 	<td>${g.station_local } </td>
 			 	<td>
-			 		<a href="detailGasStation.do?no2=${g.no2}">${g.name}</a> 
+			 		<a href="detailGasStation.do?station_no=${g.station_no}">${g.station_name}</a> 
 			 	</td>			 
-				<td> ${g.addr } </td>			
-				<td> ${g.brand } </td>			
+				<td> ${g.station_addr } </td>			
+				<td> ${g.station_brand } </td>			
 						
-				<td> ${g.oil_price_b027 } </td>			
-				<td> ${g.oil_price_d047 } </td>			
+				<td> ${g.oil_b027 } </td>			
+				<td> ${g.oil_d047 } </td>			
 						 
 			</tr>			
 		 </c:forEach>
@@ -184,6 +201,10 @@ listData.forEach(function(addr, index) {
 		<a href="selectGasStation.do?pageNUM=${i}">${i}</a>&nbsp;&nbsp;
 		<!-- -링크를 걸어주고 page번호를 받음 -->
 	</c:forEach>
+	
+	
+	
+	
 	
 	
 	

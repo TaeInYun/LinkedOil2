@@ -15,17 +15,17 @@
 	<h2>주유소 상세 페이지</h2>
 	
 	<hr>
-		주유소 번호 : ${g.no1}<br>	
-		주유소 고유번호 : ${g.no2}<br>
-		주유소 지역 : ${g.local }<br>
-	 	주유소 상호: ${g.name}	<br>  	
-		주유소 주소: ${g.addr }<br>
-		주유소 상표: ${g.brand } <br>				
-		주유소 셀프여부: ${g.self }	<br> 	 
-		고급휘발유 가격: ${g.oil_price_b034 }<br>		 
-		휘발유 가격:${g.oil_price_b027 }<br>
-		경유 가격:	${g.oil_price_d047 }<br>				
-		실내등유 가격:	 ${g.oil_price_c004}<br>
+		주유소 번호 : ${g.station_num}<br>	
+		주유소 고유번호 : ${g.station_no}<br>
+		주유소 지역 : ${g.station_local }<br>
+	 	주유소 상호: ${g.station_name}	<br>  	
+		주유소 주소: ${g.station_addr }<br>
+		주유소 상표: ${g.station_brand } <br>				
+		주유소 셀프여부: ${g.station_self }	<br> 	 
+		고급휘발유 가격: ${g.oil_b037 }<br>		 
+		휘발유 가격:${g.oil_b027 }<br>
+		경유 가격:	${g.oil_d047 }<br>				
+		실내등유 가격: ${g.oil_c004}<br>
 		
 </div>
  <div id="map" style="width:100%;height:350px;" class="right">
@@ -45,7 +45,7 @@ var map = new kakao.maps.Map(mapContainer, mapOption);
 var geocoder = new kakao.maps.services.Geocoder();
 
 // 주소로 좌표를 검색합니다
-geocoder.addressSearch('${g.addr}', function(result, status) {
+geocoder.addressSearch('${g.station_addr}', function(result, status) {
 
     // 정상적으로 검색이 완료됐으면 
      if (status === kakao.maps.services.Status.OK) {
@@ -60,7 +60,7 @@ geocoder.addressSearch('${g.addr}', function(result, status) {
 
         // 인포윈도우로 장소에 대한 설명을 표시합니다
         var infowindow = new kakao.maps.InfoWindow({
-            content: '<div style="width:150px;text-align:center;padding:6px 0;">${g.name}</div>'
+            content: '<div style="width:150px;text-align:center;padding:6px 0;">${g.station_name}</div>'
         });
         infowindow.open(map, marker);
 
