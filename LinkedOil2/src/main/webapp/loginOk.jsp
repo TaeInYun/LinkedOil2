@@ -13,6 +13,7 @@
 	String email = request.getParameter("email");
 	String pwd = request.getParameter("pwd");
 	MemberDAO dao = new MemberDAO();
+	
 	if( dao.isMember(email, pwd)){
 		//세션이 있나 확인
 		session.setAttribute("member", "yes");

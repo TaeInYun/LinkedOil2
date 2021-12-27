@@ -10,6 +10,7 @@
 	<form action="searchList.do" method="post">
 	<input type="text" name="searchbox">
 	<input type="submit" value="검색">	
+	
 	</form>
 </body>
 </html>

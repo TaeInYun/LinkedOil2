@@ -18,6 +18,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import com.linkedoil.dao.LocalDAO;
+import com.linkedoil.dao.WeekAvgOilPriceDAO;
 import com.linkedoil.vo.LocalVO;
 import com.linkedoil.vo.WeekAvgOilPriceVO;
 
@@ -69,6 +70,10 @@ public class ReadWeekAvgOilPrice {
                 double premium_gas_price = 0;
                 double lpg_price = 0;
                 
+                int year = 0;
+                int month = 0;
+                int day = 0;
+                
                 for(int temp =0; temp<nodeList.getLength(); temp++) {
                     Node nNode = nodeList.item(temp);
                     
@@ -77,8 +82,17 @@ public class ReadWeekAvgOilPrice {
                     	Element element = (Element) nNode;
                     	
                     	String oil_code = getTagValue("PRODCD", element);
-                    	System.out.println(oil_code);
+                    	String date = getTagValue("DATE", element);
                     	
+                    	String sub_year = date.substring(0, 4);
+                    	String sub_month = date.substring(4,6);
+                    	String sub_day = date.substring(6,8);
+                    	
+                    	year = Integer.parseInt(sub_year);
+                    	month = Integer.parseInt(sub_month) -1;
+                    	day = Integer.parseInt(sub_day);
+                    	
+                    	//평균을 내기위해 각각의 유가를 유가변수에 더하면서 넣어줌
                     	if( oil_code.equals(gas_code) ) {
                     		gas_price += Double.parseDouble( getTagValue("PRICE", element) );
                     	}else if ( oil_code.equals(diesel_code) ) {
@@ -88,39 +102,75 @@ public class ReadWeekAvgOilPrice {
 						}else if ( oil_code.equals(lpg_code) ) {
 							lpg_price += Double.parseDouble( getTagValue("PRICE", element) );
 						}
-                    	/*
-                        //VO에 값 담기
-                        WeekAvgOilPriceVO vo = new WeekAvgOilPriceVO();
-                        vo.setOil_code(getTagValue("PRODCD", element)); 
-                       vo.setLocal_name(getTagValue("AREA_NM", element));  //충전소명
-                       vo.setGas_price(price);
-                       vo.setDiesel_price(price);
-                       vo.setPremium_gas_price(price);
-                       vo.setLpg_price(price);
-                        //insert메소드
-                        LocalDAO dao = new LocalDAO();
-                        int re = dao.insertLocal(local);
-                    	if(re==1) {
-            				System.out.println("레코드 생성 성공");
-            			}else {
-            				System.out.println("레코드 생성 실패");
-            			}
-                        */
+                    	
                     }//if
 
                 }//for nodelist
                 
-                double avg_gas_price = gas_price/7;
+                //레코드 삽입하기위한 변수들
+                double avg_gas_price = Math.round(gas_price/7*100) / 100.0;
+                double avg_diesel_price = Math.round(diesel_price/7*100) / 100.0;
+                double avg_premium_gas_price = Math.round(premium_gas_price/7*100) / 100.0;
+                double avg_lpg_price = Math.round(lpg_price/7*100) / 100.0;
+                
+                Calendar date = Calendar.getInstance();
+                date.set(year, month, day);
+                int weekOfMonth = date.get(Calendar.WEEK_OF_MONTH) - 1;
+                
+                String week = date.get(Calendar.YEAR) + "년" + (date.get(Calendar.MONTH)+1) + "월" + weekOfMonth + "주";
                 
                 
-                Calendar today = Calendar.getInstance();
-            	int week = today.get(Calendar.WEEK_OF_MONTH);
-            	
-                System.out.println(avg_gas_price);
-                System.out.println(diesel_price);
-                System.out.println(premium_gas_price);
-                System.out.println(lpg_price);
+                //VO생성
+                WeekAvgOilPriceVO gas = new WeekAvgOilPriceVO();
+                gas.setWeek(week);
+                gas.setPrice(avg_gas_price);
+                gas.setOil_code(gas_code);
+                
+                WeekAvgOilPriceVO diesel = new WeekAvgOilPriceVO();
+                diesel.setWeek(week);
+                diesel.setPrice(avg_diesel_price);
+                diesel.setOil_code(diesel_code);
+                
+                WeekAvgOilPriceVO premium_gas = new WeekAvgOilPriceVO();
+                premium_gas.setWeek(week);
+                premium_gas.setPrice(avg_premium_gas_price);
+                premium_gas.setOil_code(premium_gas_code);
+                
+                WeekAvgOilPriceVO lpg = new WeekAvgOilPriceVO();
+                lpg.setWeek(week);
+                lpg.setPrice(avg_lpg_price);
+                lpg.setOil_code(lpg_code);
 
+                //레코드 삽입 메소드 호출
+                WeekAvgOilPriceDAO dao = new WeekAvgOilPriceDAO();
+
+                int result_gas = dao.insertWeekAvgOilPrice(gas);
+                int result_diesel = dao.insertWeekAvgOilPrice(diesel);
+                int result_premium_gas = dao.insertWeekAvgOilPrice(premium_gas);
+                int result_lpg = dao.insertWeekAvgOilPrice(lpg);
+                
+                if(result_gas==1) {
+    				System.out.println("휘발유 레코드 생성 성공");
+    			}else {
+    				System.out.println("휘발유 레코드 생성 실패");
+    			}
+                
+                if(result_premium_gas==1) {
+                	System.out.println("고급휘발유 레코드 생성 성공");
+                }else {
+                	System.out.println("고급 휘발유 레코드 생성 실패");
+                }
+                if(result_diesel==1) {
+                	System.out.println("경유 레코드 생성 성공");
+                }else {
+                	System.out.println("경유 레코드 생성 실패");
+                }
+                if(result_lpg==1) {
+                	System.out.println("LPG 레코드 생성 성공");
+                }else {
+                	System.out.println("LPG 레코드 생성 실패");
+                }
+                
         } catch (Exception e) {
             e.printStackTrace();
         }

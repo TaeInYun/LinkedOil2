@@ -3,12 +3,13 @@ package com.linkedoil.vo;
 public class WeekAvgOilPriceVO {
 
 		private String week;
-		private String  oil_code;
+		private String oil_code;
 		
 		private double premium_gas_price;
 		private double gas_price;
 		private double diesel_price;
 		private double lpg_price;
+		private double price;
 		
 		public WeekAvgOilPriceVO() {
 			super();
@@ -24,6 +25,14 @@ public class WeekAvgOilPriceVO {
 		}
 		
 		
+		public double getPrice() {
+			return price;
+		}
+
+		public void setPrice(double price) {
+			this.price = price;
+		}
+
 		public double getLpg_price() {
 			return lpg_price;
 		}

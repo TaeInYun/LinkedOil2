@@ -10,13 +10,13 @@ import com.linkedoil.vo.WeekAvgOilPriceVO;
 public class WeekAvgOilPriceDAO {
 	
 	public static void main(String[] args) {
-		/*
+
 		WeekAvgOilPriceDAO dao = new WeekAvgOilPriceDAO();
-		int premiumGas = dao.insertWeekAvgPremiumGas();
-		int gas = dao.insertWeekAvgGas();
-		int diesel = dao.insertWeekAvgDiesel();
-		int lpg = dao.insertWeekAvgLpg();
-		*/
+		//int premiumGas = dao.insertWeekAvgPremiumGas();
+		//int gas = dao.insertWeekAvgGas();
+		//int diesel = dao.insertWeekAvgDiesel();
+		//int lpg = dao.insertWeekAvgLpg();
+
 		//System.out.println("삽입한 고급휘발유 레코드 수:" + premiumGas);
 		//System.out.println("삽입한 휘발유 레코드 수:" + gas);
 		//System.out.println("삽입한 경유 레코드 수:" + diesel);
@@ -25,9 +25,36 @@ public class WeekAvgOilPriceDAO {
 	
 	//메소드
 	
-	//레코드가져오기
+	//주간평균유가 삽입메소드
+	public int insertWeekAvgOilPrice(WeekAvgOilPriceVO vo) {
+		int re = 0;
+		String sql = "insert into WeekAvgOilPrice(no,oil_code,week,price) "
+				+ " values((select nvl(count(*),0) + 1 from WeekAvgOilPrice), "
+				+ "?,?,?)";
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			conn = ConnectionProvider.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, vo.getOil_code());
+			pstmt.setString(2, vo.getWeek());
+			pstmt.setDouble(3, vo.getPrice());
+			
+			re = pstmt.executeUpdate();
+		} catch (Exception e) {
+			System.out.println("예외발생:" + e.getMessage());
+		}finally {
+			ConnectionProvider.close(conn, pstmt);
+		}
+		
+		return re;
+	}
 	
 	
+	
+	//csv 메소드
 	//고급휘발유 주간유가평균 데이터 삽입
 	public int insertWeekAvgPremiumGas(){
 		CsvDAO dao = new CsvDAO();
