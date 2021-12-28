@@ -21,6 +21,7 @@ public class SearchStationDAO {
 	public static int startPage;
 	public static int endPage;
 
+
 	
 	public int getTotalEvRecord(String sido1, String gugun1) {
 		int n= 0 ;

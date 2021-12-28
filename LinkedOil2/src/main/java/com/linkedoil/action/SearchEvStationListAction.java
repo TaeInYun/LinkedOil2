@@ -62,6 +62,7 @@ public class SearchEvStationListAction implements LinkedOilAction {
 		request.setAttribute("startPage", SearchStationDAO.startPage);
 		request.setAttribute("endPage", SearchStationDAO.endPage);
 		
+		
 
 		if(sido1 != null && gugun1!=null) {
 			

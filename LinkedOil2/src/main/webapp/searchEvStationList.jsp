@@ -178,4 +178,5 @@ geocoder.addressSearch(listData[i], function(result, status) {
 		<a href="searchEvStationList.do?pageNUM=${endPage+1}">다음</a>
 	</c:if>
 </body>
+
 </html>

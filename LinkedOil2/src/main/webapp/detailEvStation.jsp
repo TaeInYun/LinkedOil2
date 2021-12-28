@@ -24,6 +24,7 @@
 	<hr>
 		<table border="1" width="60%">
 		<tr>
+	
 			
 			<td>상태</td>
 			<td>충전기 방식</td>		
