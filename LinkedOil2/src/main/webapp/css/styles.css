@@ -1,3 +1,5 @@
 @charset "EUC-KR";
 
 @import "reset.css";
+@import "default.css";
+@import "component.css";
