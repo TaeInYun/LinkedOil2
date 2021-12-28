@@ -4,10 +4,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <meta charset="UTF-8">  
+<link rel="stylesheet" href="css/maplist.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script> 
 <!--  시도 선택을 위한 js-->
 <script language="javascript">
@@ -80,11 +82,13 @@ $('document').ready(function() {
 
 	
 </script>
-
+</head>
+<body>
+<div id="container" >
+<div id="map"></div>
 
 <!-- -----------지도 -->
 
-<div id="map" style="width:100%;height:350px;"></div>
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=383beb63eac8714dec4cc534f56f27f8&libraries=services"></script>
 <script>
@@ -133,24 +137,32 @@ geocoder.addressSearch(listData[i], function(result, status) {
 
 };     
 </script>
-</head>
-<body>
 
+<!-- ----------------------------------리스트-- ----------------- -->	
+
+<div class="list" >
+<div class="select">
+ <h2>충전소 리스트</h2><br>
 <form action="searchEvStationList.do" method="post" >
       <select name="sido1" id="sido1"></select> 
       <select name="gugun1" id="gugun1"></select> 
                   
       <input type="submit" value="검색">
 </form>
-<!-- ----------------------------------리스트-- ----------------- -->	
- <b>결과 리스트</b><br>
-<hr>
-	<table class="table table-hover">
+</div>
+<div class="table" >
+	<table class="table table-hover" style="table-layout: fixed">
+	<colgroup>
+	<col style="width:30%;">
+	<col style="width:40%;">
+	<col style="width:15%;">
+	<col style="width:15%;">
+	</colgroup>
 		<thead>
-		<tr>
+		<tr bgcolor="#f2f2f2" >
 			<th>이름</th>
 			<th>주소</th>
-			<th>리뷰수</th>
+			<th style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;" >리뷰수</th>
 			<th>평점</th>
 		</tr>
 		</thead>
@@ -159,24 +171,27 @@ geocoder.addressSearch(listData[i], function(result, status) {
 			<tr>
 				
 				<td><a href="detailEvStation.do?ev_id=${e.ev_id }">${e.ev_name}</a></td>
-				<td>${e.ev_addr }</td>
-				<td>${e.review_cnt }</td>
-				<td>${e.asterion_avg }</td>
+				<td style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">${e.ev_addr }</td>
+				<td >${e.review_cnt }</td>
+				<td style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;" >${e.asterion_avg }</td>
 			</tr>
 		</c:forEach>
 		</tbody>
 	</table>
 	<br>
-	<br>
 	<c:if test = "${startPage > 1}">
 		<a href="searchEvStationList.do?pageNUM=${startPage-1}">이전</a>
 	</c:if>
 		<c:forEach var="i" begin="${startPage}" end="${endPage}">
-		<a href="searchEvStationList.do?pageNUM=${i}">${i}</a>&nbsp;&nbsp;
+		<li><a href="searchEvStationList.do?pageNUM=${i}">${i}</a>&nbsp;&nbsp;</li>
 		</c:forEach>
 	<c:if test = "${endPage < totalPage}">
 		<a href="searchEvStationList.do?pageNUM=${endPage+1}">다음</a>
 	</c:if>
+	
+	</div>
+	
+</div>	
 </body>
 
 </html>
