@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
- <a href="selectYososu.do">요소수 리스트로 돌아가기</a>
+ <!-- <a href="selectYososu.do">요소수 리스트로 돌아가기</a> -->
  <a href="likeStation.do">관심주유소 등록하기</a>
  <div>
  <div class="left">
@@ -57,7 +57,7 @@ geocoder.addressSearch('${y.addr}', function(result, status) {
 
         // 인포윈도우로 장소에 대한 설명을 표시합니다
         var infowindow = new kakao.maps.InfoWindow({
-            content: '<div style="width:150px;text-align:center;padding:6px 0;">${g.station_name}</div>'
+            content: '<div style="width:150px;text-align:center;padding:6px 0;">${y.name}</div>'
         });
         infowindow.open(map, marker);
 
