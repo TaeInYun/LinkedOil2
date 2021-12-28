@@ -16,3 +16,7 @@ body{
 	color: black;
 	font-family: 'Bebas Neue', 'NotoSansKR';
 }
+.logo{
+	width: 400px;
+	margin-bottom: 40px;	
+}
