@@ -8,11 +8,36 @@ pageEncoding="UTF-8"%>
 <head>
 
 <meta charset="UTF-8">  
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script> 
+
 <!--  시도 선택을 위한 js-->
 <script language="javascript">
 //내 위치 불러오기 
-function getLocation() {
+
+/* function aroundGetLocation(){
+	if(navigor.geolocation){
+		navigator.geolocation.getCurrentPosition(function(position){
+			
+			var latitude = posistion.coords.latitude;
+			var longtitude=position.coords.longtitude;
+			
+			var obj = wgs84ToKatech(latitude,longitude);
+			
+			var prodcd=$("#pridcd").val();
+			var distance=$("#distance").val();
+			var sort=$("#sort").val();
+		}
+		
+	}
+} */
+
+
+/* function getLocation() {
 	  if (navigator.geolocation) { // GPS를 지원하면
 	    navigator.geolocation.getCurrentPosition(function(position) {
 	      alert(position.coords.latitude + ' ' + position.coords.longitude);
@@ -28,7 +53,7 @@ function getLocation() {
 	    alert('GPS를 지원하지 않습니다');
 	  }
 	}
-	getLocation();
+	getLocation(); */
 
  
 $('document').ready(function() {
@@ -187,7 +212,14 @@ for (var i=0; i < listData.length ; i++) {
 		<select name="gugun1" id="gugun1"></select> 
 					   
 		<input type="submit" value="검색">
+		
+		
 </form>
+
+<form action="selectYososu.do" method="post">
+	<input type="search" name="keyword">
+	<input type="submit" value="검색">
+</form> 
 
 									 
 <!-- ----------------------------------리스트-- ----------------- -->		
@@ -195,9 +227,10 @@ for (var i=0; i < listData.length ; i++) {
 	<b>결과 리스트</b><br>
 	 
   	
+	<div class="container">
 	
-	
-	<table border="1" width="60%">
+	<!-- <table border="1" width="60%"> -->
+		<table class="table table-hover">
 		<tr>
 		<!--  		 
 			<td>번호</td>
@@ -221,9 +254,9 @@ for (var i=0; i < listData.length ; i++) {
 			 		<a href="detailYososu.do?name=${y.name}">${y.name } </a>
 			 	</td>
 			 	<td>${y.addr }</td>			 
-				<td> ${y.inventory } </td>
+				<td> ${y.inventory } L</td>
 				<td>${y.color } </td>	
-				<td> ${y.price } </td>			
+				<td> ${y.price } 원</td>			
 				<%-- 	<td> ${y.lat } </td>			
 				<td> ${y.lng } </td> --%>			
 						 
@@ -231,9 +264,12 @@ for (var i=0; i < listData.length ; i++) {
 		 </c:forEach>
 		</tr>
 		
+		
+		
+	<!-- </table> -->
 	</table>
 	
-	
+	</div>
 	<c:forEach var="i" begin="1" end="${totalPage}">
 		<a href="selectYososu.do?pageNUM=${i}">${i}</a>&nbsp;&nbsp;
 		<!-- -링크를 걸어주고 page번호를 받음 -->

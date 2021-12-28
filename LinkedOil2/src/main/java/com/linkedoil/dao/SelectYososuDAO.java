@@ -107,6 +107,30 @@ public class SelectYososuDAO {
 		
 		return y;
 	}
+	
+	public int searchYososu(String keyword) {
+		int n = 0 ;
+		String sql= "select * from yososu";
+		if(keyword !=null) {
+			sql +="where name like '%"+keyword+"%'";
+		}
+		
+		try {
+			Connection conn = ConnectionProvider.getConnection();
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			ResultSet rs = pstmt.executeQuery();
+			if(rs.next()) {
+				n = rs.getInt(1);
+			}
+			ConnectionProvider.close(conn, pstmt, rs);
+		}catch (Exception e) {
+			System.out.println("예외발생:"+e.getMessage());
+		}
+		
+		return n;
+	}
+	
+	
 }
 
 

@@ -6,12 +6,10 @@ pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-
 <meta charset="UTF-8">  
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script> 
 <!--  시도 선택을 위한 js-->
 <script language="javascript">
- 
  
 $('document').ready(function() {
 	 var area0 = ["시/도 선택","서울","인천","대전","광주","대구","울산","부산","경기","강원","충북","충남","전북","전남","경북","경남","제주"];
@@ -64,33 +62,31 @@ $('document').ready(function() {
 
 	
 </script>
- </head>
- 
-<div id="map" style="width:100%;height:350px;"></div>
+
 <body>
- 
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=efc51d149bcb86beca3f7969fe946ef1&libraries=services"></script>
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script type="text/javascript">
- 
-var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-    mapOption = {
-        center: new daum.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-        level: 10 // 지도의 확대 레벨
-    };  
+  
+<!-- -----------지도 -->
 
-// 지도를 생성합니다    
+<div id="map" style="width:100%;height:350px;"></div>
+
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=383beb63eac8714dec4cc534f56f27f8&libraries=services"></script>
+<script>
+	
+var mapContainer = document.getElementById('map');
+var mapOption = {
+    center: new daum.maps.LatLng(37.450701, 126.570667),
+    level: 10
+};  
+
 var map = new daum.maps.Map(mapContainer, mapOption); 
-
-// 주소-좌표 변환 객체를 생성합니다
+		
 var geocoder = new daum.maps.services.Geocoder();
 
 //주소를 배열에 담기
 var listData = new Array();
 <c:forEach items="${list}" var="g">
-listData.push("${g.station_addr }");
+listData.push("${g.station_addr}");
 </c:forEach>
-
 
 for (var i=0; i < listData.length ; i++) {
 // 주소로 좌표를 검색합니다
@@ -118,8 +114,7 @@ geocoder.addressSearch(listData[i], function(result, status) {
     } 
 })
 
-
-};    
+};     
 </script>
 
 <form action="selectGasStation.do" method="post" >
@@ -181,13 +176,17 @@ geocoder.addressSearch(listData[i], function(result, status) {
 		</tr>
 		
 	</table>
-	
-	
-	<c:forEach var="i" begin="1" end="${totalPage}">
+	<br>
+	<br>
+	<c:if test = "${startPage > 1}">
+		<a href="selectGasStation.do?pageNUM=${startPage-1}">이전</a>
+	</c:if>
+		<c:forEach var="i" begin="${startPage}" end="${endPage}">
 		<a href="selectGasStation.do?pageNUM=${i}">${i}</a>&nbsp;&nbsp;
-		<!-- -링크를 걸어주고 page번호를 받음 -->
-	</c:forEach>
-	
-	 
+		</c:forEach>
+	<c:if test = "${endPage < totalPage}">
+		<a href="selectGasStation.do?pageNUM=${endPage+1}">다음</a>
+	</c:if>
 </body>
+
 </html>

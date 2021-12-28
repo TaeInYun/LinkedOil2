@@ -14,6 +14,7 @@ import com.linkedoil.vo.DetailStationVO;
 import com.linkedoil.vo.EvStationVO;
 import com.linkedoil.vo.SearchStationVO;
 
+
 public class DetailEvStationAction implements LinkedOilAction {
 
 	public DetailStationDAO dao;
@@ -30,8 +31,8 @@ public class DetailEvStationAction implements LinkedOilAction {
 		System.out.println(ev_id);
 		
 		
-		DetailStationVO ev = dao.getEvStation(ev_id); 
-		ArrayList<DetailStationVO> clist = dao.EvChargerlist(ev_id);
+		DetailStationVO ev = dao.getEvStation(ev_id); // 충전소의 아이디/이름/주소/평균별점/리뷰수
+		ArrayList<DetailStationVO> clist = dao.EvChargerlist(ev_id);// 충전소가 갖고있는 충전기 정보들
 
 		request.setAttribute("ev", ev);
 		request.setAttribute("clist", clist);
