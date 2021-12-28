@@ -13,6 +13,10 @@ public class SelectYososuDAO {
 	public static int pageSize = 10;
 	public static int totalRecord;
 	public static int totalPage;
+	public static int pageGroup = 10;
+	
+	public static int startPage;
+	public static int endPage;
 
 	public int getTotalRecord(String sido1, String gugun1) {
 		int n = 0;
@@ -49,6 +53,22 @@ public class SelectYososuDAO {
 
 		System.out.println("start" + start);
 		System.out.println("end" + end);
+		
+		startPage = (int)Math.floor( (pageNUM-1)/pageGroup) *pageGroup + 1;
+		endPage = startPage + pageGroup - 1;
+		
+		System.out.println("startPage:"+startPage);
+		System.out.println("endPage:"+endPage);
+		
+		// 추가로 조건 설정
+		if( totalPage < pageNUM) {
+			pageNUM = totalPage;
+		}
+
+		if ( endPage > totalPage) {
+		endPage = totalPage;
+		}
+		
 
 		ArrayList<YososuVO> list = new ArrayList<YososuVO>();
 		try {
