@@ -39,25 +39,25 @@
 			<td>주소</td>		
 			<td>재고수량</td>		
 			<td>재고상태</td>			
-			<td>가격</td>		 
-			<td>위도</td>		 
-			<td>경도</td>		 
-			<td>전화번호</td>		 
+			<td>가격</td>		 				 
+			<td>전화번호</td>	
+			<!-- <td>리뷰수</td>		 
+			<td>평균평점</td>	 -->	 
 			<!-- <td>위도</td>
 			<td>경도</td> -->
 				
 		
-		 
+		
 		 	<tr>
 		 	  				
 			 	<td>${y.name }</td>
 			 	<td>${y.addr }</td>			 
 				<td> ${y.inventory } L</td>
 				<td>${y.color } </td>	
-				<td> ${y.price } 원</td>			
-				<td> ${y.lat } </td>			
-				<td> ${y.lng } </td>			
-				<td> ${y.tel } </td>			
+				<td> ${y.price } 원</td>										
+				<td> ${y.tel } </td>	
+				<%-- <td> ${y.review_cnt } </td>			
+				<td> ${y.asterion_avg } </td> --%>		
 				<%-- 	<td> ${y.lat } </td>			
 				<td> ${y.lng } </td> --%>			
 						 
