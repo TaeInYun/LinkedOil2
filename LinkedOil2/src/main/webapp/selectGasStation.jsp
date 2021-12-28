@@ -11,8 +11,33 @@ pageEncoding="UTF-8"%>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script> 
 <!--  시도 선택을 위한 js-->
 <script language="javascript">
+<<<<<<< HEAD
+//내 위치 불러오기 
+function getLocation() {
+	  if (navigator.geolocation) { // GPS를 지원하면
+	    navigator.geolocation.getCurrentPosition(function(position) {
+	      alert(position.coords.latitude + ' ' + position.coords.longitude);
+	      //위도 경도를 불러옴
+	    }, function(error) {
+	      console.error(error);
+	    }, {
+	      enableHighAccuracy: false,
+	      maximumAge: 0,
+	      timeout: Infinity
+	    });
+	  } else {
+	    alert('GPS를 지원하지 않습니다');
+	  }
+	}
+	getLocation();
+
+	
+	
+//시군선택박스
+=======
  
  
+>>>>>>> branch 'master' of https://github.com/TaeInYun/LinkedOil2.git
 $('document').ready(function() {
 	 var area0 = ["시/도 선택","서울","인천","대전","광주","대구","울산","부산","경기","강원","충북","충남","전북","전남","경북","경남","제주"];
 	  var area1 = ["강남구","강동구","강북구","강서구","관악구","광진구","구로구","금천구","노원구","도봉구","동대문구","동작구","마포구","서대문구","서초구","성동구","성북구","송파구","양천구","영등포구","용산구","은평구","종로구","중구","중랑구"];
@@ -64,8 +89,15 @@ $('document').ready(function() {
 
 	
 </script>
+<<<<<<< HEAD
+
+
+<!-- -----------지도 
+
+=======
  </head>
  
+>>>>>>> branch 'master' of https://github.com/TaeInYun/LinkedOil2.git
 <div id="map" style="width:100%;height:350px;"></div>
 <body>
  
@@ -91,6 +123,21 @@ var listData = new Array();
 listData.push("${g.station_addr }");
 </c:forEach>
 
+<<<<<<< HEAD
+            var marker = new daum.maps.Marker({
+                map: map,
+                position: coords
+            });
+            var infowindow = new daum.maps.InfoWindow({
+                content: '<div style="width:150px;text-align:center;padding:6px 0;">' + listData[index] + '</div>',
+                disableAutoPan: true
+            });
+            infowindow.open(map, marker);
+        } 
+    });
+   
+});    -->
+=======
 
 for (var i=0; i < listData.length ; i++) {
 // 주소로 좌표를 검색합니다
@@ -120,6 +167,7 @@ geocoder.addressSearch(listData[i], function(result, status) {
 
 
 };    
+>>>>>>> branch 'master' of https://github.com/TaeInYun/LinkedOil2.git
 </script>
 
 <form action="selectGasStation.do" method="post" >
@@ -188,6 +236,10 @@ geocoder.addressSearch(listData[i], function(result, status) {
 		<!-- -링크를 걸어주고 page번호를 받음 -->
 	</c:forEach>
 	
+<<<<<<< HEAD
+	
+=======
 	 
+>>>>>>> branch 'master' of https://github.com/TaeInYun/LinkedOil2.git
 </body>
 </html>

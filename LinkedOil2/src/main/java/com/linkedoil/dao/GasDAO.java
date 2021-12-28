@@ -37,7 +37,6 @@ public class GasDAO {
 				System.out.println("예외발생:"+e.getMessage());
 			}	
 			return n;
-			
 		}
 
 

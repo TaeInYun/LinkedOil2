@@ -1,3 +1,4 @@
+<%@page import="com.linkedoil.vo.WeekAvgOilPriceVO"%>
 <%@page import="com.google.gson.Gson"%>
 <%@page import="com.linkedoil.vo.WeekAvgOilPriceVO"%>
 <%@page import="java.util.ArrayList"%>

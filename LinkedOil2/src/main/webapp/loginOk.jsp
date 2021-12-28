@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+
+=======
+>>>>>>> branch 'master' of https://github.com/TaeInYun/LinkedOil2.git
 <%@page import="com.linkedoil.dao.MemberDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
