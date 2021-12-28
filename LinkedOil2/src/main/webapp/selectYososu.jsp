@@ -12,7 +12,26 @@ pageEncoding="UTF-8"%>
 <!--  시도 선택을 위한 js-->
 <script language="javascript">
 //내 위치 불러오기 
-function getLocation() {
+
+/* function aroundGetLocation(){
+	if(navigor.geolocation){
+		navigator.geolocation.getCurrentPosition(function(position){
+			
+			var latitude = posistion.coords.latitude;
+			var longtitude=position.coords.longtitude;
+			
+			var obj = wgs84ToKatech(latitude,longitude);
+			
+			var prodcd=$("#pridcd").val();
+			var distance=$("#distance").val();
+			var sort=$("#sort").val();
+		}
+		
+	}
+} */
+
+
+/* function getLocation() {
 	  if (navigator.geolocation) { // GPS를 지원하면
 	    navigator.geolocation.getCurrentPosition(function(position) {
 	      alert(position.coords.latitude + ' ' + position.coords.longitude);
@@ -28,7 +47,7 @@ function getLocation() {
 	    alert('GPS를 지원하지 않습니다');
 	  }
 	}
-	getLocation();
+	getLocation(); */
 
  
 $('document').ready(function() {
@@ -187,7 +206,14 @@ for (var i=0; i < listData.length ; i++) {
 		<select name="gugun1" id="gugun1"></select> 
 					   
 		<input type="submit" value="검색">
+		
+		
 </form>
+
+<form action="selectYososu.do" method="post">
+	<input type="search" name="keyword">
+	<input type="submit" value="검색">
+</form> 
 
 									 
 <!-- ----------------------------------리스트-- ----------------- -->		
@@ -221,9 +247,9 @@ for (var i=0; i < listData.length ; i++) {
 			 		<a href="detailYososu.do?name=${y.name}">${y.name } </a>
 			 	</td>
 			 	<td>${y.addr }</td>			 
-				<td> ${y.inventory } </td>
+				<td> ${y.inventory } L</td>
 				<td>${y.color } </td>	
-				<td> ${y.price } </td>			
+				<td> ${y.price } 원</td>			
 				<%-- 	<td> ${y.lat } </td>			
 				<td> ${y.lng } </td> --%>			
 						 
