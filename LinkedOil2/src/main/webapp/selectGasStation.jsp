@@ -11,25 +11,7 @@ pageEncoding="UTF-8"%>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script> 
 <!--  시도 선택을 위한 js-->
 <script language="javascript">
-//내 위치 불러오기 
-function getLocation() {
-	  if (navigator.geolocation) { // GPS를 지원하면
-	    navigator.geolocation.getCurrentPosition(function(position) {
-	      alert(position.coords.latitude + ' ' + position.coords.longitude);
-	      //위도 경도를 불러옴
-	    }, function(error) {
-	      console.error(error);
-	    }, {
-	      enableHighAccuracy: false,
-	      maximumAge: 0,
-	      timeout: Infinity
-	    });
-	  } else {
-	    alert('GPS를 지원하지 않습니다');
-	  }
-	}
-	getLocation();
-
+ 
  
 $('document').ready(function() {
 	 var area0 = ["시/도 선택","서울","인천","대전","광주","대구","울산","부산","경기","강원","충북","충남","전북","전남","경북","경남","제주"];
@@ -82,57 +64,64 @@ $('document').ready(function() {
 
 	
 </script>
-
-
-<!-- -----------지도 -->
-
+ </head>
+ 
 <div id="map" style="width:100%;height:350px;"></div>
+<body>
+ 
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=efc51d149bcb86beca3f7969fe946ef1&libraries=services"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+ 
+var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+    mapOption = {
+        center: new daum.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+        level: 10 // 지도의 확대 레벨
+    };  
 
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5ce43d6c6e81f2fef309da06d4726f64&libraries=services"></script>
-<script>
-	
-var mapContainer = document.getElementById('map');
-var mapOption = {
-    center: new daum.maps.LatLng(37.450701, 126.570667),
-    level: 3
-};  
-
+// 지도를 생성합니다    
 var map = new daum.maps.Map(mapContainer, mapOption); 
 
- 
-//이거 어떻게 값을 불러오지...?
-		
+// 주소-좌표 변환 객체를 생성합니다
 var geocoder = new daum.maps.services.Geocoder();
-var listData = [
-	'서울 서대문구 연희로 266 (홍은동)',
-	
-];
 
-listData.forEach(function(addr, index) {
-    geocoder.addressSearch(addr, function(result, status) {
-        if (status === daum.maps.services.Status.OK) {
-            var coords = new daum.maps.LatLng(result[0].y, result[0].x);
+//주소를 배열에 담기
+var listData = new Array();
+<c:forEach items="${list}" var="g">
+listData.push("${g.station_addr }");
+</c:forEach>
 
-            var marker = new daum.maps.Marker({
-                map: map,
-                position: coords
-            });
-            var infowindow = new daum.maps.InfoWindow({
-                content: '<div style="width:150px;text-align:center;padding:6px 0;">' + listData[index] + '</div>',
-                disableAutoPan: true
-            });
-            infowindow.open(map, marker);
-        } 
-    });
-   
-});    
+
+for (var i=0; i < listData.length ; i++) {
+// 주소로 좌표를 검색합니다
+geocoder.addressSearch(listData[i], function(result, status) {
+
+    // 정상적으로 검색이 완료됐으면 
+     if (status === daum.maps.services.Status.OK) {
+
+        var coords = new daum.maps.LatLng(result[0].y, result[0].x);
+
+        // 결과값으로 받은 위치를 마커로 표시합니다
+        var marker = new daum.maps.Marker({
+            map: map,
+            position: coords
+        });
+
+     /*   // 인포윈도우로 장소에 대한 설명을 표시합니다
+        var infowindow = new daum.maps.InfoWindow({
+        	content: result[0].y + "," + result[0].x
+        });
+        infowindow.open(map, marker);*/
+
+        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+        map.setCenter(coords);
+    } 
+})
+
+
+};    
 </script>
- 
 
-
-
- </head>
-<body>
 <form action="selectGasStation.do" method="post" >
 		<select name="sido1" id="sido1"></select> 
 		<select name="gugun1" id="gugun1"></select>
@@ -157,9 +146,6 @@ listData.forEach(function(addr, index) {
 <!-- ----------------------------------리스트-- ----------------- -->		
 <hr>
 	<b>결과 리스트</b><br>
-	 
-  	
-	
 	
 	<table border="1" width="60%">
 		<tr>
@@ -177,7 +163,7 @@ listData.forEach(function(addr, index) {
 			<td>경유</td>
 				
 		
-		 <c:forEach var="g" items="${list }"> 
+		 <c:forEach var="g" items="${list}"> 
 		 	<tr>
 		 	  				
 			 	<td>${g.station_local } </td>
@@ -202,16 +188,6 @@ listData.forEach(function(addr, index) {
 		<!-- -링크를 걸어주고 page번호를 받음 -->
 	</c:forEach>
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	 
 </body>
 </html>

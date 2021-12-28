@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 
 import com.linkedoil.db.ConnectionProvider;
 
+
+
 public class OilDAO {
 	
 	//오일테이블 레코드 삽입
@@ -24,7 +26,7 @@ public class OilDAO {
 		PreparedStatement pstmt = null;
 		
 		try {
-			conn = ConnectionProvider.getConnection();
+			conn = com.linkedoil.db.ConnectionProvider.getConnection();
 			pstmt = conn.prepareStatement(sql);
 			
 			for(int i = 0; i < oil_code.length; i++) {
@@ -37,7 +39,7 @@ public class OilDAO {
 		} catch (Exception e) {
 			// TODO: handle exception
 		}finally {
-			ConnectionProvider.close(conn, pstmt);
+			com.linkedoil.db.ConnectionProvider.close(conn, pstmt);
 		}
 		return re;
 	}
