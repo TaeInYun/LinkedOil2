@@ -126,6 +126,14 @@ public class TodayOilPriceDAO {
                      	String oil_code = getTagValue("PRODCD", element);
                      	
                      	if(!oil_name.equals("실내등유")) {
+                     		
+                     		if(oil_name.equals("자동차용경유")) {
+                     			oil_name = "경유";
+                     		}
+                     		if(oil_name.equals("자동차용부탄")) {
+                     			oil_name = "LPG";
+                     		}
+                     		
                      		TodayOilVO today = new TodayOilVO(oil_name, price, diff);
                      		double lastWeek_price = getLastWeekAvgOilPrice(oil_code);
                      		double lastMonth_price = getLastMonthAvgOilPrice(oil_code);

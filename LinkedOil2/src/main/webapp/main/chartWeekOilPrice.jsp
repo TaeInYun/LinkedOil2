@@ -9,6 +9,7 @@
  
     var arr = [['date','휘발유']];
     $(function(){
+    	
     	$.ajax({url:"main/listWeekOilPrice.jsp",success:function(data){
     		console.log(data);
     		i=0;
@@ -57,6 +58,7 @@
     </script>
   </head>
   <body>
+    <input type="hidden" id="code">
     <div id="curve_chart" style="width: 600px; height: 350px"></div>
   </body>
 </html>
