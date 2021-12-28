@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
- <!-- <a href="selectYososu.do">요소수 리스트로 돌아가기</a> -->
+<a href="selectYososu.do">요소수 리스트로 돌아가기</a>
  <a href="likeStation.do">관심주유소 등록하기</a>
  <div>
  <div class="left">
@@ -21,7 +21,8 @@
 	 	요소수 재고상태: ${y.color }	<br>  	
 		요소수 가격: ${y.price }<br>
 		경도: ${y.lat } <br>				
-		위도: ${y.lng }	<br> 	 
+		위도: ${y.lng }	<br> 
+		전화번호:${y.tel} <br>	 
 		
 		
 </div>
@@ -71,3 +72,6 @@ geocoder.addressSearch('${y.addr}', function(result, status) {
 
 </body>
 </html>
+
+
+

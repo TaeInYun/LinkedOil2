@@ -13,9 +13,10 @@ import com.linkedoil.vo.YososuVO;
 public class YososuDAO2 {
 	
 	
-	public int insertYososuVO(String name, String addr, String inventory, String color, int price, double lat, double lng) {
-		int re = -1;
-		String sql="insert into yososu values(?,?,?,?,?,?,?)";
+	
+	public int insertYososuVO(String name, String addr, String inventory, String color, int price, double lat, double lng, String tel) {
+		int re = -1;  
+		String sql="insert into yososu values(?,?,?,?,?,?,?,?)";
 		try {
 			Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -26,6 +27,8 @@ public class YososuDAO2 {
 			pstmt.setInt(5, price);
 			pstmt.setDouble(6, lat);
 			pstmt.setDouble(7, lng);
+			pstmt.setString(8, tel);
+			
 			re = pstmt.executeUpdate();
 			ConnectionProvider.close(conn, pstmt);
 		} catch (Exception e1) {

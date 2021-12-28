@@ -103,12 +103,61 @@ var map = new daum.maps.Map(mapContainer, mapOption);
 //이거 어떻게 값을 불러오지...?
 		
 var geocoder = new daum.maps.services.Geocoder();
-var listData = [
+
+
+var listData = new Array();
+<c:forEach items="${list}" var="y">
+listData.push("${y.addr}");
+</c:forEach>
+
+for (var i=0; i < listData.length ; i++) {
+	// 주소로 좌표를 검색합니다
+  geocoder.addressSearch(listData[i], function(result, status) {
+
+	    // 정상적으로 검색이 완료됐으면 
+	  if (status === daum.maps.services.Status.OK) {
+
+	       var coords = new daum.maps.LatLng(result[0].y, result[0].x);
+
+	        // 결과값으로 받은 위치를 마커로 표시합니다
+	      var marker = new daum.maps.Marker({
+	           map: map,
+	           position: coords
+	       });
+	        	  	        	
+	        var infowindow = new kakao.maps.InfoWindow({
+	            content: '<div style="width:150px;text-align:center;padding:6px 0;">${y.addr}</div>'
+	        });
+	        infowindow.open(map, marker);
+	        
+	      
+	        
+	     /*   // 인포윈도우로 장소에 대한 설명을 표시합니다
+	        var infowindow = new daum.maps.InfoWindow({
+	        	content: result[0].y + "," + result[0].x
+	        });
+	        infowindow.open(map, marker);*/
+
+	        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+	        map.setCenter(coords);
+	    } 
+	})
+
+
+	}; 
+	
+		
+	
+
+/* var listData = [
 	'서울 서대문구 연희로 266 (홍은동)',
 	
-];
+]; */
 
-listData.forEach(function(addr, index) {
+
+
+
+/* listData.forEach(function(addr, index) {
     geocoder.addressSearch(addr, function(result, status) {
         if (status === daum.maps.services.Status.OK) {
             var coords = new daum.maps.LatLng(result[0].y, result[0].x);
@@ -125,7 +174,7 @@ listData.forEach(function(addr, index) {
         } 
     });
    
-});    
+}); */    
 </script>
  
 
@@ -159,10 +208,10 @@ listData.forEach(function(addr, index) {
 			<td>이름</td>
 			<td>주소</td>		
 			<td>재고수량</td>		
-			<td>색(재고)</td>			
+			<td>재고상태</td>			
 			<td>가격</td>		 
-			<td>위도</td>
-			<td>경도</td>
+			<!-- <td>위도</td>
+			<td>경도</td> -->
 				
 		
 		 <c:forEach var="y" items="${list }"> 
@@ -172,12 +221,11 @@ listData.forEach(function(addr, index) {
 			 		<a href="detailYososu.do?name=${y.name}">${y.name } </a>
 			 	</td>
 			 	<td>${y.addr }</td>			 
-				<td> ${y.inventory } </td>			
-				<td> ${y.color } </td>			
-						
+				<td> ${y.inventory } </td>
+				<td>${y.color } </td>	
 				<td> ${y.price } </td>			
-				<td> ${y.lat } </td>			
-				<td> ${y.lng } </td>			
+				<%-- 	<td> ${y.lat } </td>			
+				<td> ${y.lng } </td> --%>			
 						 
 			</tr>			
 		 </c:forEach>
@@ -197,3 +245,4 @@ listData.forEach(function(addr, index) {
 	
 </body>
 </html>
+

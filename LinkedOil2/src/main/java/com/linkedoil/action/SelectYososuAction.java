@@ -65,3 +65,10 @@ public class SelectYososuAction implements LinkedOilAction {
 	}
 
 }
+
+
+
+
+
+
+

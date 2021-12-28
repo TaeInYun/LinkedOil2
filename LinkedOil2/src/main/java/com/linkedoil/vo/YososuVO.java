@@ -9,9 +9,12 @@ public class YososuVO {
     private int price;
     private double lat;
     private double lng;
+    private String tel;
     
     
-	public YososuVO(String name, String addr, String inventory, String color, int price, double lat, double lng) {
+    
+	public YososuVO(String name, String addr, String inventory, String color, int price, double lat, double lng,
+			String tel) {
 		super();
 		this.name = name;
 		this.addr = addr;
@@ -20,6 +23,7 @@ public class YososuVO {
 		this.price = price;
 		this.lat = lat;
 		this.lng = lng;
+		this.tel = tel;
 	}
 
 
@@ -97,11 +101,19 @@ public class YososuVO {
 	public void setLng(double lng) {
 		this.lng = lng;
 	}
+
+
+	public String getTel() {
+		return tel;
+	}
+
+
+	public void setTel(String tel) {
+		this.tel = tel;
+	}
+    
 	
-	
-	
-	
-	
+
 	
 	
 }

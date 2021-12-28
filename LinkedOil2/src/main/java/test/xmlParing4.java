@@ -37,7 +37,7 @@ public class xmlParing4 {
 
      
                 //parsing할 url 지정 
-            	String url="https://api.odcloud.kr/api/uws/v1/inventory?page=5&perPage=500&returnType=XML&serviceKey=LagRHYY9F38PlpfFZn7yKVVUXJ9NV1LYBaX1SqaA9K1uL7rGHwSJ%2Blb1Fyt8YGi8OkQFehMSvLu2zy4BMIyCJw%3D%3D";// 페이지 수
+            	String url="https://api.odcloud.kr/api/uws/v1/inventory?page=16&perPage=100&returnType=XML&serviceKey=LagRHYY9F38PlpfFZn7yKVVUXJ9NV1LYBaX1SqaA9K1uL7rGHwSJ%2Blb1Fyt8YGi8OkQFehMSvLu2zy4BMIyCJw%3D%3D";// 페이지 수
      
                 DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
                 DocumentBuilder dBuilder  = dbFactory.newDocumentBuilder();
@@ -60,6 +60,7 @@ public class xmlParing4 {
                 int price = 0;
                 double lat = 0;
                 double lng = 0;
+                String tel= "";
                 for(int temp =0; temp<nodeList.getLength(); temp++) {
                 	System.out.println("index:"+temp);
                     Node nNode = nodeList.item(temp);
@@ -95,6 +96,10 @@ public class xmlParing4 {
                         	else if(attr.equals("lng")) {
                         		lng = Double.parseDouble(col.getChildNodes().item(0).getNodeValue());
                         	}
+                        	else if(attr.equals("tel")) {
+                        		tel =col.getChildNodes().item(0).getNodeValue();
+                        	}
+                        	
                         }
 //                    
                      
@@ -106,10 +111,10 @@ public class xmlParing4 {
                    // new YososuVO();
                     
                     YososuVO y = new YososuVO();
-                    new YososuVO(name,addr,inventory,color,price,lat,lng);
+                    new YososuVO(name,addr,inventory,color,price,lat,lng,tel);
                     
                    YososuDAO2 d = new YososuDAO2();
-                    d.insertYososuVO(name,addr,inventory,color,price,lat,lng);
+                    d.insertYososuVO(name,addr,inventory,color,price,lat,lng,tel);
                     
                    
                         //VO에 값 담기
