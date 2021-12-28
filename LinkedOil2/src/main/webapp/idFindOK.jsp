@@ -13,7 +13,7 @@
 	
 	<h2>아이디 찾기 결과</h2>
 		<div>
-		  	email
+		  	${email}
 		</div>
 	
 	</form>

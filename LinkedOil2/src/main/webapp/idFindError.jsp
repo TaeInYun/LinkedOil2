@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-ㄴㅇㄹㄴㅇ
+	<p>닉네임이나 이름이 회원정보와 일치하지 않습니다.</p>
 </body>
 </html>

@@ -27,10 +27,9 @@ public class IdFindAction implements LinkedOilAction {
 		String nickname = request.getParameter("nickname");
 		String name = request.getParameter("name");
 		 
-		  
-		 
+		   
 		
-	 return "idFindOK.jsp";
+	 return "idFind.jsp";
 	 
 
 }
