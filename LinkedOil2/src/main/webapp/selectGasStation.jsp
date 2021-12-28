@@ -30,6 +30,9 @@ function getLocation() {
 	}
 	getLocation();
 
+	
+	
+//시군선택박스
 $('document').ready(function() {
 	 var area0 = ["시/도 선택","서울","인천","대전","광주","대구","울산","부산","경기","강원","충북","충남","전북","전남","경북","경남","제주"];
 	  var area1 = ["강남구","강동구","강북구","강서구","관악구","광진구","구로구","금천구","노원구","도봉구","동대문구","동작구","마포구","서대문구","서초구","성동구","성북구","송파구","양천구","영등포구","용산구","은평구","종로구","중구","중랑구"];
@@ -83,7 +86,7 @@ $('document').ready(function() {
 </script>
 
 
-<!-- -----------지도 -->
+<!-- -----------지도 
 
 <div id="map" style="width:100%;height:350px;"></div>
 
@@ -124,7 +127,7 @@ listData.forEach(function(addr, index) {
         } 
     });
    
-});    
+});    -->
 </script>
  
 
@@ -200,16 +203,6 @@ listData.forEach(function(addr, index) {
 		<a href="selectGasStation.do?pageNUM=${i}">${i}</a>&nbsp;&nbsp;
 		<!-- -링크를 걸어주고 page번호를 받음 -->
 	</c:forEach>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 </body>

@@ -18,7 +18,6 @@ public class SelectGasStationAction implements LinkedOilAction {
 	public SelectGasStationAction() {
 		dao = new GasDAO();
 	}
-
 	
 	
 		
