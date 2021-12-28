@@ -77,15 +77,34 @@
 	<a href="searchEvStationList.do">전기차 검색하기</a>
 	<ul class="grid cs-style-4">
 		<li>
-			<a href="selectGasStation.do">
-				<figure>
-					<img src="images/5.png" alt="img01">
-					<figcaption>
-						<h3>주유소 검색</h3>
-						Take a look
-					</figcaption>
-				</figure>
-			</a>
+			<figure>
+				<div><img src="images/main03.jpg" alt="img05"></div>
+				<figcaption>
+					<h3>주유소</h3>
+					<span>Gas Station</span>
+					<a href="selectGasStation.do">검색하기</a>
+				</figcaption>
+			</figure>
+		</li>
+		<li>
+			<figure>
+				<div><img src="images/main02.jpg" alt="img05"></div>
+				<figcaption>
+					<h3>전기차 충전소</h3>
+					<span>EV charging station</span>
+					<a href="searchEvStationList.do">검색하기</a>
+				</figcaption>
+			</figure>
+		</li>
+		<li>
+			<figure>
+				<div><img src="images/main01.jpg" alt="img05"></div>
+				<figcaption>
+					<h3>요소수</h3>
+					<span>Diesel exhaust fluid</span>
+					<a href="selectYososu.do">검색하기</a>
+				</figcaption>
+			</figure>
 		</li>
 	</ul>
 	<table class="table table-striped">
