@@ -8,7 +8,7 @@
 </head>
 <body>
 	<%
-		response.sendRedirect("listTodayOilInfo.do");
+		response.sendRedirect("selectGasStation.do");
 	%>
 </body>
 </html>

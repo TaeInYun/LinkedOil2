@@ -32,7 +32,7 @@ public class IdFindOKAction implements LinkedOilAction {
 			//찾았으면 idFindOK.jsp로 가서 아이디 알려주기
 			System.out.println(email);
 			}else {
-				viewPage = "idFindError.jps";
+				viewPage = "idFindError.jsp";
 			}	
 		
 		
