@@ -11,5 +11,6 @@
 	<%
 		 response.sendRedirect("listTodayOilInfo.do"); 
 	%>
+	
 </body>
 </html>

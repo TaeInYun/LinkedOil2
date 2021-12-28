@@ -11,9 +11,9 @@
 	<h2>LINKED OIL</h2>
 	 
 	<form action="loginOK.do" method="post">
-			아이디 : <input type="text" name ="email"> <br>
-			비밀번호 : <input type="password" name ="pwd"><br>
-			<input type="submit" value="로그인하기"><br>
+			<p>아이디 : <input type="text" name ="email"   ></p> 
+			<p>비밀번호 : <input type="password" name ="pwd" ></p><br>
+			<input type="submit" value="로그인"><br>  
 			<a href="idFind.do">아이디 찾기</a>
 			<a href="pwdFind.do">비밀번호 찾기</a><br>
 	</form>
