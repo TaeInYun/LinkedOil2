@@ -70,8 +70,11 @@ public class SelectGasStationAction implements LinkedOilAction {
 			ArrayList<GasStationVO>list = dao.listgas(pageNUM,sido1,gugun1,user_brand,oil);
 		 	request.setAttribute("totalPage", GasDAO.totalPage);		
 			request.setAttribute("list", list);
-			 
 			
+			
+			request.setAttribute("totalPage", GasDAO.totalPage);
+			request.setAttribute("startPage", GasDAO.startPage);
+			request.setAttribute("endPage", GasDAO.endPage);
 		 
 			if(sido1 != null && gugun1!=null) {
 				
