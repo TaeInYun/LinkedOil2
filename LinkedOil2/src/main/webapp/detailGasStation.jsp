@@ -8,7 +8,7 @@
 </head>
 <body>
  <a href="selectGasStation.do">주유소 리스트로 돌아가기</a>
- <a href="likeStation.do?station_no=${g.station_no}">관심주유소 등록하기</a>
+
  <div>
  <div class="left">
  

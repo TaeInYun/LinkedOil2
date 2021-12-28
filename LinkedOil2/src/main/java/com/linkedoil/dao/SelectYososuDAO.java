@@ -63,8 +63,8 @@ public class SelectYososuDAO {
 				sql2 += "  where  addr like '%"+sido1+"%'  and addr like '%"+gugun1+"%'    ";
 			}
 			 
-			String sql = "select name ,addr, inventory, color , price,lat, lng  from( "
-					+ "			select rownum n, name ,addr, inventory, color , price,lat, lng "
+			String sql = "select name ,addr, inventory, color , price,lat, lng,tel  from( "
+					+ "			select rownum n, name ,addr, inventory, color , price,lat, lng,tel "
 					+ "			from("+sql2+")) "
 					+ "			where n between ? and ?";
  
@@ -77,7 +77,7 @@ public class SelectYososuDAO {
 			 
 			ResultSet rs = pstmt.executeQuery();
 			while(rs.next()) {
-				list.add(new YososuVO(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getInt(5),rs.getDouble(6),rs.getDouble(7)));
+				list.add(new YososuVO(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getInt(5),rs.getDouble(6),rs.getDouble(7),rs.getString(8)));
 			}
 			ConnectionProvider.close(conn, pstmt, rs);
 			
@@ -96,7 +96,7 @@ public class SelectYososuDAO {
 			pstmt.setString(1, name);
 			ResultSet rs = pstmt.executeQuery();
 			if(rs.next()) {
-				y= new YososuVO(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getInt(5),rs.getDouble(6),rs.getDouble(7));						
+				y= new YososuVO(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getInt(5),rs.getDouble(6),rs.getDouble(7),rs.getString(8));						
 						
 			}
 			
@@ -107,4 +107,31 @@ public class SelectYososuDAO {
 		
 		return y;
 	}
+	
+	public int searchYososu(String keyword) {
+		int n = 0 ;
+		String sql= "select * from yososu";
+		if(keyword !=null) {
+			sql +="where name like '%"+keyword+"%'";
+		}
+		
+		try {
+			Connection conn = ConnectionProvider.getConnection();
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			ResultSet rs = pstmt.executeQuery();
+			if(rs.next()) {
+				n = rs.getInt(1);
+			}
+			ConnectionProvider.close(conn, pstmt, rs);
+		}catch (Exception e) {
+			System.out.println("예외발생:"+e.getMessage());
+		}
+		
+		return n;
+	}
+	
+	
 }
+
+
+

@@ -8,11 +8,36 @@ pageEncoding="UTF-8"%>
 <head>
 
 <meta charset="UTF-8">  
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script> 
+
 <!--  시도 선택을 위한 js-->
 <script language="javascript">
 //내 위치 불러오기 
-function getLocation() {
+
+/* function aroundGetLocation(){
+	if(navigor.geolocation){
+		navigator.geolocation.getCurrentPosition(function(position){
+			
+			var latitude = posistion.coords.latitude;
+			var longtitude=position.coords.longtitude;
+			
+			var obj = wgs84ToKatech(latitude,longitude);
+			
+			var prodcd=$("#pridcd").val();
+			var distance=$("#distance").val();
+			var sort=$("#sort").val();
+		}
+		
+	}
+} */
+
+
+/* function getLocation() {
 	  if (navigator.geolocation) { // GPS를 지원하면
 	    navigator.geolocation.getCurrentPosition(function(position) {
 	      alert(position.coords.latitude + ' ' + position.coords.longitude);
@@ -28,7 +53,7 @@ function getLocation() {
 	    alert('GPS를 지원하지 않습니다');
 	  }
 	}
-	getLocation();
+	getLocation(); */
 
  
 $('document').ready(function() {
@@ -103,12 +128,61 @@ var map = new daum.maps.Map(mapContainer, mapOption);
 //이거 어떻게 값을 불러오지...?
 		
 var geocoder = new daum.maps.services.Geocoder();
-var listData = [
+
+
+var listData = new Array();
+<c:forEach items="${list}" var="y">
+listData.push("${y.addr}");
+</c:forEach>
+
+for (var i=0; i < listData.length ; i++) {
+	// 주소로 좌표를 검색합니다
+  geocoder.addressSearch(listData[i], function(result, status) {
+
+	    // 정상적으로 검색이 완료됐으면 
+	  if (status === daum.maps.services.Status.OK) {
+
+	       var coords = new daum.maps.LatLng(result[0].y, result[0].x);
+
+	        // 결과값으로 받은 위치를 마커로 표시합니다
+	      var marker = new daum.maps.Marker({
+	           map: map,
+	           position: coords
+	       });
+	        	  	        	
+	        var infowindow = new kakao.maps.InfoWindow({
+	            content: '<div style="width:150px;text-align:center;padding:6px 0;">${y.addr}</div>'
+	        });
+	        infowindow.open(map, marker);
+	        
+	      
+	        
+	     /*   // 인포윈도우로 장소에 대한 설명을 표시합니다
+	        var infowindow = new daum.maps.InfoWindow({
+	        	content: result[0].y + "," + result[0].x
+	        });
+	        infowindow.open(map, marker);*/
+
+	        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+	        map.setCenter(coords);
+	    } 
+	})
+
+
+	}; 
+	
+		
+	
+
+/* var listData = [
 	'서울 서대문구 연희로 266 (홍은동)',
 	
-];
+]; */
 
-listData.forEach(function(addr, index) {
+
+
+
+/* listData.forEach(function(addr, index) {
     geocoder.addressSearch(addr, function(result, status) {
         if (status === daum.maps.services.Status.OK) {
             var coords = new daum.maps.LatLng(result[0].y, result[0].x);
@@ -125,7 +199,7 @@ listData.forEach(function(addr, index) {
         } 
     });
    
-});    
+}); */    
 </script>
  
 
@@ -138,7 +212,14 @@ listData.forEach(function(addr, index) {
 		<select name="gugun1" id="gugun1"></select> 
 					   
 		<input type="submit" value="검색">
+		
+		
 </form>
+
+<form action="selectYososu.do" method="post">
+	<input type="search" name="keyword">
+	<input type="submit" value="검색">
+</form> 
 
 									 
 <!-- ----------------------------------리스트-- ----------------- -->		
@@ -146,9 +227,10 @@ listData.forEach(function(addr, index) {
 	<b>결과 리스트</b><br>
 	 
   	
+	<div class="container">
 	
-	
-	<table border="1" width="60%">
+	<!-- <table border="1" width="60%"> -->
+		<table class="table table-hover">
 		<tr>
 		<!--  		 
 			<td>번호</td>
@@ -159,10 +241,10 @@ listData.forEach(function(addr, index) {
 			<td>이름</td>
 			<td>주소</td>		
 			<td>재고수량</td>		
-			<td>색(재고)</td>			
+			<td>재고상태</td>			
 			<td>가격</td>		 
-			<td>위도</td>
-			<td>경도</td>
+			<!-- <td>위도</td>
+			<td>경도</td> -->
 				
 		
 		 <c:forEach var="y" items="${list }"> 
@@ -172,20 +254,22 @@ listData.forEach(function(addr, index) {
 			 		<a href="detailYososu.do?name=${y.name}">${y.name } </a>
 			 	</td>
 			 	<td>${y.addr }</td>			 
-				<td> ${y.inventory } </td>			
-				<td> ${y.color } </td>			
-						
-				<td> ${y.price } </td>			
-				<td> ${y.lat } </td>			
-				<td> ${y.lng } </td>			
+				<td> ${y.inventory } L</td>
+				<td>${y.color } </td>	
+				<td> ${y.price } 원</td>			
+				<%-- 	<td> ${y.lat } </td>			
+				<td> ${y.lng } </td> --%>			
 						 
 			</tr>			
 		 </c:forEach>
 		</tr>
 		
+		
+		
+	<!-- </table> -->
 	</table>
 	
-	
+	</div>
 	<c:forEach var="i" begin="1" end="${totalPage}">
 		<a href="selectYososu.do?pageNUM=${i}">${i}</a>&nbsp;&nbsp;
 		<!-- -링크를 걸어주고 page번호를 받음 -->
@@ -197,3 +281,4 @@ listData.forEach(function(addr, index) {
 	
 </body>
 </html>
+

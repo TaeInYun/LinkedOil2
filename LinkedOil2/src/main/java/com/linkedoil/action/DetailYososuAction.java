@@ -29,3 +29,9 @@ public class DetailYososuAction implements LinkedOilAction {
 	}
 
 }
+
+
+
+
+
+

@@ -11,9 +11,8 @@ public class PwdFindAction implements LinkedOilAction {
 	@Override
 	public String proRequest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		
-		return "pwdFind.jsp";
+		String email = request.getParameter("email");
+		return "pwdFindOK.do";
 	}
 
 }
