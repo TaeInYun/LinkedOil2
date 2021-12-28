@@ -18,7 +18,7 @@
    <script src="js/modernizr.custom.js"></script>
     
     <script type="text/javascript">
- 
+ 	
     
     var arr = [['date','휘발유']];
     function setCodeName(c){
@@ -72,6 +72,7 @@
 
 </head>
 <body>
+	<%@ include file="header.jsp" %>
    <ul class="grid cs-style-4">
       <li>
          <figure>
