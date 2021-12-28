@@ -1,25 +1,114 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Insert title here</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+	
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript">
+ 
+    
+	 var arr = [['date','íœ˜ë°œìœ ']];
+    function setCodeName(c){
+    	arr = [['date',c]];
+    	$.ajax({url:"listWeekOilPrice.do?oil_code_name="+c,success:function(data){
+    		console.log(data);
+    		i=0;
+    		$.each(data, function(index,item){
+    			
+    			if(i==0){
+    				row = [];    				
+    				
+    				row.push(item['week']);    				
+    			}
+    			row.push(item['price']);
+    			i++;
+    			if(i == 1){
+    				arr.push(row);
+    				i=0;
+    			}
+    		
+    		});
+    		 google.charts.load('current', {'packages':['corechart']});
+    		 google.charts.setOnLoadCallback(drawChart);
+    	}});
+    }
+    
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable(arr);
+
+        var options = {
+	          title: 'ìµœê·¼ 7ì¼ê°„ ì¼ì¼ ìœ ê°€ í‰ê· ê°€ê²©',
+	          curveType: 'function',
+	          legend: { position: 'bottom' },
+	          responsive: false,
+	          scales: {
+				yAxes: [{
+					ticks: {
+						stepSize : 10
+					}
+				}]
+			}
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+        chart.draw(data, options);
+      }
+
+</script>
+
 </head>
 <body>
 	<jsp:include page="search.jsp"/>
-	<table>
-	<c:forEach var="t" items="${list }">
+	<table class="table table-striped">
 		<tr>
-			<td>${t.oil_name }</td>
-			<td>${t.price }</td>
-			<td>¾îÁ¦º¸´Ù ${t.api_diff }¿ø</td>
-			<td>Áö³­ÁÖº¸´Ù ${t.week_diff }¿ø</td>
-			<td>Áö³­´Şº¸´Ù ${t.month_diff }¿ø</td>
+			<c:forEach var="t" items="${list }">
+				<td>${t.oil_name }</td>
+			</c:forEach>
 		</tr>
-		
-	</c:forEach>
+		<tr>
+			<c:forEach var="t" items="${list }">
+				<td>${t.price }</td>
+			</c:forEach>
+		</tr>
+		<tr>
+			<c:forEach var="t" items="${list }">
+				<td>ì–´ì œë³´ë‹¤ ${t.api_diff }ì›</td>
+			</c:forEach>
+		</tr>
+		<tr>
+			<c:forEach var="t" items="${list }">
+				<td>ì§€ë‚œì£¼ë³´ë‹¤ ${t.week_diff }ì›</td>
+			</c:forEach>
+		</tr>
+		<tr>
+			<c:forEach var="t" items="${list }">
+				<td>ì§€ë‚œë‹¬ë³´ë‹¤ ${t.month_diff }ì›</td>
+			</c:forEach>
+		</tr>
 	</table>
+	<div>
+		<ul>
+			<li><a href="#" onclick="setCodeName('ê³ ê¸‰íœ˜ë°œìœ ')">ê³ ê¸‰íœ˜ë°œìœ </a></li>
+			<li><a href="#"  onclick="setCodeName('íœ˜ë°œìœ ')">íœ˜ë°œìœ </a></li>
+			<li><a href="#"  onclick="setCodeName('ê²½ìœ ')">ê²½ìœ </a></li>
+			<li><a href="#"  onclick="setCodeName('LPG')">LPG</a></li>
+		</ul>
+		
+	</div>
+	
+	
+    <div id="curve_chart" style="width: 600px; height: 350px"></div>
+    
+    
 </body>
 </html>

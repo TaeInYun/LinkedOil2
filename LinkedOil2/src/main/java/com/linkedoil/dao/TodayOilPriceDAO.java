@@ -50,7 +50,6 @@ public class TodayOilPriceDAO {
      		
      		if(rs.next()) {
      			avg_price = rs.getDouble(1);
-     			System.out.println(avg_price + "---------------------------avg");
      		}
  		} catch (Exception e) {
  			e.printStackTrace();
@@ -87,7 +86,6 @@ public class TodayOilPriceDAO {
     		
     		if(rs.next()) {
     			avg_price = rs.getDouble(1);
-    			System.out.println(avg_price + "-----------------week avg");
     		}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -114,7 +112,6 @@ public class TodayOilPriceDAO {
                  // parsing tag -
                  NodeList nodeList = doc.getElementsByTagName("OIL");
                  
-                 
                  for(int temp =0; temp<nodeList.getLength(); temp++) {
                      Node nNode = nodeList.item(temp);
                      
@@ -124,22 +121,25 @@ public class TodayOilPriceDAO {
                      	
                      	String oil_name = getTagValue("PRODNM", element);
                      	double price = Double.parseDouble(getTagValue("PRICE", element));
-                     	System.out.println(price);
                      	
                      	String diff = getTagValue("DIFF", element);
                      	String oil_code = getTagValue("PRODCD", element);
                      	
                      	if(!oil_name.equals("실내등유")) {
+                     		
+                     		if(oil_name.equals("자동차용경유")) {
+                     			oil_name = "경유";
+                     		}
+                     		if(oil_name.equals("자동차용부탄")) {
+                     			oil_name = "LPG";
+                     		}
+                     		
                      		TodayOilVO today = new TodayOilVO(oil_name, price, diff);
                      		double lastWeek_price = getLastWeekAvgOilPrice(oil_code);
                      		double lastMonth_price = getLastMonthAvgOilPrice(oil_code);
                      		
                      		double lastweek_diff = Math.round( (price - lastWeek_price)*100 ) /100.0;
                      		double lastmonth_diff = Math.round( (price - lastMonth_price)*100 )/100.0;
-                     		System.out.println("유종명:            ---" + oil_name);
-                     		System.out.println("유종코드:            ---" + oil_code);
-                     		System.out.println("지난주와의차이:            ---" + lastweek_diff);
-                     		System.out.println("지난달와의차이:            ---" + lastmonth_diff);
                      		today.setWeek_diff(lastweek_diff);
                      		today.setMonth_diff(lastmonth_diff);
                      		
@@ -150,6 +150,7 @@ public class TodayOilPriceDAO {
          } catch (Exception e) {
              e.printStackTrace();
          }
+         
          return list;
     }
 }
