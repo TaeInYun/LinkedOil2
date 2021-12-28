@@ -125,7 +125,6 @@ var mapOption = {
 var map = new daum.maps.Map(mapContainer, mapOption); 
 
  
-//이거 어떻게 값을 불러오지...?
 		
 var geocoder = new daum.maps.services.Geocoder();
 
@@ -270,15 +269,20 @@ for (var i=0; i < listData.length ; i++) {
 	</table>
 	
 	</div>
-	<c:forEach var="i" begin="1" end="${totalPage}">
+	<br>
+	<c:if test = "${startPage > 1}">
+		<a href="selectYososu.do?pageNUM=${startPage-1}">이전</a>
+	</c:if>
+	<c:forEach var="i" begin="${startPage}" end="${endPage}">
 		<a href="selectYososu.do?pageNUM=${i}">${i}</a>&nbsp;&nbsp;
-		<!-- -링크를 걸어주고 page번호를 받음 -->
-	</c:forEach>
+		</c:forEach>
+	<c:if test = "${endPage < totalPage}">
+		<a href="selectYososu.do?pageNUM=${endPage+1}">다음</a>
+	</c:if>
 	
-	
-
-
 	
 </body>
+
+
 </html>
 

@@ -55,7 +55,8 @@
 </script>
 </head>
 <body>
-	<h3>LINKED OIL</h3>
+	<%@ include file="header.jsp" %>
+	<!-- <h3>LINKED OIL</h3> -->
 	<form action="insertMember.do" method="post" name="loginForm">
 		<div class="form-group">
 		  <label for="email">아이디(이메일):</label>

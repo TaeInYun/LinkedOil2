@@ -37,7 +37,7 @@ public class xmlParing4 {
 
      
                 //parsing할 url 지정 
-            	String url="https://api.odcloud.kr/api/uws/v1/inventory?page=16&perPage=100&returnType=XML&serviceKey=LagRHYY9F38PlpfFZn7yKVVUXJ9NV1LYBaX1SqaA9K1uL7rGHwSJ%2Blb1Fyt8YGi8OkQFehMSvLu2zy4BMIyCJw%3D%3D";// 페이지 수
+            	String url="https://api.odcloud.kr/api/uws/v1/inventory?page=18&perPage=100&returnType=XML&serviceKey=LagRHYY9F38PlpfFZn7yKVVUXJ9NV1LYBaX1SqaA9K1uL7rGHwSJ%2Blb1Fyt8YGi8OkQFehMSvLu2zy4BMIyCJw%3D%3D";// 페이지 수
      
                 DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
                 DocumentBuilder dBuilder  = dbFactory.newDocumentBuilder();

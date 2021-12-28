@@ -110,7 +110,7 @@ public class SearchStationDAO {
 				vo.setEv_addr(rs.getString(3));
 				vo.setReview_cnt(rs.getInt(4));
 				vo.setAsterion_avg(rs.getDouble(5));
-				list.add(vo);
+				list.add(vo); 
 			}
 			ConnectionProvider.close(conn, pstmt, rs);
 		} catch (Exception e) {
