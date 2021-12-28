@@ -9,9 +9,9 @@
 		  
 </head>
 <body>
-	<h2>아이디 찾기 결과</h2>
+	<h2>비밀번호 찾기 결과</h2>
 		<div>
-		  	${email}
+		  	${pwd}
 		</div>
 	
 </body>

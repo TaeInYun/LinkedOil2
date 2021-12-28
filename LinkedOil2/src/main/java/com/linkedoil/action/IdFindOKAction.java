@@ -23,13 +23,10 @@ public class IdFindOKAction implements LinkedOilAction {
 		String nickName =  request.getParameter("nickName");
 		String name = request.getParameter("name");
 		String email = 	dao.findId(nickName, name);
-		System.out.println(email);
-		//이메일을 가져옴
 		String viewPage = "";
 		
 		if(email != null){
 			viewPage = "idFindOK.jsp";
-			System.out.println(email);
 			request.setAttribute("email", email);
 			}else {
 				viewPage = "idFind.jsp";

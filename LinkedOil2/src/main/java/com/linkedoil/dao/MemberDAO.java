@@ -230,36 +230,31 @@ public class MemberDAO {
 		return email;
 	}
 	
-	public String findPwd(String nickname, String email) {
+	//비밀번호 찾기
+	public String findPwd(String email) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String pwd = "";
-		boolean re = false;
-		String sql = "select pwd member where nickname=? and email=?";
+		String sql = "select pwd from member where email=?";
+		
 		try {
 			conn = ConnectionProvider.getConnection();
 			pstmt = conn.prepareStatement(sql);
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, nickname);
-			pstmt.setString(2, email);
+			pstmt.setString(1, email);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
-				re = true;
+				pwd = rs.getString(1);
+				System.out.println(pwd);
 			}
 					
 		}catch (Exception e) {
 			System.out.println("예외발생: "+e.getMessage());
 		}finally {
 			try {
-				if(pstmt != null) {
-					pstmt.close();
-				}
-				if(conn != null) {
-					conn.close();
-				}
+				ConnectionProvider.close(conn, pstmt, rs);
 			}catch (Exception e) {
-				// TODO: handle exception
 			}
 		}
 		
