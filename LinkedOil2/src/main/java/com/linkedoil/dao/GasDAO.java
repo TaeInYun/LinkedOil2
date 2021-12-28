@@ -16,6 +16,11 @@ public class GasDAO {
 	public static int totalRecord; 
 	public static int totalPage;  
 	
+	public static int pageGroup = 10; // 한 화면에 보여줄 페이지의 수를 10개씩
+	
+	public static int startPage;
+	public static int endPage;
+	
 	public int getTotalRecord(String sido1, String gugun1, String user_brand) {
 		int n= 0 ;
 		String sql ="select count(*) from gas_station ";		
@@ -52,6 +57,21 @@ public class GasDAO {
 				
 				System.out.println("start"+start);
 				System.out.println("end"+end);
+				
+				startPage = (int)Math.floor( (pageNUM-1)/pageGroup) *pageGroup + 1;
+				endPage = startPage + pageGroup - 1;
+
+				System.out.println("startPage:"+startPage);
+				System.out.println("endPage:"+endPage);
+				
+				// 추가로 조건 설정
+				if( totalPage < pageNUM) {
+					pageNUM = totalPage;
+				}
+
+				if ( endPage > totalPage) {
+				endPage = totalPage;
+				}
 				
 				
 				ArrayList<GasStationVO> list = new ArrayList<GasStationVO>();

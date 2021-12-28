@@ -21,7 +21,6 @@ public class IdFindAction implements LinkedOilAction {
 	@Override
 	public String proRequest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		
 		request.setCharacterEncoding("utf-8");
 		String nickname = request.getParameter("nickName");
