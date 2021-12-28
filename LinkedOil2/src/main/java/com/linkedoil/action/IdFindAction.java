@@ -26,9 +26,7 @@ public class IdFindAction implements LinkedOilAction {
 		request.setCharacterEncoding("utf-8");
 		String nickname = request.getParameter("nickName");
 		String name = request.getParameter("name");
-		
-	 return "idFindOK.do";
-	 
+		return "idFindOK.do";
 
 }
 

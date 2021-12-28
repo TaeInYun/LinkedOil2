@@ -28,11 +28,11 @@ public class IdFindOKAction implements LinkedOilAction {
 		if(email != null){
 			viewPage = "idFindOK.jsp";
 			request.setAttribute("email", email);
+			
+			viewPage = "idFindOK.jsp";
 			}else {
-				viewPage = "idFind.jsp";
+				viewPage = "idFindError.jsp";
 			}	
-		
-		
 		return viewPage;
 		} 
 		
