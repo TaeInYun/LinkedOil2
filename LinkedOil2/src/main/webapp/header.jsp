@@ -17,7 +17,7 @@
  <nav class="navbar navbar-expand-sm bg-primary navbar-dark">
   <ul class="navbar-nav">
     <li class="nav-item active">
-      <a class="nav-link" href="login.jsp">로그인</a>
+      <a class="nav-link" href="login2.jsp">로그인</a>
     </li>
     <li class="nav-item">
       <a class="nav-link" href="signUp.jsp">회원가입</a>
