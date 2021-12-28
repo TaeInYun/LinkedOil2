@@ -6,6 +6,9 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
+	
+	</style> 
+	
 	<link rel="stylesheet" href="css/styles.css">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 	
@@ -75,19 +78,59 @@
 	<a href="selectGasStation.do">주유소 검색하기</a>
 	<a href="selectYososu.do">요소수 검색하기</a>
 	<a href="searchEvStationList.do">전기차 검색하기</a>
-	<ul class="grid cs-style-4">
+	 <ul class="grid cs-style-4">
+	 	<table>
+		<td>
 		<li>
+			<div id="GAS">
 			<a href="selectGasStation.do">
 				<figure>
-					<img src="images/5.png" alt="img01">
+					<img src="images/주유소사진.png" alt="img01">
 					<figcaption>
 						<h3>주유소 검색</h3>
 						Take a look
 					</figcaption>
 				</figure>
 			</a>
+			</div>
 		</li>
-	</ul>
+		</td>
+		<td>
+		<li>
+		
+			<div id="YOO">
+			<a href="selectYososu.do">
+				<figure>
+					<img src="images/요소수사진.png" alt="img01">
+					<figcaption>
+						<h3>요소수 검색</h3>
+						Take a look
+					</figcaption>
+				</figure>
+			</a>
+			</div>
+		</li>
+		</td>
+		<td>
+		<li>
+			<div id="EV">
+			<a href="searchEvStationList.do">
+				<figure>
+					<img src="images/전기차사진.png" alt="img01">
+					<figcaption>
+						<h3>전기차 검색</h3>
+						Take a look
+					</figcaption>
+				</figure>
+			</a>
+			</div>
+			</td>
+		</li>
+		
+	</ul> 
+	</table>
+		
+	
 	<table class="table table-striped">
 		<tr>
 			<c:forEach var="t" items="${list }">
