@@ -24,13 +24,10 @@ public class IdFindAction implements LinkedOilAction {
 		// TODO Auto-generated method stub
 		
 		request.setCharacterEncoding("utf-8");
-		String nickname = request.getParameter("nickname");
+		String nickname = request.getParameter("nickName");
 		String name = request.getParameter("name");
-		 
-		  
-		 
 		
-	 return "idFindOK.jsp";
+	 return "idFindOK.do";
 	 
 
 }

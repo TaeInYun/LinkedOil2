@@ -208,16 +208,15 @@ public class MemberDAO {
 	}
 //아이디 찾기
 	public String findId(String nickName, String name) {
-		String email = null;
+		String email = "없음";
 		
 		try {
-			String sql = "select email from members where nickName=? and name=? ";
-			Connection conn = null;
+			String sql = "select email from member where nickname='"+nickName+"' and name='"+name+"'";
+			Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
+			
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, nickName);
-			pstmt.setString(2, name);
 			
 			rs = pstmt.executeQuery();
 			
@@ -230,6 +229,7 @@ public class MemberDAO {
 		}
 		return email;
 	}
+	
 	public String findPwd(String nickname, String email) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;

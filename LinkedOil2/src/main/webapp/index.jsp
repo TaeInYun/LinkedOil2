@@ -106,7 +106,6 @@
 		
 	</div>
 	
-	
     <div id="curve_chart" style="width: 600px; height: 350px"></div>
     
     
