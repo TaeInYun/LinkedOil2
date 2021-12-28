@@ -72,9 +72,6 @@
 
 </head>
 <body>
-	<a href="selectGasStation.do">주유소 검색하기</a>
-	<a href="selectYososu.do">요소수 검색하기</a>
-	<a href="searchEvStationList.do">전기차 검색하기</a>
 	<ul class="grid cs-style-4">
 		<li>
 			<figure>
@@ -90,7 +87,7 @@
 			<figure>
 				<div><img src="images/main02.jpg" alt="img05"></div>
 				<figcaption>
-					<h3>전기차 충전소</h3>
+					<h3>전기차 &nbsp;&nbsp;&nbsp;충전소</h3>
 					<span>EV charging station</span>
 					<a href="searchEvStationList.do">검색하기</a>
 				</figcaption>
