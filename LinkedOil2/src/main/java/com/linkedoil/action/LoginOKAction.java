@@ -18,8 +18,6 @@ public class LoginOKAction implements LinkedOilAction {
 		dao = new MemberDAO();
 	}
 	
-	
-	
 	@Override
 	public String proRequest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -41,15 +39,9 @@ public class LoginOKAction implements LinkedOilAction {
 			response.setContentType("text/html; charset=utf-8");
 			response.getWriter().print("<script>alert('로그인 정보가 일치하지 않습니다.');history.back();</script>");
 			 
-
- 
 			viewPage= "login.jsp";
 		 
 		}
-				
 		return viewPage;
- 
-		 
-
 }
 }
