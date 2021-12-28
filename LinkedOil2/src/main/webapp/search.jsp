@@ -8,9 +8,9 @@
 </head>
 <body>
 	<form action="searchList.do" method="post">
-	<input type="text" name="searchbox">
-	<input type="submit" value="검색">	
-	
+	<a href="selectGasStation.do">주유소 검색하기</a>
+	<a href="selectYososu.do">요소수 검색하기</a>
+	<a href="searchEvStationList.do">전기차 검색하기</a> 
 	</form>
 </body>
 </html>

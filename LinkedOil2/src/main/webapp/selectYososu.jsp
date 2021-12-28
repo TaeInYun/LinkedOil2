@@ -8,12 +8,36 @@ pageEncoding="UTF-8"%>
 <head>
 
 <meta charset="UTF-8">  
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script> 
+
 <!--  시도 선택을 위한 js-->
 <script language="javascript">
-<<<<<<< HEAD
 //내 위치 불러오기 
-function getLocation() {
+
+/* function aroundGetLocation(){
+	if(navigor.geolocation){
+		navigator.geolocation.getCurrentPosition(function(position){
+			
+			var latitude = posistion.coords.latitude;
+			var longtitude=position.coords.longtitude;
+			
+			var obj = wgs84ToKatech(latitude,longitude);
+			
+			var prodcd=$("#pridcd").val();
+			var distance=$("#distance").val();
+			var sort=$("#sort").val();
+		}
+		
+	}
+} */
+
+
+/* function getLocation() {
 	  if (navigator.geolocation) { // GPS를 지원하면
 	    navigator.geolocation.getCurrentPosition(function(position) {
 	      alert(position.coords.latitude + ' ' + position.coords.longitude);
@@ -29,15 +53,9 @@ function getLocation() {
 	    alert('GPS를 지원하지 않습니다');
 	  }
 	}
-	getLocation();
+	getLocation(); */
 
-	
-	
-//시군선택박스
-=======
  
- 
->>>>>>> branch 'master' of https://github.com/TaeInYun/LinkedOil2.git
 $('document').ready(function() {
 	 var area0 = ["시/도 선택","서울","인천","대전","광주","대구","울산","부산","경기","강원","충북","충남","전북","전남","경북","경남","제주"];
 	  var area1 = ["강남구","강동구","강북구","강서구","관악구","광진구","구로구","금천구","노원구","도봉구","동대문구","동작구","마포구","서대문구","서초구","성동구","성북구","송파구","양천구","영등포구","용산구","은평구","종로구","중구","중랑구"];
@@ -89,41 +107,86 @@ $('document').ready(function() {
 
 	
 </script>
-<<<<<<< HEAD
 
 
-<!-- -----------지도 
+<!-- -----------지도 -->
 
-=======
- </head>
- 
->>>>>>> branch 'master' of https://github.com/TaeInYun/LinkedOil2.git
 <div id="map" style="width:100%;height:350px;"></div>
-<body>
- 
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=efc51d149bcb86beca3f7969fe946ef1&libraries=services"></script>
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script type="text/javascript">
- 
-var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-    mapOption = {
-        center: new daum.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-        level: 10 // 지도의 확대 레벨
-    };  
 
-// 지도를 생성합니다    
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=383beb63eac8714dec4cc534f56f27f8&libraries=services"></script>
+<script>
+	
+var mapContainer = document.getElementById('map');
+var mapOption = {
+    center: new daum.maps.LatLng(37.450701, 126.570667),
+    level: 3
+};  
+
 var map = new daum.maps.Map(mapContainer, mapOption); 
 
-// 주소-좌표 변환 객체를 생성합니다
+ 
+//이거 어떻게 값을 불러오지...?
+		
 var geocoder = new daum.maps.services.Geocoder();
 
-//주소를 배열에 담기
+
 var listData = new Array();
-<c:forEach items="${list}" var="g">
-listData.push("${g.station_addr }");
+<c:forEach items="${list}" var="y">
+listData.push("${y.addr}");
 </c:forEach>
 
-<<<<<<< HEAD
+for (var i=0; i < listData.length ; i++) {
+	// 주소로 좌표를 검색합니다
+  geocoder.addressSearch(listData[i], function(result, status) {
+
+	    // 정상적으로 검색이 완료됐으면 
+	  if (status === daum.maps.services.Status.OK) {
+
+	       var coords = new daum.maps.LatLng(result[0].y, result[0].x);
+
+	        // 결과값으로 받은 위치를 마커로 표시합니다
+	      var marker = new daum.maps.Marker({
+	           map: map,
+	           position: coords
+	       });
+	        	  	        	
+	        var infowindow = new kakao.maps.InfoWindow({
+	            content: '<div style="width:150px;text-align:center;padding:6px 0;">${y.addr}</div>'
+	        });
+	        infowindow.open(map, marker);
+	        
+	      
+	        
+	     /*   // 인포윈도우로 장소에 대한 설명을 표시합니다
+	        var infowindow = new daum.maps.InfoWindow({
+	        	content: result[0].y + "," + result[0].x
+	        });
+	        infowindow.open(map, marker);*/
+
+	        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+	        map.setCenter(coords);
+	    } 
+	})
+
+
+	}; 
+	
+		
+	
+
+/* var listData = [
+	'서울 서대문구 연희로 266 (홍은동)',
+	
+]; */
+
+
+
+
+/* listData.forEach(function(addr, index) {
+    geocoder.addressSearch(addr, function(result, status) {
+        if (status === daum.maps.services.Status.OK) {
+            var coords = new daum.maps.LatLng(result[0].y, result[0].x);
+
             var marker = new daum.maps.Marker({
                 map: map,
                 position: coords
@@ -136,66 +199,38 @@ listData.push("${g.station_addr }");
         } 
     });
    
-});    -->
-=======
-
-for (var i=0; i < listData.length ; i++) {
-// 주소로 좌표를 검색합니다
-geocoder.addressSearch(listData[i], function(result, status) {
-
-    // 정상적으로 검색이 완료됐으면 
-     if (status === daum.maps.services.Status.OK) {
-
-        var coords = new daum.maps.LatLng(result[0].y, result[0].x);
-
-        // 결과값으로 받은 위치를 마커로 표시합니다
-        var marker = new daum.maps.Marker({
-            map: map,
-            position: coords
-        });
-
-     /*   // 인포윈도우로 장소에 대한 설명을 표시합니다
-        var infowindow = new daum.maps.InfoWindow({
-        	content: result[0].y + "," + result[0].x
-        });
-        infowindow.open(map, marker);*/
-
-        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-        map.setCenter(coords);
-    } 
-})
-
-
-};    
->>>>>>> branch 'master' of https://github.com/TaeInYun/LinkedOil2.git
+}); */    
 </script>
+ 
 
-<form action="selectGasStation.do" method="post" >
+
+
+ </head>
+<body>
+<form action="selectYososu.do" method="post" >
 		<select name="sido1" id="sido1"></select> 
-		<select name="gugun1" id="gugun1"></select>
-		<select name="user_brand" id="user_brand">		 
-				<option value="SK" selected="selected">SK</option>		
-				<option value="GS" >GS</option> 
-				<option value="현대" >현대오일</option>		 
-				<option value="S-O" >S-OIL</option>
-				<option value="알뜰" >자영알뜰</option>		
-		</select>
-			
-		<select name="oil" id="oil" >		 
-				<option value="oil_b027" selected="selected">휘발유</option>		
-				<option value="oil_d047">경유</option>				 
-		</select>
-	 
+		<select name="gugun1" id="gugun1"></select> 
 					   
 		<input type="submit" value="검색">
+		
+		
 </form>
+
+<form action="selectYososu.do" method="post">
+	<input type="search" name="keyword">
+	<input type="submit" value="검색">
+</form> 
 
 									 
 <!-- ----------------------------------리스트-- ----------------- -->		
 <hr>
 	<b>결과 리스트</b><br>
+	 
+  	
+	<div class="container">
 	
-	<table border="1" width="60%">
+	<!-- <table border="1" width="60%"> -->
+		<table class="table table-hover">
 		<tr>
 		<!--  		 
 			<td>번호</td>
@@ -203,43 +238,47 @@ geocoder.addressSearch(listData[i], function(result, status) {
 			<td>고급휘발유</td>	
 			<td>등유</td>	 -->
 			
-			<td>지역</td>
-			<td>이름</td>		
+			<td>이름</td>
 			<td>주소</td>		
-			<td>브랜드</td>			
-			<td>휘발유</td>		 
-			<td>경유</td>
+			<td>재고수량</td>		
+			<td>재고상태</td>			
+			<td>가격</td>		 
+			<!-- <td>위도</td>
+			<td>경도</td> -->
 				
 		
-		 <c:forEach var="g" items="${list}"> 
+		 <c:forEach var="y" items="${list }"> 
 		 	<tr>
 		 	  				
-			 	<td>${g.station_local } </td>
 			 	<td>
-			 		<a href="detailGasStation.do?station_no=${g.station_no}">${g.station_name}</a> 
-			 	</td>			 
-				<td> ${g.station_addr } </td>			
-				<td> ${g.station_brand } </td>			
-						
-				<td> ${g.oil_b027 } </td>			
-				<td> ${g.oil_d047 } </td>			
+			 		<a href="detailYososu.do?name=${y.name}">${y.name } </a>
+			 	</td>
+			 	<td>${y.addr }</td>			 
+				<td> ${y.inventory } L</td>
+				<td>${y.color } </td>	
+				<td> ${y.price } 원</td>			
+				<%-- 	<td> ${y.lat } </td>			
+				<td> ${y.lng } </td> --%>			
 						 
 			</tr>			
 		 </c:forEach>
 		</tr>
 		
+		
+		
+	<!-- </table> -->
 	</table>
 	
-	
+	</div>
 	<c:forEach var="i" begin="1" end="${totalPage}">
-		<a href="selectGasStation.do?pageNUM=${i}">${i}</a>&nbsp;&nbsp;
+		<a href="selectYososu.do?pageNUM=${i}">${i}</a>&nbsp;&nbsp;
 		<!-- -링크를 걸어주고 page번호를 받음 -->
 	</c:forEach>
 	
-<<<<<<< HEAD
 	
-=======
-	 
->>>>>>> branch 'master' of https://github.com/TaeInYun/LinkedOil2.git
+
+
+	
 </body>
 </html>
+

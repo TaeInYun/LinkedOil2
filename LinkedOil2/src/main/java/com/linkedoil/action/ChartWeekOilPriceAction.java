@@ -6,13 +6,16 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class PwdFindAction implements LinkedOilAction {
+public class ChartWeekOilPriceAction implements LinkedOilAction {
 
 	@Override
 	public String proRequest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String email = request.getParameter("email");
-		return "pwdFindOK.do";
+		request.setCharacterEncoding("UTF-8");
+		String oil_code = request.getParameter("oil_code");
+		System.out.println("oil_code:"+oil_code);
+		request.setAttribute("oil_code", oil_code);
+		return "main/chartWeekOilPrice.jsp";
 	}
 
 }
