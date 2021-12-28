@@ -1,0 +1,26 @@
+@charset "EUC-KR";
+h1{
+	margin-bottom: 40px;
+	font-size: 40px;
+	font-weight: bolder;
+}
+
+.loginForm{
+	width: 100%;
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;	
+}
+
+.loginForm input{
+	margin: 18px;
+	padding: 15px 20px;
+	border: none;
+	border-bottom: 1px solid #ccc;
+	font-size: 20px;
+	
+}
+
+
