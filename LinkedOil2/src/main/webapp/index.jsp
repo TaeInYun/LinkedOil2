@@ -72,17 +72,20 @@
 
 </head>
 <body>
-	<jsp:include page="search.jsp"/>
+	<a href="selectGasStation.do">주유소 검색하기</a>
+	<a href="selectYososu.do">요소수 검색하기</a>
+	<a href="searchEvStationList.do">전기차 검색하기</a>
 	<ul class="grid cs-style-4">
 		<li>
-			<figure>
-				<img src="images/5.png" alt="img01">
-				<figcaption>
-					<h3>반경내 주유소</h3>
-					<span>현재 위치</span>
-					<a href="http://dribbble.com/shots/1115632-Camera">Take a look</a>
-				</figcaption>
-			</figure>
+			<a href="selectGasStation.do">
+				<figure>
+					<img src="images/5.png" alt="img01">
+					<figcaption>
+						<h3>주유소 검색</h3>
+						Take a look
+					</figcaption>
+				</figure>
+			</a>
 		</li>
 	</ul>
 	<table class="table table-striped">
