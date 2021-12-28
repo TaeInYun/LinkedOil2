@@ -75,7 +75,11 @@
 	<ul class="grid cs-style-4">
 		<li>
 			<figure>
-				<div><img src="images/main03.jpg" alt="img05"></div>
+				<div>
+					<a href="selectGasStation.do">
+						<img src="images/main03.jpg" alt="img05">
+					</a>
+				</div>
 				<figcaption>
 					<h3>주유소</h3>
 					<span>Gas Station</span>
@@ -85,9 +89,13 @@
 		</li>
 		<li>
 			<figure>
-				<div><img src="images/main02.jpg" alt="img05"></div>
+				<div>
+					<a href="searchEvStationList.do">
+						<img src="images/main02.jpg" alt="img05">
+					</a>
+				</div>
 				<figcaption>
-					<h3>전기차 &nbsp;&nbsp;&nbsp;충전소</h3>
+					<h3>전기차 &nbsp;충전소</h3>
 					<span>EV charging station</span>
 					<a href="searchEvStationList.do">검색하기</a>
 				</figcaption>
@@ -95,7 +103,11 @@
 		</li>
 		<li>
 			<figure>
-				<div><img src="images/main01.jpg" alt="img05"></div>
+				<div>
+					<a href="selectYososu.do">
+						<img src="images/main01.jpg" alt="img05">
+					</a>
+				</div>
 				<figcaption>
 					<h3>요소수</h3>
 					<span>Diesel exhaust fluid</span>
