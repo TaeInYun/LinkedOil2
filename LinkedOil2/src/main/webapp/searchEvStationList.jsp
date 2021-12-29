@@ -1,40 +1,23 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@page import="java.util.ArrayList"%>
+ 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"   
+pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<head>
-
+<head> <meta charset="utf-8">
+ <link rel="stylesheet" href="css/searchEvStationList.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+</head>
 <meta charset="UTF-8">  
-<link rel="stylesheet" href="css/styles.css">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script> 
 <!--  시도 선택을 위한 js-->
 <script language="javascript">
-/*//내 위치 불러오기 
-function getLocation() {
-	  if (navigator.geolocation) { // GPS를 지원하면
-	    navigator.geolocation.getCurrentPosition(function(position) {
-	      alert(position.coords.latitude + ' ' + position.coords.longitude);
-	      //위도 경도를 불러옴
-	    }, function(error) {
-	      console.error(error);
-	    }, {
-	      enableHighAccuracy: false,
-	      maximumAge: 0,
-	      timeout: Infinity
-	    });
-	  } else {
-	    alert('GPS를 지원하지 않습니다');
-	  }
-	}
-	getLocation();*/
-
  
-	
 $('document').ready(function() {
 	 var area0 = ["시/도 선택","서울","인천","대전","광주","대구","울산","부산","경기","강원","충북","충남","전북","전남","경북","경남","제주"];
 	  var area1 = ["강남구","강동구","강북구","강서구","관악구","광진구","구로구","금천구","노원구","도봉구","동대문구","동작구","마포구","서대문구","서초구","성동구","성북구","송파구","양천구","영등포구","용산구","은평구","종로구","중구","중랑구"];
@@ -54,6 +37,7 @@ $('document').ready(function() {
 	   var area15 = ["거제시","김해시","마산시","밀양시","사천시","양산시","진주시","진해시","창원시","통영시","거창군","고성군","남해군","산청군","의령군","창녕군","하동군","함안군","함양군","합천군"];
 	   var area16 = ["서귀포시","제주시","남제주군","북제주군"];
 
+	 
 
 	 // 시/도 선택 박스 초기화
 	 $("select[name^=sido]").each(function() {
@@ -67,6 +51,7 @@ $('document').ready(function() {
 	 
 
 	 // 시/도 선택시 구/군 설정
+
 	 $("select[name^=sido]").change(function() {
 	  var area = "area"+$("option",$(this)).index($("option:selected",$(this))); // 선택지역의 구군 Array
 	  var $gugun = $(this).next(); // 선택영역 군구 객체
@@ -84,14 +69,34 @@ $('document').ready(function() {
 
 	
 </script>
-</head>
+
 <body>
-<%@ include file="header.jsp" %>
+
+  <%@ include file="header.jsp" %>
+
+<div id=container>
+	<!-- 검색창 -->
+	<section id="selectbox">
+		
+		 
+	
+	<form action="searchEvStationList.do" method="post" >
+      <select name="sido1" id="sido1"></select> 
+      <select name="gugun1" id="gugun1"></select> 
+                  
+      <input type="submit" value="검색">
+	</form>
 
 
-<div id="container" >
-
-<div id="map" style="width:100%;height:900px;"></div>
+		 	
+	 	
+	</section>
+	
+	
+	<!-- 검색창 지도 -->
+	<section id = "maplist">
+	
+	<div id="map" style="width:100%;height:700px;"></div>
 
 <!-- -----------지도 -->
 
@@ -109,6 +114,8 @@ var map = new daum.maps.Map(mapContainer, mapOption);
 		
 		
 var geocoder = new daum.maps.services.Geocoder();
+
+
 
 //주소를 배열에 담기
 var listData = new Array();
@@ -147,43 +154,29 @@ geocoder.addressSearch(listData[i], function(result, status) {
 
 	
 </script>
+	
+	</section>
+	
+	
+	<!-- 검색창 리스트 -->
+	<section id="list">
+	<table class="table table-hover">
+		<tr>
+		 
 
-<!-- ----------------------------------리스트-- ----------------- -->	
-
-<div id="list" >
- <b>충전소 리스트</b><br>
-<div class="select">
-<form action="searchEvStationList.do" method="post" >
-      <select name="sido1" id="sido1"></select> 
-      <select name="gugun1" id="gugun1"></select> 
-                  
-      <input type="submit" value="검색">
-</form>
-</div>
-
-<div class="table" >
-	<table class="table table-hover" style="table-layout: fixed">
-	<colgroup>
-	<col style="width:40%;">
-	<col style="width:30%;">
-	<col style="width:15%;">
-	<col style="width:15%;">
-	</colgroup>
-		<thead>
-		<tr bgcolor="#f2f2f2" >
-			<th>이름</th>
-			<th>주소</th>
-			<th style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;" >리뷰수</th>
-			<th>평점</th>
-		</tr>
-		</thead>
-		<tbody>
-		<c:forEach var="e" items="${list}">
+			<td>이름</td>
+			<td>주소</td>
+			<td>리뷰수</td>
+			<td>평점</td>
+				
+		
+		
+<c:forEach var="e" items="${list}">
 			<tr>				
 				<td><a style="text-decoration: none; color : black; " href="detailEvStation.do?ev_id=${e.ev_id }">${e.ev_name}</a></td>
-				<td style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">${e.ev_addr }</td>
+				<td >${e.ev_addr }</td>
 				<td >${e.review_cnt }</td>
-				<td style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;" >${e.asterion_avg }</td>
+				<td >${e.asterion_avg }</td>
 			</tr>
 		</c:forEach>
 		</tbody>
@@ -205,7 +198,7 @@ geocoder.addressSearch(listData[i], function(result, status) {
 		
 </div>
 </div>
-<%@ include file="footer.jsp" %>
+ 
 </body>
 
 </html>

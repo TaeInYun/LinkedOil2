@@ -5,56 +5,19 @@
 pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<head>
-
-<meta charset="UTF-8">  
- <meta name="viewport" content="width=device-width, initial-scale=1">
+<head> <meta charset="utf-8">
+  
+<link rel="stylesheet" href="css/selectYososu.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<meta charset="UTF-8">  
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script> 
-
 <!--  시도 선택을 위한 js-->
 <script language="javascript">
-//내 위치 불러오기 
-
-/* function aroundGetLocation(){
-	if(navigor.geolocation){
-		navigator.geolocation.getCurrentPosition(function(position){
-			
-			var latitude = posistion.coords.latitude;
-			var longtitude=position.coords.longtitude;
-			
-			var obj = wgs84ToKatech(latitude,longitude);
-			
-			var prodcd=$("#pridcd").val();
-			var distance=$("#distance").val();
-			var sort=$("#sort").val();
-		}
-		
-	}
-} */
-
-
-/* function getLocation() {
-	  if (navigator.geolocation) { // GPS를 지원하면
-	    navigator.geolocation.getCurrentPosition(function(position) {
-	      alert(position.coords.latitude + ' ' + position.coords.longitude);
-	      //위도 경도를 불러옴
-	    }, function(error) {
-	      console.error(error);
-	    }, {
-	      enableHighAccuracy: false,
-	      maximumAge: 0,
-	      timeout: Infinity
-	    });
-	  } else {
-	    alert('GPS를 지원하지 않습니다');
-	  }
-	}
-	getLocation(); */
-
  
 $('document').ready(function() {
 	 var area0 = ["시/도 선택","서울","인천","대전","광주","대구","울산","부산","경기","강원","충북","충남","전북","전남","경북","경남","제주"];
@@ -108,10 +71,36 @@ $('document').ready(function() {
 	
 </script>
 
+<body>
+
+  <%@ include file="header.jsp" %>
+
+<div id=container>
+	<!-- 검색창 -->
+	<section id="selectbox">
+		
+		 
+	
+	
+<form action="selectYososu.do" method="post" id="select">
+		<select name="sido1" id="sido1"></select> 
+		<select name="gugun1" id="gugun1"></select> 					   
+		<input type="submit" value="검색">
+
+ </form>
+
+		 	
+	 	
+	</section>
+	
+	
+	<!-- 검색창 지도 -->
+	<section id = "maplist">
+	
+	<div id="map" style="width:100%;height:700px;"></div>
 
 <!-- -----------지도 -->
 
-<div id="map" style="width:100%;height:350px;"></div>
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=383beb63eac8714dec4cc534f56f27f8&libraries=services"></script>
 <script>
@@ -119,14 +108,15 @@ $('document').ready(function() {
 var mapContainer = document.getElementById('map');
 var mapOption = {
     center: new daum.maps.LatLng(37.450701, 126.570667),
-    level: 10
+    level: 8
 };  
 
 var map = new daum.maps.Map(mapContainer, mapOption); 
-
- 
+		
 		
 var geocoder = new daum.maps.services.Geocoder();
+
+
 
 
 var listData = new Array();
@@ -135,142 +125,74 @@ listData.push("${y.addr}");
 </c:forEach>
 
 for (var i=0; i < listData.length ; i++) {
-	// 주소로 좌표를 검색합니다
-  geocoder.addressSearch(listData[i], function(result, status) {
+// 주소로 좌표를 검색합니다
+geocoder.addressSearch(listData[i], function(result, status) {
 
-	    // 정상적으로 검색이 완료됐으면 
-	  if (status === daum.maps.services.Status.OK) {
+    // 정상적으로 검색이 완료됐으면 
+     if (status === daum.maps.services.Status.OK) {
 
-	       var coords = new daum.maps.LatLng(result[0].y, result[0].x);
+        var coords = new daum.maps.LatLng(result[0].y, result[0].x);
 
-	        // 결과값으로 받은 위치를 마커로 표시합니다
-	      var marker = new daum.maps.Marker({
-	           map: map,
-	           position: coords
-	       });
-	        	  	        	
-	        var infowindow = new kakao.maps.InfoWindow({
-	            content: '<div style="width:150px;text-align:center;padding:6px 0;">${y.addr}</div>'
-	        });
-	        infowindow.open(map, marker);
-	        
-	      
-	        
-	     /*   // 인포윈도우로 장소에 대한 설명을 표시합니다
-	        var infowindow = new daum.maps.InfoWindow({
-	        	content: result[0].y + "," + result[0].x
-	        });
-	        infowindow.open(map, marker);*/
+        // 결과값으로 받은 위치를 마커로 표시합니다
+        var marker = new daum.maps.Marker({
+            map: map,
+            position: coords
+        });
 
-	        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-	        map.setCenter(coords);
-	    } 
-	})
+     /*   // 인포윈도우로 장소에 대한 설명을 표시합니다
+        var infowindow = new daum.maps.InfoWindow({
+        	content: result[0].y + "," + result[0].x
+        });
+        infowindow.open(map, marker);*/
+
+        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+        map.setCenter(coords);
+    } 
+})
+};  
 
 
-	}; 
+
 	
-		
-	
-
-/* var listData = [
-	'서울 서대문구 연희로 266 (홍은동)',
-	
-]; */
-
-
-
-
-/* listData.forEach(function(addr, index) {
-    geocoder.addressSearch(addr, function(result, status) {
-        if (status === daum.maps.services.Status.OK) {
-            var coords = new daum.maps.LatLng(result[0].y, result[0].x);
-
-            var marker = new daum.maps.Marker({
-                map: map,
-                position: coords
-            });
-            var infowindow = new daum.maps.InfoWindow({
-                content: '<div style="width:150px;text-align:center;padding:6px 0;">' + listData[index] + '</div>',
-                disableAutoPan: true
-            });
-            infowindow.open(map, marker);
-        } 
-    });
-   
-}); */    
 </script>
- 
-
-
-
- </head>
-<body>
-<form action="selectYososu.do" method="post" >
-		<select name="sido1" id="sido1"></select> 
-		<select name="gugun1" id="gugun1"></select> 
-					   
-		<input type="submit" value="검색">
-		
-		
-</form>
-
-<form action="selectYososu.do" method="post">
-	<input type="search" name="keyword">
-	<input type="submit" value="검색">
-</form> 
-
-									 
-<!-- ----------------------------------리스트-- ----------------- -->		
-<hr>
-	<b>결과 리스트</b><br>
-	 
-  	
-  	
-	<div class="container">
 	
-	<!-- <table border="1" width="60%"> -->
-		<table class="table table-hover">
+	</section>
+	
+	
+	<!-- 검색창 리스트 -->
+	<section id="list">
+	<table class="table table-hover">
 		<tr>
-		<!--  		 
-			<td>번호</td>
-			<td>셀프여부</td>		
-			<td>고급휘발유</td>	
-			<td>등유</td>	 -->
+		 
+
 			
-			<td>이름</td>
-			<td>주소</td>		
-			<td>재고수량</td>		
-			<td>재고상태</td>			
-			<td>가격</td>		 
-			<!-- <td>위도</td>
-			<td>경도</td> -->
-				
+
+			<td >이름</td>
+			<td >주소</td>		
+			<td  >재고수량</td>		
+			<td  >재고상태</td>			
+			<td  >가격</td>	
 		
-		 <c:forEach var="y" items="${list }"> 
+		
+
+
+<c:forEach var="y" items="${list }"> 
 		 	<tr>
 		 	  				
 			 	<td>
-			 		<a href="detailYososu.do?name=${y.name}">${y.name } </a>
+			 		<a style="text-decoration: none; color : black; " href="detailYososu.do?name=${y.name}">${y.name } </a>
 			 	</td>
 			 	<td>${y.addr }</td>			 
 				<td> ${y.inventory } L</td>
 				<td>${y.color } </td>	
-				<td> ${y.price } 원</td>			
-				<%-- 	<td> ${y.lat } </td>			
-				<td> ${y.lng } </td> --%>			
-						 
+				<td> ${y.price } 원</td>
 			</tr>			
 		 </c:forEach>
 		</tr>
-		
-		
-		
-	<!-- </table> -->
 	</table>
-	
-	</div>
+	 
 	<br>
+	<div class="pagination">
 	<c:if test = "${startPage > 1}">
 		<a href="selectYososu.do?pageNUM=${startPage-1}">이전</a>
 	</c:if>
@@ -279,12 +201,11 @@ for (var i=0; i < listData.length ; i++) {
 		</c:forEach>
 	<c:if test = "${endPage < totalPage}">
 		<a href="selectYososu.do?pageNUM=${endPage+1}">다음</a>
-	</c:if>
-	
-	
-	
+	</c:if>	
+	</div>
+	</div>
+	 
 </body>
-
-
 </html>
 
+ 
