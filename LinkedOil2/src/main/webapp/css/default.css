@@ -1,6 +1,6 @@
 /* General Demo Style */
 @import url(http://fonts.googleapis.com/css?family=Lato:300,400,700);
-
+@import url('https://fonts.googleapis.com/css2&family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
 
 @font-face {
 	font-family: 'codropsicons';
@@ -24,6 +24,9 @@ body {
 	font-family: 'Lato', Calibri, Arial, sans-serif;
 	color: #b3b9bf;
 	background: #f9f9f9;
+	
+	font-family: 'Noto Sans KR', sans-serif;
+
 }
 
 a {
