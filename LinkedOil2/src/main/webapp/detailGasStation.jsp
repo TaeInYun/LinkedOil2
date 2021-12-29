@@ -5,30 +5,35 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+ <link rel="stylesheet" href="css/detailGasStation.css">
 </head>
 <body>
  <a href="selectGasStation.do">주유소 리스트로 돌아가기</a>
 
  <div>
  <div class="left">
- 
-	<h2>주유소 상세 페이지</h2>
-	
-	<hr>
-		주유소 번호 : ${g.station_num}<br>	
-		주유소 고유번호 : ${g.station_no}<br>
-		주유소 지역 : ${g.station_local }<br>
-	 	주유소 상호: ${g.station_name}	<br>  	
-		주유소 주소: ${g.station_addr }<br>
-		주유소 상표: ${g.station_brand } <br>				
-		주유소 셀프여부: ${g.station_self }	<br> 	 
-		고급휘발유 가격: ${g.oil_b037 }<br>		 
-		휘발유 가격:${g.oil_b027 }<br>
-		경유 가격:	${g.oil_d047 }<br>				
-		실내등유 가격: ${g.oil_c004}<br>
-		
+  
+	<div class="name"><h2>${g.station_name}</h2></div>
+	<div class="list">
+	  
+		 <div class="data">${g.station_local }</div>
+	 	 <hr> 	
+		<div class="data"> ${g.station_addr }<br>
+		<hr>
+		<div class="data">  ${g.station_brand } <br>				
+		<hr>
+		<div class="data"> ${g.station_self }	<br> 	 
+		<hr>
+		<div class="data">  ${g.oil_b037 }<br>		 
+		<hr>
+		<div class="data"> ${g.oil_b027 }<br>
+		<hr>
+		<div class="data"> 	${g.oil_d047 }<br>				
+		<hr>
+		<div class="data">  ${g.oil_c004}<br>
+</div>		
 </div>
- <div id="map" style="width:100%;height:350px;" class="right">
+ <div id="map">
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5ce43d6c6e81f2fef309da06d4726f64&libraries=services"></script>
 <script>

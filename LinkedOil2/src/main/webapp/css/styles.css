@@ -7,11 +7,12 @@
 @import "reset.css";
 @import "default.css";
 @import "component.css";
-
+@import "maplist.css";
 /*components*/
 @import "components/form.css";
 
 /*screens*/
+
 
 body{
 	background: #fff;
@@ -22,3 +23,4 @@ body{
 	width: 400px;
 	margin-bottom: 40px;	
 }
+
