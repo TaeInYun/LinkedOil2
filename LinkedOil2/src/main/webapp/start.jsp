@@ -9,7 +9,7 @@
 <body>
 
 	<%
-		 response.sendRedirect("listTodayOilInfo.do"); 
+		response.sendRedirect("listTodayOilInfo.do"); 
 	%>
 	
 </body>

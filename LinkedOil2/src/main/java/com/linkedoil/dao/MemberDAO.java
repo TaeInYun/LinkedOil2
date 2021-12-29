@@ -10,6 +10,7 @@ import com.linkedoil.db.ConnectionProvider;
 import com.linkedoil.vo.MemberVO;
  
 public class MemberDAO {
+	
 	public int getNo(String email, String nickname) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -40,13 +41,13 @@ public class MemberDAO {
 		return no;
 	}
 	
-	public boolean isMember(String email, String pwd) {
+	public String isMember(String email, String pwd) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
-		boolean re = false;
-		String sql = "select * from member where email=? and pwd=?";
+		String re = null;
+		String sql = "select nickname from member where email=? and pwd=?";
 		try {
 			conn = ConnectionProvider.getConnection();
 			pstmt = conn.prepareStatement(sql);
@@ -54,23 +55,15 @@ public class MemberDAO {
 			pstmt.setString(1, email);
 			pstmt.setString(2, pwd);
 			rs = pstmt.executeQuery();
+			
 			if(rs.next()) {
-				re = true;
+				re = rs.getString(1);
 			}
 					
 		}catch (Exception e) {
 			System.out.println("예외발생: "+e.getMessage());
 		}finally {
-			try {
-				if(pstmt != null) {
-					pstmt.close();
-				}
-				if(conn != null) {
-					conn.close();
-				}
-			}catch (Exception e) {
-				// TODO: handle exception
-			}
+			ConnectionProvider.close(conn, pstmt, rs);
 		}
 		
 		return re;
@@ -130,80 +123,6 @@ public class MemberDAO {
 		}
 		return re;
 	}
-	
- /*
-	public String getId(String nickname, String name) {
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		String email = "";
-		boolean re = false;
-		String sql = "select email from member where nickname=? and name=?";
-		try {
-			conn = ConnectionProvider.getConnection();
-			pstmt = conn.prepareStatement(sql);
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, nickname);
-			pstmt.setString(2, name);
-			rs = pstmt.executeQuery();
-			if(rs.next()) {
-				re = true;
-			}
-					
-		}catch (Exception e) {
-			System.out.println("예외발생: "+e.getMessage());
-		}finally {
-			try {
-				if(pstmt != null) {
-					pstmt.close();
-				}
-				if(conn != null) {
-					conn.close();
-				}
-			}catch (Exception e) {
-				// TODO: handle exception
-			}
-		}
-		
-		return email;
-	}
-	public boolean FindId(String nickName, String name) {
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		
-		boolean re = false;
-		String sql = "select * from member where nickName=? and name=?";
-		try {
-			conn = ConnectionProvider.getConnection();
-			pstmt = conn.prepareStatement(sql);
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, nickName);
-			pstmt.setString(2, name);
-			rs = pstmt.executeQuery();
-			if(rs.next()) {
-				re = true;
-			}
-					
-		}catch (Exception e) {
-			System.out.println("예외발생: "+e.getMessage());
-		}finally {
-			try {
-				if(pstmt != null) {
-					pstmt.close();
-				}
-				if(conn != null) {
-					conn.close();
-				}
-			}catch (Exception e) {
-				// TODO: handle exception
-			}
-		}
-		
-		return re;
-	}
-	*/
-	
 	//탈퇴하기
 	public boolean deleteId (String email, String pwd) {
 		boolean result = false;
@@ -336,4 +255,27 @@ public class MemberDAO {
 		}
 		return result;
 	}	
+	
+	public int getEmail(String email) {
+		int re = 0;
+		String sql = "select nvl(count(*),0) from member where email=?";
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			conn = ConnectionProvider.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, email);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				re = 1;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			ConnectionProvider.close(conn, pstmt, rs);
+		}
+		return re;
+		
+	}
 }
