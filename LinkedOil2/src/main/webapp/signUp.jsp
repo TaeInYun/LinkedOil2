@@ -45,14 +45,14 @@
 		}
 		
 		url = "confirmId.do?email=" + email;
-		open(url, "confirm", "toolbar=no, location=no, status=no, menubar=no scrollbar=no, resizable=no,width=300,height=200");
+		open(url, "confirm", "toolbar=no, location=no, status=no, menubar=no scrollbar=no, resizable=no,width=500,height=500");
 	}
 	
 	function checkNickname(){
 		var nickname = document.getElementById('nickname').value;
 		
 		url = "confirmNickname.do?nickname=" + nickname;
-		open(url, "confirm", "toolbar=no, location=no, status=no, menubar=no scrollbar=no, resizable=no,width=300,height=200");
+		open(url, "confirm", "toolbar=no, location=no, status=no, menubar=no scrollbar=no, resizable=no,width=500,height=500");
 	}
 </script>
 </head>
@@ -117,7 +117,7 @@
 			</div>
 			<p class="form__msg"> *MY 유종은 마이페이지에서 설정 가능합니다. </p>
 		</div>
-		<input type="button" value="회원가입" class="form__submit" onclick="checkForm()">
+		<input type="button" value="가입하기" class="form__submit" onclick="checkForm()">
 	</form>
 </body>
 </html>
