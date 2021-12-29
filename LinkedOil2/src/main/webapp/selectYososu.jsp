@@ -111,7 +111,7 @@ $('document').ready(function() {
 
 <!-- -----------지도 -->
 
-<div id="map" style="width:100%;height:350px;"></div>
+<div id="map" style="width:100%;height:800px;"></div>
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=383beb63eac8714dec4cc534f56f27f8&libraries=services"></script>
 <script>
@@ -119,7 +119,7 @@ $('document').ready(function() {
 var mapContainer = document.getElementById('map');
 var mapOption = {
     center: new daum.maps.LatLng(37.450701, 126.570667),
-    level: 3
+    level: 10
 };  
 
 var map = new daum.maps.Map(mapContainer, mapOption); 
@@ -226,6 +226,7 @@ for (var i=0; i < listData.length ; i++) {
 	<b>결과 리스트</b><br>
 	 
   	
+  	
 	<div class="container">
 	
 	<!-- <table border="1" width="60%"> -->
@@ -279,6 +280,7 @@ for (var i=0; i < listData.length ; i++) {
 	<c:if test = "${endPage < totalPage}">
 		<a href="selectYososu.do?pageNUM=${endPage+1}">다음</a>
 	</c:if>
+	
 	
 	
 </body>
