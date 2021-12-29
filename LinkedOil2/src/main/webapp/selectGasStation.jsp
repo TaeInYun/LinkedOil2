@@ -99,7 +99,9 @@ $('document').ready(function() {
 	<!-- 검색창 지도 -->
 	<section id = "maplist">
 	
+
 	<div id="map" style="width:100%;height:500px;"></div>
+
 
 <!-- -----------지도 -->
 
@@ -142,6 +144,12 @@ geocoder.addressSearch(listData[i], function(result, status) {
     } 
 })
 };  
+<<<<<<< HEAD
+
+
+
+=======
+>>>>>>> branch 'master' of https://github.com/TaeInYun/LinkedOil2.git
 	
 </script>
 	
@@ -180,7 +188,7 @@ geocoder.addressSearch(listData[i], function(result, status) {
 		</tr>
 		
 	</table>
- 
+
 	<br>
 	<div class="pagination">
 	<c:if test = "${startPage > 1}">

@@ -13,7 +13,6 @@ public class ListWeekOilPriceAction implements LinkedOilAction {
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		String oil_code_name = request.getParameter("oil_code_name");
-		System.out.println(oil_code_name);
 		request.setAttribute("oil_code_name", oil_code_name);
 		return "main/listWeekOilPrice.jsp";
 	}
