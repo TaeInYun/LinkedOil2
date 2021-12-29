@@ -18,7 +18,7 @@
 		<ul id="main-nav">
 		<li><button type="button" class="btn btn-outline-light" onclick = "location.href = 'searchEvStationList.do'"> 전기차 충전소 검색</button></li>
 		<div id="linkedoilLogo">
-		<a href="index.jsp"><img id src="images/로고.png" width="120px" height="auto"> </a>
+		<a href="index.jsp"><img id src="images/linkedoil_logo_white.png" width="140px" height="auto"> </a>
 		</div>
 		</ul>
 		</nav>
