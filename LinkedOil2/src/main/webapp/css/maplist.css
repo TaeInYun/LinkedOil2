@@ -1,0 +1,90 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2&family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
+*{
+	font-family: 'Noto Sans KR', sans-serif;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+	
+#container{
+	height:100%;
+	display: flex;
+ 	align-items: stretch;
+}
+
+
+
+a{
+	text-decoration: none;
+}
+
+#map{
+flex:2 2 0;
+overflow: auto;
+}
+
+
+
+#list{
+	padding: 1.5%;
+	flex:1 1 0;
+	width: 30%;	
+	height : 100%;
+}
+
+#list > b{
+	font-size: 2em;
+	font-weight:700;
+}
+
+.select{
+	margin-top : 10px;
+	margin-bottom: 20px;	
+}
+
+.select select{
+     width:500px;
+     padding:5px;
+     border:1px solid #999;
+     font-family:'Nanumgothic';
+     background:url('images/arrow_down.png') no-repeat 95% 50%;
+     border-radius:3px;
+     -webkit-appearance: none;
+     -moz-appearance: none;
+     appearance : none;
+}
+
+.pagination {
+	display:block;
+	width:100%;
+	height:auto;
+}
+
+.pagination a {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  border: 1px solid #ddd;
+}
+
+.pagination a.active {
+  background-color: #4CAF50;
+  color: white;
+  border: 1px solid #4CAF50;
+}
+
+.pagination a:hover:not(.active) {background-color: #ddd;}
+
+.pagination a:first-child {
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.pagination a:last-child {
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+

@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <meta charset="UTF-8">  
 <link rel="stylesheet" href="css/maplist.css">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,7 +14,7 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script> 
 <!--  시도 선택을 위한 js-->
 <script language="javascript">
-//내 위치 불러오기 
+/*//내 위치 불러오기 
 function getLocation() {
 	  if (navigator.geolocation) { // GPS를 지원하면
 	    navigator.geolocation.getCurrentPosition(function(position) {
@@ -30,9 +31,10 @@ function getLocation() {
 	    alert('GPS를 지원하지 않습니다');
 	  }
 	}
-	getLocation();
+	getLocation();*/
 
  
+	
 $('document').ready(function() {
 	 var area0 = ["시/도 선택","서울","인천","대전","광주","대구","울산","부산","경기","강원","충북","충남","전북","전남","경북","경남","제주"];
 	  var area1 = ["강남구","강동구","강북구","강서구","관악구","광진구","구로구","금천구","노원구","도봉구","동대문구","동작구","마포구","서대문구","서초구","성동구","성북구","송파구","양천구","영등포구","용산구","은평구","종로구","중구","중랑구"];
@@ -84,8 +86,12 @@ $('document').ready(function() {
 </script>
 </head>
 <body>
+<%@ include file="header.jsp" %>
+
+
 <div id="container" >
-<div id="map"></div>
+
+<div id="map" style="width:100%;height:900px;"></div>
 
 <!-- -----------지도 -->
 
@@ -96,10 +102,11 @@ $('document').ready(function() {
 var mapContainer = document.getElementById('map');
 var mapOption = {
     center: new daum.maps.LatLng(37.450701, 126.570667),
-    level: 10
+    level: 8
 };  
 
 var map = new daum.maps.Map(mapContainer, mapOption); 
+		
 		
 var geocoder = new daum.maps.services.Geocoder();
 
@@ -134,15 +141,18 @@ geocoder.addressSearch(listData[i], function(result, status) {
         map.setCenter(coords);
     } 
 })
+};  
 
-};     
+
+
+	
 </script>
 
 <!-- ----------------------------------리스트-- ----------------- -->	
 
-<div class="list" >
+<div id="list" >
+ <b>충전소 리스트</b><br>
 <div class="select">
- <h2>충전소 리스트</h2><br>
 <form action="searchEvStationList.do" method="post" >
       <select name="sido1" id="sido1"></select> 
       <select name="gugun1" id="gugun1"></select> 
@@ -150,11 +160,12 @@ geocoder.addressSearch(listData[i], function(result, status) {
       <input type="submit" value="검색">
 </form>
 </div>
+
 <div class="table" >
 	<table class="table table-hover" style="table-layout: fixed">
 	<colgroup>
-	<col style="width:30%;">
 	<col style="width:40%;">
+	<col style="width:30%;">
 	<col style="width:15%;">
 	<col style="width:15%;">
 	</colgroup>
@@ -178,20 +189,24 @@ geocoder.addressSearch(listData[i], function(result, status) {
 		</c:forEach>
 		</tbody>
 	</table>
-	<br>
+	
+	<div class="pagination"> 
 	<c:if test = "${startPage > 1}">
-		<a href="searchEvStationList.do?pageNUM=${startPage-1}">이전</a>
+		<a href="searchEvStationList.do?pageNUM=${startPage-1}">&laquo;</a>
 	</c:if>
 		<c:forEach var="i" begin="${startPage}" end="${endPage}">
-		<li><a href="searchEvStationList.do?pageNUM=${i}">${i}</a>&nbsp;&nbsp;</li>
+		<a href="searchEvStationList.do?pageNUM=${i}">${i}</a>
 		</c:forEach>
 	<c:if test = "${endPage < totalPage}">
-		<a href="searchEvStationList.do?pageNUM=${endPage+1}">다음</a>
+		<a href="searchEvStationList.do?pageNUM=${endPage+1}">&laquo;</a>
 	</c:if>
-	
 	</div>
-	
-</div>	
+		
+	</div>
+		
+</div>
+</div>
+<%@ include file="footer.jsp" %>
 </body>
 
 </html>

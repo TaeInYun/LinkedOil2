@@ -5,13 +5,15 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="css/maplist.css">
 <title>Insert title here</title>
 </head>
 <body>
+<div id ="wrap">
  <a href="searchEvStationList.do">자동차 충전소 리스트로 돌아가기</a>
-  <a href="likeStation.do">관심주유소 등록하기</a>
- <div>
- <div class="left">
+  <a href="likeStation.do">관심주유소 등록하기</a>-
+ 	
+ 	<div class="info">
  
 	<h2>전기차 충전소 상세 페이지</h2>
 	
@@ -22,9 +24,10 @@
 		별점 : ${ev.review_cnt}<br>
 		평점 : ${ev.asterion_avg}<br>
 	<hr>
+	<div class="space_line">
+ 	<div class="chargerinfo">	
 		<table border="1" width="60%">
 		<tr>
-	
 			
 			<td>상태</td>
 			<td>충전기 방식</td>		
@@ -39,11 +42,9 @@
 		</c:forEach>
 			</tr>
 	</table>
-	
+	</div>	
 
-		
-</div>
- <div id="map" style="width:100%;height:350px;" class="right">
+ <div id="map">
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5ce43d6c6e81f2fef309da06d4726f64&libraries=services"></script>
 <script>
@@ -83,9 +84,9 @@ geocoder.addressSearch('${ev.ev_addr}', function(result, status) {
         map.setCenter(coords);
     } 
 });    
-</script>
+	</script>
+	</div>
+	</div>
 </div>
-</div>
-
 </body>
 </html>
