@@ -225,7 +225,7 @@ public class MemberDAO {
 				if (pstmt != null)
 					pstmt.close();
 				if (conn != null)
-					pstmt.close();
+					conn.close();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -238,12 +238,12 @@ public class MemberDAO {
 //아이디 찾기
 	public String findId(String nickName, String name) {
 		String email = "없음";
+		Connection conn = ConnectionProvider.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 		
 		try {
 			String sql = "select email from member where nickname='"+nickName+"' and name='"+name+"'";
-			Connection conn = ConnectionProvider.getConnection();
-			PreparedStatement pstmt = null;
-			ResultSet rs = null;
 			
 			pstmt = conn.prepareStatement(sql);
 			
@@ -252,9 +252,11 @@ public class MemberDAO {
 			if(rs.next()) {
 				email = rs.getString("email");
 			}
-				
+			
 		} catch (Exception e) {
 			e.printStackTrace();
+		}finally {
+			ConnectionProvider.close(conn, pstmt, rs);
 		}
 		return email;
 	}
@@ -281,10 +283,7 @@ public class MemberDAO {
 		}catch (Exception e) {
 			System.out.println("예외발생: "+e.getMessage());
 		}finally {
-			try {
-				ConnectionProvider.close(conn, pstmt, rs);
-			}catch (Exception e) {
-			}
+			ConnectionProvider.close(conn, pstmt, rs);
 		}
 		
 		return pwd;

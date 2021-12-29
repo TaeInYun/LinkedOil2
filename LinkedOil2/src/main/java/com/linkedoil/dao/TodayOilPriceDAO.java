@@ -53,6 +53,8 @@ public class TodayOilPriceDAO {
      		}
  		} catch (Exception e) {
  			e.printStackTrace();
+ 		}finally {
+ 			ConnectionProvider.close(conn, stmt, rs);
  		}
      	return avg_price;
     	
@@ -89,6 +91,8 @@ public class TodayOilPriceDAO {
     		}
 		} catch (Exception e) {
 			e.printStackTrace();
+		}finally {
+			ConnectionProvider.close(conn, stmt, rs);
 		}
     	return avg_price;
     }

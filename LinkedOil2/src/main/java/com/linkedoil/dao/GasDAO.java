@@ -49,14 +49,10 @@ public class GasDAO {
 		
 				totalRecord =  getTotalRecord(sido1, gugun1,user_brand);
 				totalPage = (int)Math.ceil(totalRecord/(double)pageSize);
-				System.out.println("전체 레코드 :"+totalRecord);
-				System.out.println("전체 페이지"+totalPage);
 				
 				int start =(pageNUM-1)*GasDAO.pageSize+1;
 				int end = start +GasDAO.pageSize-1;
 				
-				System.out.println("start"+start);
-				System.out.println("end"+end);
 				
 				startPage = (int)Math.floor( (pageNUM-1)/pageGroup) *pageGroup + 1;
 				endPage = startPage + pageGroup - 1;

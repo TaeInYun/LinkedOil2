@@ -34,7 +34,6 @@ public class InsertMemberAction implements LinkedOilAction {
 		if(re == 1) {
 			if(myOil != null) {
 				for(int i = 0; i < myOil.length; i++) {
-					System.out.println("나의 유가정보 ------------------------"+myOil[i]);
 					LikeOilVO v = new LikeOilVO(no, myOil[i]);
 					insert_oil += oilDao.insertLikeOil(v);
 				}
