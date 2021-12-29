@@ -16,7 +16,7 @@
 	<div class="name"><h2>${g.station_name}</h2></div>
 	<div class="list">
 	  
-		 <div class="data">${g.station_local }</div>
+		<div class="data">${g.station_local }</div>
 	 	 <hr> 	
 		<div class="data"> ${g.station_addr }<br>
 		<hr>
