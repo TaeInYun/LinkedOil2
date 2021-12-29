@@ -94,7 +94,7 @@ $('document').ready(function() {
 					<option value="oil_b027" selected="selected">휘발유</option>		
 					<option value="oil_d047">경유</option>				 
 			</select>
-	 	<input type="submit" value="검색" size="15px">
+	 	<input type="submit" value="검색">
 	 	</div>
 	 	</form>
 	 	
@@ -104,7 +104,7 @@ $('document').ready(function() {
 	<!-- 검색창 지도 -->
 	<section id = "maplist">
 	
-	<div id="map" style="width:100%;height:700px;"></div>
+	<div id="map" style="width:100%;height:500px;"></div>
 
 <!-- -----------지도 -->
 
