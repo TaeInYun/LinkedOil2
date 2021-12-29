@@ -24,7 +24,33 @@
 		<p>전국 최저가 주유소
 	</div>	
 	
-	<div id="map" class="box-map"></div>
+	
+ 
+	
+	<%
+	MinPriceGasDAO dao= new MinPriceGasDAO();
+	ArrayList<MinPriceGasVO>minList  = dao.minPriceGasList();
+	request.setAttribute("minList", minList);
+	%>
+		<div id="tableList">
+			<table class="table table-hover">
+				 <tr>		 		
+					<th style="text-align:  center;">지역</th>		
+					<th style="text-align:  center;">이름</th>			
+					<th style="text-align:  center;">위치</th>			 	
+					<th style="text-align:  center;">휘발유</th>			 
+					<c:forEach var="g" items="${minList}">
+				 <tr>
+					<td>${g.station_local } </td>
+				 	<td><a style="text-decoration: none; color : black;"href="detailGasStation.do?station_no=${g.station_no}">${g.station_name }</a></td>			 
+					<td> ${g.station_addr } </td>
+					<td> ${g.oil_b027 } </td>	
+				</tr>		
+					</c:forEach>
+				</tr>
+		  	</table>
+		</div>
+		<div id="map" class="box-map"></div>
 		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=383beb63eac8714dec4cc534f56f27f8&libraries=services"></script>
 		<script>
 	
@@ -61,31 +87,6 @@
 			})
 		};     
 </script>
- 
-	
-	<%
-	MinPriceGasDAO dao= new MinPriceGasDAO();
-	ArrayList<MinPriceGasVO>minList  = dao.minPriceGasList();
-	request.setAttribute("minList", minList);
-	%>
-		<div id="tableList">
-			<table class="table table-hover">
-				 <tr>		 		
-					<th style="text-align:  center;">지역</th>		
-					<th style="text-align:  center;">이름</th>			
-					<th style="text-align:  center;">위치</th>			 	
-					<th style="text-align:  center;">휘발유</th>			 
-					<c:forEach var="g" items="${minList}">
-				 <tr>
-					<td>${g.station_local } </td>
-				 	<td><a style="text-decoration: none; color : black;"href="detailGasStation.do?station_no=${g.station_no}">${g.station_name }</a></td>			 
-					<td> ${g.station_addr } </td>
-					<td> ${g.oil_b027 } </td>	
-				</tr>		
-					</c:forEach>
-				</tr>
-		  	</table>
-		</div>
 	</div>
 </body>
 </html>
