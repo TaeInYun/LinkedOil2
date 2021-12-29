@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import com.google.gson.Gson;
 import com.linkedoil.db.ConnectionProvider;
 import com.linkedoil.vo.EvStationVO;
 import com.linkedoil.vo.GasStationVO;
@@ -26,6 +27,10 @@ public class SearchStationDAO {
 	public int getTotalEvRecord(String sido1, String gugun1) {
 		int n= 0 ;
 		String sql ="select count(*) from ev_station ";		
+		
+	/*	if(keyword != null) {
+			sql += "  where ev_addr like '%"+keyword+"%' ";
+		} */
 		
 		if(sido1 != null && gugun1 != null) {
 			sql += "  where ev_addr like '%"+sido1+"%'  and ev_addr like '%"+gugun1+"%'    ";
@@ -112,6 +117,7 @@ public class SearchStationDAO {
 				vo.setAsterion_avg(rs.getDouble(5));
 				list.add(vo); 
 			}
+			
 			ConnectionProvider.close(conn, pstmt, rs);
 		} catch (Exception e) {
 			System.out.println("예외발생:"+e.getMessage());
