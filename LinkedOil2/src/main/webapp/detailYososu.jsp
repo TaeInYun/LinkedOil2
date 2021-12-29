@@ -11,7 +11,7 @@
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 </head>
-<body>
+<body style="width: 100%">
 
 <div class="container">
  <button type="button" class="btn btn-dark"><a href="selectYososu.do">요소수 리스트로 돌아가기</a></button>
@@ -21,77 +21,39 @@
  <div>
  
  <hr>
- <div class="container">
- <b>결과 리스트</b><br>
+
+ <div id="show">
+ <div style="text-align: center; margin: 0 auto;"><h1><b>결과 리스트</b></h1></div><br>
  
- <div class="container">
-	
-	<!-- <table border="1" width="60%"> -->
-		<table class="table table-hover">
-		<tr>
-		<!--  		 
-			<td>번호</td>
-			<td>셀프여부</td>		
-			<td>고급휘발유</td>	
-			<td>등유</td>	 -->
+ <div class="container" style="width:70%" >
+		 <table class="table table-hover"> 
+		<tr>		
 			
-			<td>이름</td>
-			<td>주소</td>		
-			<td>재고수량</td>		
-			<td>재고상태</td>			
-			<td>가격</td>		 				 
-			<td>전화번호</td>	
-			<!-- <td>리뷰수</td>		 
-			<td>평균평점</td>	 -->	 
-			<!-- <td>위도</td>
-			<td>경도</td> -->
+			<tr><td><h3>이름</h3></td>
+				<td>${y.name }</td></tr>
+			<tr><td><h3>주소</h3></td>		
+				<td>${y.addr }</td>	</tr>
+			<tr><td><h3>재고수량</h3></td>
+				<td> ${y.inventory } L</td></tr>
+			<tr><td><h3>재고상태</h3></td>
+				<td>${y.color } </td></tr>	
+			<tr><td><h3>가격</h3></td>  
+				<td> ${y.price } 원</td>	</tr>				 
+			<tr><td><h3>전화번호</h3></td>
+				<td> ${y.tel } </td></tr>
 				
-		
-		
-		 	<tr>
-		 	  				
-			 	<td>${y.name }</td>
-			 	<td>${y.addr }</td>			 
-				<td> ${y.inventory } L</td>
-				<td>${y.color } </td>	
-				<td> ${y.price } 원</td>										
-				<td> ${y.tel } </td>	
-				<%-- <td> ${y.review_cnt } </td>			
-				<td> ${y.asterion_avg } </td> --%>		
-				<%-- 	<td> ${y.lat } </td>			
-				<td> ${y.lng } </td> --%>			
-						 
-			</tr>			
-		
-		</tr>
+			
  	</table>
  	</div>
- 
- 
- 
- 
- <%-- <div class="left">
  	
-	<h2>요소수 상세 페이지</h2>
-	
-	
-	<hr>
-	
-		요소수 보유 주유소 이름 : ${y.name }<br> 
-		주소:  ${y.addr}<br>
-		요소수 재고수 : ${y.inventory }<br>  
-	 	요소수 재고상태: ${y.color }	<br>   	
-		요소수 가격: ${y.price }<br> 
-		경도: ${y.lat } <br>		 		
-		위도: ${y.lng }	<br> 
-		전화번호:${y.tel} <br>	 
-		 
-		
-		
-</div> --%>
-
- <div id="map" style="width:100%;height:350px;" class="right">
-
+ 	</div>  <!--show(메뉴)  -->
+ 
+ 
+ 
+ 
+ <div class="container" style="width:70%;height:350px;" >
+ 	<div id="map"  style="width:100%;height:100%;"  class="right "></div>
+</div>
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=383beb63eac8714dec4cc534f56f27f8&libraries=services"></script>
 <script>
@@ -132,7 +94,6 @@ geocoder.addressSearch('${y.addr}', function(result, status) {
     } 
 });    
 </script>
-</div>
 </div>
 
 </body>
