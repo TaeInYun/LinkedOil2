@@ -120,7 +120,7 @@ $(function(){
 			for (var i = 0; i < positions.length; i ++) {
 				
 				  
-				var iwContent = '<div style="padding:5px;">'+positions[i].name+'</div><a href="detailYososu.do?name='+positions[i].name+'" style="color:blue">정보보기</a></div>' 				
+				var iwContent = '<div style="padding:5px;">'+positions[i].name+'</div><a href="detailYososu.do?name='+positions[i].name+'" style="color:blue" target="_blank">정보보기</a></div>' 				
 			    iwPosition = positions[i].latlng; //인포윈도우 표시 위치입니다
 			    
 			    

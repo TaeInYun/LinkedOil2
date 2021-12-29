@@ -1,5 +1,6 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+   pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,9 +10,11 @@
 
 </head>
 <body>
-
+	<%
+		String nickname = (String)session.getAttribute("nickname");
+	%>
 	<nav class="navbar navbar-light" style="background-color: #ff9d47;">
-		<div class="container">
+		<div class="container header__list">
 			<a class="navbar-brand" href="start.jsp"> <img
 				src="images/linkedoil_logo_white.png" width="220" height="38"
 				alt="로고">
@@ -23,16 +26,30 @@
 				<span class="navbar-toggler-icon"></span>
 			</button>
 			<div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+			<%
+				if(nickname!=null){
+			%>
+					<span class="navbar-brand"><%= nickname %>님</span>
+					<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+						<li class="nav-item active">
+							<a class="nav-link" href="logout.jsp">로그아웃</a>
+						</li>
+					</ul>
+			<%		
+				}else{
+			%>
 				<a class="navbar-brand" href="login.jsp">로그인</a>
 				<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
 					<li class="nav-item active"><a class="nav-link"
 						href="signUp.jsp">회원가입 <span class="sr-only">(current)</span></a></li>
 				</ul>
+			<%		
+				}
+			%>
 			</div>
 		</div>
 	</nav>
-	
-	
 
 </body>
+
 </html>

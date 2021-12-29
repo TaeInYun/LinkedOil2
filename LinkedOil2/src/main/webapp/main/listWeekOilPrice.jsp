@@ -26,7 +26,6 @@
 		String serviceKey = "F211201253";
 	try {
 			request.setCharacterEncoding("UTF-8");
-
 			String oil_code_name = (String)request.getAttribute("oil_code_name");
     		String url="https://www.opinet.co.kr/api/avgRecentPrice.do?out=xml&code="+serviceKey+"&prodcd=D047";
 			String oil_code ="D047";

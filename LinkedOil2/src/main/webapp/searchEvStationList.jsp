@@ -76,7 +76,7 @@ $(function(){
 	 var lat;
 	 var lng;
 	 
-	 $.ajax({url:"getJsonListGasStation.do",success:function(data){
+	 $.ajax({url:"getJsonListEvStation.do",success:function(data){
 		 listData = data;	
 		 $.each(data, function(index, item){
 			 ev_addr = item['ev_addr'];

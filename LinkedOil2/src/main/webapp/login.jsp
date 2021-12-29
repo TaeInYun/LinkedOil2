@@ -12,7 +12,7 @@
 	<div class="header">
 		<a href="start.jsp"><img class="logo" alt="링크드오일로고" src="images/로고.png"></a>
 	</div>
-	<form action="loginOK.do" method="post" class="form">
+	<form action="loginOK.jsp" method="post" class="form">
 		<p><input type="text" name ="email"  class="form-init" placeholder="이메일(아이디)를 입력하세요." required="required"></p>
 		<p><input type="password" name ="pwd" class="form-init" placeholder="비밀번호를 입력하세요." required="required"></p>
 		<p><input type="submit" class="form__submit" value="로그인"></p>

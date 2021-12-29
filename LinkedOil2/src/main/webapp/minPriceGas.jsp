@@ -1,3 +1,6 @@
+<%@page import="com.linkedoil.dao.MinPriceGasDAO"%>
+<%@page import="com.linkedoil.vo.MinPriceGasVO"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -70,11 +73,17 @@ geocoder.addressSearch(listData[i], function(result, status) {
 
 };     
 </script>
+<%
+MinPriceGasDAO dao= new MinPriceGasDAO();
+ArrayList<MinPriceGasVO>minList  = dao.minPriceGasList();
+request.setAttribute("minList", minList);
+
+%>
 <div id="mapCon">
 	 <table border="1"  class="table table-hover">
 	 <tr>
 	  
-		<th style="text-align:  center; ">고유번호</th>		
+		 		
 		<th style="text-align:  center;">지역</th>		
 		<th style="text-align:  center;">이름</th>			
 		<th style="text-align:  center;">위치</th>			 	
@@ -82,7 +91,7 @@ geocoder.addressSearch(listData[i], function(result, status) {
 		
 		<c:forEach var="g" items="${minList}">
 		<tr>
-			 	<td>${g.station_no } </td>  
+			 	 
 			 	<td>${g.station_local } </td>
 			 	<td><a style="text-decoration: none; color : black;"href="detailGasStation.do?station_no=${g.station_no}">${g.station_name }</a></td>			 
 				<td> ${g.station_addr } </td>
@@ -91,9 +100,6 @@ geocoder.addressSearch(listData[i], function(result, status) {
 		
 		</c:forEach>
 	 </tr>
-	 
-	 
-	 
 	 
 	 </table>
 	 </div>
