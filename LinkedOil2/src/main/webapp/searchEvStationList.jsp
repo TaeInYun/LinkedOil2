@@ -6,7 +6,7 @@
 <head>
 
 <meta charset="UTF-8">  
-<link rel="stylesheet" href="css/maplist.css">
+<link rel="stylesheet" href="css/styles.css">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -179,9 +179,8 @@ geocoder.addressSearch(listData[i], function(result, status) {
 		</thead>
 		<tbody>
 		<c:forEach var="e" items="${list}">
-			<tr>
-				
-				<td><a href="detailEvStation.do?ev_id=${e.ev_id }">${e.ev_name}</a></td>
+			<tr>				
+				<td><a style="text-decoration: none; color : black; " href="detailEvStation.do?ev_id=${e.ev_id }">${e.ev_name}</a></td>
 				<td style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">${e.ev_addr }</td>
 				<td >${e.review_cnt }</td>
 				<td style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;" >${e.asterion_avg }</td>
