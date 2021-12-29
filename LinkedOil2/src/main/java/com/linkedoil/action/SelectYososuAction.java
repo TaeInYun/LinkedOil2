@@ -61,8 +61,12 @@ public class SelectYososuAction implements LinkedOilAction {
 			System.out.println("pageNUM:"+pageNUM);
 			
 			ArrayList<YososuVO>list = dao.listyososu(pageNUM,sido1,gugun1);
-		 	request.setAttribute("totalPage", SelectYososuDAO.totalPage);		
-			request.setAttribute("list", list);
+		 	request.setAttribute("totalPage", SelectYososuDAO.totalPage);
+		 	
+		 	
+		 	
+			session.setAttribute("list", list); //이거변경
+			
 			
 			request.setAttribute("totalPage", SelectYososuDAO.totalPage);
 			request.setAttribute("startPage", SelectYososuDAO.startPage);

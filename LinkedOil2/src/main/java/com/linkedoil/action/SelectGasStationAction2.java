@@ -11,11 +11,11 @@ import javax.servlet.http.HttpSession;
 import com.linkedoil.dao.GasDAO;
 import com.linkedoil.vo.GasStationVO;
 
-public class SelectGasStationAction implements LinkedOilAction {
+public class SelectGasStationAction2 implements LinkedOilAction {
 
 	
 	public GasDAO dao;
-	public SelectGasStationAction() {
+	public SelectGasStationAction2() {
 		dao = new GasDAO();
 	}
 	
@@ -64,9 +64,8 @@ public class SelectGasStationAction implements LinkedOilAction {
 			
 			System.out.println("pageNUM:"+pageNUM);
 			ArrayList<GasStationVO>list = dao.listgas(pageNUM,sido1,gugun1,user_brand,oil);
-		 	request.setAttribute("totalPage", GasDAO.totalPage);
-		 	
-		 	session.setAttribute("list", list);  //이거변경
+		 	request.setAttribute("totalPage", GasDAO.totalPage);		
+			request.setAttribute("list", list);
 			
 			
 			request.setAttribute("totalPage", GasDAO.totalPage);

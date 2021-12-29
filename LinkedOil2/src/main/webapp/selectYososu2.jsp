@@ -12,14 +12,52 @@ pageEncoding="UTF-8"%>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script> 
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=383beb63eac8714dec4cc534f56f27f8&libraries=services"></script>
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script> 
 
-<script type="text/javascript">
-$(function(){
-	
-	var area0 = ["시/도 선택","서울","인천","대전","광주","대구","울산","부산","경기","강원","충북","충남","전북","전남","경북","경남","제주"];
+<!--  시도 선택을 위한 js-->
+<script language="javascript">
+//내 위치 불러오기 
+
+/* function aroundGetLocation(){
+	if(navigor.geolocation){
+		navigator.geolocation.getCurrentPosition(function(position){
+			
+			var latitude = posistion.coords.latitude;
+			var longtitude=position.coords.longtitude;
+			
+			var obj = wgs84ToKatech(latitude,longitude);
+			
+			var prodcd=$("#pridcd").val();
+			var distance=$("#distance").val();
+			var sort=$("#sort").val();
+		}
+		
+	}
+} */
+
+
+/* function getLocation() {
+	  if (navigator.geolocation) { // GPS를 지원하면
+	    navigator.geolocation.getCurrentPosition(function(position) {
+	      alert(position.coords.latitude + ' ' + position.coords.longitude);
+	      //위도 경도를 불러옴
+	    }, function(error) {
+	      console.error(error);
+	    }, {
+	      enableHighAccuracy: false,
+	      maximumAge: 0,
+	      timeout: Infinity
+	    });
+	  } else {
+	    alert('GPS를 지원하지 않습니다');
+	  }
+	}
+	getLocation(); */
+
+ 
+$('document').ready(function() {
+	 var area0 = ["시/도 선택","서울","인천","대전","광주","대구","울산","부산","경기","강원","충북","충남","전북","전남","경북","경남","제주"];
 	  var area1 = ["강남구","강동구","강북구","강서구","관악구","광진구","구로구","금천구","노원구","도봉구","동대문구","동작구","마포구","서대문구","서초구","성동구","성북구","송파구","양천구","영등포구","용산구","은평구","종로구","중구","중랑구"];
 	   var area2 = ["계양구","남구","남동구","동구","부평구","서구","연수구","중구","강화군","옹진군"];
 	   var area3 = ["대덕구","동구","서구","유성구","중구"];
@@ -65,56 +103,102 @@ $(function(){
 	   });
 	  }
 	 });
-	
-	
-	
-	
-	var mapContainer = document.getElementById('map');
-	var mapOption = {
-	    center: new daum.maps.LatLng(37.450701, 126.570667),
-	    level: 10
-	};  
-
-	var map = new daum.maps.Map(mapContainer, mapOption); 
-
-	 
-			
-	var geocoder = new daum.maps.services.Geocoder();
-
-	var listData = [];
-
-	for (var i=0; i < listData.length ; i++) {
-		// 주소로 좌표를 검색합니다
-	  geocoder.addressSearch(listData[i], function(result, status) {
-
-		    // 정상적으로 검색이 완료됐으면 
-		  if (status === daum.maps.services.Status.OK) {
-
-		       var coords = new daum.maps.LatLng(result[0].y, result[0].x);
-
-		        // 결과값으로 받은 위치를 마커로 표시합니다
-		      var marker = new daum.maps.Marker({
-		           map: map,
-		           position: coords
-		       });
-		        	  	        	
-		        var infowindow = new kakao.maps.InfoWindow({
-		            content: '<div style="width:150px;text-align:center;padding:6px 0;">${y.name}</div>'
-		        });
-		        infowindow.open(map, marker);
-		        
-		      
-		        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-		        map.setCenter(coords);
-		    } 
-		})
-
-
-		}; 
-		
 });
+
 	
+</script>
+
+
+<!-- -----------지도 -->
+
+<div id="map" style="width:100%;height:350px;"></div>
+
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=383beb63eac8714dec4cc534f56f27f8&libraries=services"></script>
+<script>
 	
+var mapContainer = document.getElementById('map');
+var mapOption = {
+    center: new daum.maps.LatLng(37.450701, 126.570667),
+    level: 10
+};  
+
+var map = new daum.maps.Map(mapContainer, mapOption); 
+
+ 
+		
+var geocoder = new daum.maps.services.Geocoder();
+
+
+var listData = new Array();
+<c:forEach items="${list}" var="y">
+listData.push("${y.addr}");
+</c:forEach>
+
+for (var i=0; i < listData.length ; i++) {
+	// 주소로 좌표를 검색합니다
+  geocoder.addressSearch(listData[i], function(result, status) {
+
+	    // 정상적으로 검색이 완료됐으면 
+	  if (status === daum.maps.services.Status.OK) {
+
+	       var coords = new daum.maps.LatLng(result[0].y, result[0].x);
+
+	        // 결과값으로 받은 위치를 마커로 표시합니다
+	      var marker = new daum.maps.Marker({
+	           map: map,
+	           position: coords
+	       });
+	        	  	        	
+	        var infowindow = new kakao.maps.InfoWindow({
+	            content: '<div style="width:150px;text-align:center;padding:6px 0;">${y.addr}</div>'
+	        });
+	        infowindow.open(map, marker);
+	        
+	      
+	        
+	     /*   // 인포윈도우로 장소에 대한 설명을 표시합니다
+	        var infowindow = new daum.maps.InfoWindow({
+	        	content: result[0].y + "," + result[0].x
+	        });
+	        infowindow.open(map, marker);*/
+
+	        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+	        map.setCenter(coords);
+	    } 
+	})
+
+
+	}; 
+	
+		
+	
+
+/* var listData = [
+	'서울 서대문구 연희로 266 (홍은동)',
+	
+]; */
+
+
+
+
+/* listData.forEach(function(addr, index) {
+    geocoder.addressSearch(addr, function(result, status) {
+        if (status === daum.maps.services.Status.OK) {
+            var coords = new daum.maps.LatLng(result[0].y, result[0].x);
+
+            var marker = new daum.maps.Marker({
+                map: map,
+                position: coords
+            });
+            var infowindow = new daum.maps.InfoWindow({
+                content: '<div style="width:150px;text-align:center;padding:6px 0;">' + listData[index] + '</div>',
+                disableAutoPan: true
+            });
+            infowindow.open(map, marker);
+        } 
+    });
+   
+}); */    
 </script>
  
 
@@ -122,8 +206,6 @@ $(function(){
 
  </head>
 <body>
-
-<div id="map" style="width:100%;height:350px;"></div>
 <form action="selectYososu.do" method="post" >
 		<select name="sido1" id="sido1"></select> 
 		<select name="gugun1" id="gugun1"></select> 
@@ -147,9 +229,14 @@ $(function(){
   	
 	<div class="container">
 	
-	
+	<!-- <table border="1" width="60%"> -->
 		<table class="table table-hover">
-		<tr>	
+		<tr>
+		<!--  		 
+			<td>번호</td>
+			<td>셀프여부</td>		
+			<td>고급휘발유</td>	
+			<td>등유</td>	 -->
 			
 			<td>이름</td>
 			<td>주소</td>		
