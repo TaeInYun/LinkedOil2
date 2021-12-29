@@ -12,6 +12,8 @@ pageEncoding="UTF-8"%>
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+   
 </head>
 <meta charset="UTF-8">  
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script> 
@@ -87,7 +89,7 @@ $('document').ready(function() {
 					<option value="oil_b027" selected="selected">휘발유</option>		
 					<option value="oil_d047">경유</option>				 
 			</select>
-	 	<input type="submit" value="검색">
+	 	   <input type="submit" value="검색"  style="height: 25px;width: 50px;">  
 	 	</div>
 	 	</form>
 	 	

@@ -78,7 +78,7 @@ $('document').ready(function() {
 <form action="selectYososu.do" method="post" id="select">
 		<select name="sido1" id="sido1"></select> 
 		<select name="gugun1" id="gugun1"></select> 					   
-		<input type="submit" value="검색">
+		<input type="submit" value="검색"  style="height: 25px;width: 50px;">  
 
  </form>
 
@@ -142,11 +142,7 @@ geocoder.addressSearch(listData[i], function(result, status) {
 	<section id="list">
 	<table class="table table-hover">
 		<tr>
-		 
-
-			
-
-			<td >이름</td>
+		<td >이름</td>
 			<td >주소</td>		
 			<td  >재고수량</td>		
 			<td  >재고상태</td>			
