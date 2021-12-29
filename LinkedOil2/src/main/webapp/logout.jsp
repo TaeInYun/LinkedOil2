@@ -7,11 +7,12 @@
 <title>Insert title here</title>
 </head>
 <body>
-<%
-	session.invalidate();
-%>
- <script type="text/javascript">
- 	location.href="index.jsp";
- </script>
+	<%
+		session.invalidate();
+	%>
+	<script>
+	alert('로그아웃 하였습니다.');
+	location.href='login.jsp'; 
+	</script>
 </body>
 </html>

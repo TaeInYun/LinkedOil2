@@ -26,11 +26,11 @@ public class LoginOKAction implements LinkedOilAction {
 		request.setCharacterEncoding("utf-8");
 		String email = request.getParameter("email");
 		String pwd = request.getParameter("pwd");
-		
+		String nickname = dao.isMember(email, pwd);
 		String viewPage = "";
 		
 		
-		if(dao.isMember(email, pwd)) {			
+		if(nickname != null) {			
 			  request.setAttribute("email", email);		
 			  viewPage= "index.jsp";
 			  
