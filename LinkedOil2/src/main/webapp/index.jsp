@@ -288,5 +288,6 @@
          </div>
       </div>
    </div>
+   <jsp:include page="minPriceGas.jsp"/>
 </body>
 </html>

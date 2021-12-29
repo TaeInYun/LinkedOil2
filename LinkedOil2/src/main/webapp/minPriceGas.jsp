@@ -101,9 +101,6 @@ request.setAttribute("minList", minList);
 		</c:forEach>
 	 </tr>
 	 
-	 
-	 
-	 
 	 </table>
 	 </div>
 </body>
