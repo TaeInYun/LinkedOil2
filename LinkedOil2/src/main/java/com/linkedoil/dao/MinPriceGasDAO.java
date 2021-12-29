@@ -18,7 +18,7 @@ public class MinPriceGasDAO {
 		 try {
 				Connection conn = ConnectionProvider.getConnection();
 				
-				String sql =  "SELECT station_no, station_local, station_name, station_addr, oil_b027 FROM  ( SELECT * FROM gas_station ORDER BY oil_b027) WHERE ROWNUM < 10 and oil_b027 not in 0 "; 
+				String sql =  "SELECT station_no, station_local, station_name, station_addr, oil_b027 FROM  ( SELECT * FROM gas_station ORDER BY oil_b027) WHERE ROWNUM <=5 and oil_b027 not in 0 "; 
 				 
 				PreparedStatement pstmt = conn.prepareStatement(sql);
 				 

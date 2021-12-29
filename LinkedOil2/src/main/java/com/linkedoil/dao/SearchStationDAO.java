@@ -14,10 +14,10 @@ import com.linkedoil.vo.SearchStationVO;
 
 public class SearchStationDAO {
 	
-	public static int pageSIZE = 10;	//한 화면에 보여줄 레코드의 수
+	public static int pageSIZE = 5;	//한 화면에 보여줄 레코드의 수
 	public static int totalRecord;		//전체 레코드의 수
 	public static int totalPage;		//전체 페이지의 수
-	public static int pageGroup = 10; // 한 화면에 보여줄 페이지의 수를 10개씩
+	public static int pageGroup = 5; // 한 화면에 보여줄 페이지의 수를 10개씩
 	
 	public static int startPage;
 	public static int endPage;
