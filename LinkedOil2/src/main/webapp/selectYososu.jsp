@@ -6,7 +6,8 @@ pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head> <meta charset="utf-8">
-<link rel="stylesheet" href="css/selectGasStation.css">
+  
+<link rel="stylesheet" href="css/selectYososu.css">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
@@ -71,25 +72,17 @@ $('document').ready(function() {
 	<!-- 검색창 -->
 	<section id="selectbox">
 		
-		<form action="selectGasStation.do" method="post">
-		<div class="selectform">
-			<select name="sido1" id="sido1"></select> 
-			<select name="gugun1" id="gugun1"></select>
-			<select name="user_brand" id="user_brand">		 
-					<option value="SK" selected="selected">SK</option>		
-					<option value="GS" >GS</option> 
-					<option value="현대" >현대오일</option>		 
-					<option value="S-O" >S-OIL</option>
-					<option value="알뜰" >자영알뜰</option>		
-			</select>
-				
-			<select name="oil" id="oil" >		 
-					<option value="oil_b027" selected="selected">휘발유</option>		
-					<option value="oil_d047">경유</option>				 
-			</select>
-	 	<input type="submit" value="검색" size="15px">
-	 	</div>
-	 	</form>
+		 
+	
+	
+<form action="selectYososu.do" method="post" id="select">
+		<select name="sido1" id="sido1"></select> 
+		<select name="gugun1" id="gugun1"></select> 					   
+		<input type="submit" value="검색">
+
+ </form>
+
+		 	
 	 	
 	</section>
 	
@@ -114,10 +107,9 @@ var map = new daum.maps.Map(mapContainer, mapOption);
 		
 		
 var geocoder = new daum.maps.services.Geocoder();
-//주소를 배열에 담기
 var listData = new Array();
-<c:forEach items="${list}" var="g">
-listData.push("${g.station_addr}");
+<c:forEach items="${list}" var="y">
+listData.push("${y.addr}");
 </c:forEach>
 for (var i=0; i < listData.length ; i++) {
 // 주소로 좌표를 검색합니다
@@ -151,51 +143,46 @@ geocoder.addressSearch(listData[i], function(result, status) {
 	<table class="table table-hover">
 		<tr>
 		 
-		 
-			<th  style="text-align:  center; ">이름</th>		
-			<th  style="text-align:  center; ">주소</th>		
-			<th  style="text-align:  center; ">브랜드</th>			
-			<th  style="text-align:  center; ">휘발유</th>		 
-			<th  style="text-align:  center; ">경유</th>
-				
+
+			
+
+			<td >이름</td>
+			<td >주소</td>		
+			<td  >재고수량</td>		
+			<td  >재고상태</td>			
+			<td  >가격</td>	
 		
-		 <c:forEach var="g" items="${list}"> 
+		
+
+
+<c:forEach var="y" items="${list }"> 
 		 	<tr>
-		 	  	<!-- 		
-			 	<td>${g.station_local } </td>
-			 	 -->	
+		 	  				
 			 	<td>
-			 		<a style="text-decoration: none; color : black; " href="detailGasStation.do?station_no=${g.station_no}">${g.station_name}</a> 
-			 	</td>			 
-				<td> ${g.station_addr } </td>			
-				<td> ${g.station_brand } </td>			
-						
-				<td> ${g.oil_b027 } </td>			
-				<td> ${g.oil_d047 } </td>			
-						 
+			 		<a style="text-decoration: none; color : black; " href="detailYososu.do?name=${y.name}">${y.name } </a>
+			 	</td>
+			 	<td>${y.addr }</td>			 
+				<td> ${y.inventory } L</td>
+				<td>${y.color } </td>	
+				<td> ${y.price } 원</td>
 			</tr>			
 		 </c:forEach>
 		</tr>
-		
 	</table>
- 
+	 
 	<br>
 	<div class="pagination">
 	<c:if test = "${startPage > 1}">
-		<a href="selectGasStation.do?pageNUM=${startPage-1}">이전</a>
+		<a href="selectYososu.do?pageNUM=${startPage-1}">이전</a>
 	</c:if>
-		<c:forEach var="i" begin="${startPage}" end="${endPage}">
-		<a href="selectGasStation.do?pageNUM=${i}">${i}</a>&nbsp;&nbsp;
+	<c:forEach var="i" begin="${startPage}" end="${endPage}">
+		<a href="selectYososu.do?pageNUM=${i}">${i}</a>&nbsp;&nbsp;
 		</c:forEach>
 	<c:if test = "${endPage < totalPage}">
-		<a href="selectGasStation.do?pageNUM=${endPage+1}">다음</a>
-	</c:if>
+		<a href="selectYososu.do?pageNUM=${endPage+1}">다음</a>
+	</c:if>	
 	</div>
-	
-	</section>
-	
-</div>
+	</div>
+	 
 </body>
- 
-
 </html>
