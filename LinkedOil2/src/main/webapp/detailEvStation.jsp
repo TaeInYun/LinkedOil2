@@ -9,7 +9,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="css/detailinfo.css">
-<title>Insert title here</title>
+<title>전기차충전소 상세-링크드오일</title>
 </head>
 <body>
 <div id="container">

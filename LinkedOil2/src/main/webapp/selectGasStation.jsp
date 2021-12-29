@@ -71,28 +71,43 @@ $('document').ready(function() {
 </script>
 
 <body>
-  <%@ include file="header.jsp" %>
-<!-- -----------지도 -->
-<form action="selectGasStation.do" method="post" id="select">
-		<select name="sido1" id="sido1"></select> 
-		<select name="gugun1" id="gugun1"></select>
-		<select name="user_brand" id="user_brand">		 
-				<option value="SK" selected="selected">SK</option>		
-				<option value="GS" >GS</option> 
-				<option value="현대" >현대오일</option>		 
-				<option value="S-O" >S-OIL</option>
-				<option value="알뜰" >자영알뜰</option>		
-		</select>
-			
-		<select name="oil" id="oil" >		 
-				<option value="oil_b027" selected="selected">휘발유</option>		
-				<option value="oil_d047">경유</option>				 
-		</select>
-	 
-					   
- <input type="submit" value="검색">
 
-<div id="map"></div>
+  <%@ include file="header.jsp" %>
+
+<div id=container>
+	<!-- 검색창 -->
+	<section id="selectbox">
+		
+		<form action="selectGasStation.do" method="post">
+		<div class="selectform">
+			<select name="sido1" id="sido1"></select> 
+			<select name="gugun1" id="gugun1"></select>
+			<select name="user_brand" id="user_brand">		 
+					<option value="SK" selected="selected">SK</option>		
+					<option value="GS" >GS</option> 
+					<option value="현대" >현대오일</option>		 
+					<option value="S-O" >S-OIL</option>
+					<option value="알뜰" >자영알뜰</option>		
+			</select>
+				
+			<select name="oil" id="oil" >		 
+					<option value="oil_b027" selected="selected">휘발유</option>		
+					<option value="oil_d047">경유</option>				 
+			</select>
+	 	<input type="submit" value="검색">
+	 	</div>
+	 	</form>
+	 	
+	</section>
+	
+	
+	<!-- 검색창 지도 -->
+	<section id = "maplist">
+	
+	<div id="map" style="width:100%;height:700px;"></div>
+
+<!-- -----------지도 -->
+
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=383beb63eac8714dec4cc534f56f27f8&libraries=services"></script>
 <script>
@@ -100,10 +115,11 @@ $('document').ready(function() {
 var mapContainer = document.getElementById('map');
 var mapOption = {
     center: new daum.maps.LatLng(37.450701, 126.570667),
-    level:8
+    level: 8
 };  
 
 var map = new daum.maps.Map(mapContainer, mapOption); 
+		
 		
 var geocoder = new daum.maps.services.Geocoder();
 
@@ -138,20 +154,19 @@ geocoder.addressSearch(listData[i], function(result, status) {
         map.setCenter(coords);
     } 
 })
+};  
 
-};     
+
+
+	
 </script>
- 
-
-
-		 
-</form>
-</div>									 
-<!-- ----------------------------------리스트-- ----------------- -->		
- 
-	 
-	<div id="mapCon">
-	<table class="table table-hover"   width="60%">
+	
+	</section>
+	
+	
+	<!-- 검색창 리스트 -->
+	<section id="list">
+	<table class="table table-hover">
 		<tr>
 		 
 			<!-- 
@@ -183,7 +198,7 @@ geocoder.addressSearch(listData[i], function(result, status) {
 		</tr>
 		
 	</table>
-	<br>
+
 	<br>
 	<div class="pagination">
 	<c:if test = "${startPage > 1}">
@@ -196,7 +211,10 @@ geocoder.addressSearch(listData[i], function(result, status) {
 		<a href="selectGasStation.do?pageNUM=${endPage+1}">다음</a>
 	</c:if>
 	</div>
-	</div>
+	
+	</section>
+	
+</div>
 </body>
 
 </html>

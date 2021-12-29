@@ -1,40 +1,92 @@
-#map{
-	 width:45%;
-	 height:450px;
-	 float: left;
-	 margin-top: 100px;
-	 margin-left: 50px;
+@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
+
+*{
+	font-family: 'Noto Sans KR', sans-serif;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	
 }
-.table{
-	float: right;
-	width: 30%;
+
+#continer{
+	width: 100%;
+	margin: 0 auto;
+	}
+	
+#section{
+	width: 100%;
+
 }
-.pagination{
-	float:   inherit;
+	
+#selectbox{
+	display: flex;
+	width : 100%;
+	height :120px;
+	justify-content: center;
+ 	align-items: center;
+
 }
+
+
+
+#maplist{
+	float: left;
+	width: 55%;
+	overflow: hidden;
+}
+
+#list{
+	padding-left : 20px;
+	padding-right : 20px;	
+	float: right;	
+	width: 45%;
+}
+
+
+.pagination {
+	display:block;
+	width:100%;
+	height:auto;
+}
+
+.pagination a {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  border: 1px solid #ddd;
+}
+
+.pagination a.active {
+  background-color: #4CAF50;
+  color: white;
+  border: 1px solid #4CAF50;
+}
+
+.pagination a:hover:not(.active) {background-color: #ddd;}
+
+.pagination a:first-child {
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.pagination a:last-child {
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
  
-td{
-	padding: 1px;
-	font-size: 0.63em;
-	table-layout: fixed;
-	width: 300px;
-	text-align: center;
-}
-th{	
-	padding: 5px;
-	font-size: 0.63em;
-	text-align: center;
-}
  
-#mapCon{
-	margin-top:30px;
- 	width: 45%; 	 
- 	float: right;
-  	padding: 30px;
- }
- 
- #select{
- margin-top: 30px;
- margin-left: 10px;
- 
- }
+/*
+	*스마트폰 
+	태플릿		760px
+	pc			992이상
+*/
+
+
+@media screen and (min-width:992px){
+	#container{
+		width: 90%;
+		margin: 0 auto;
+		background: #ffffff;
+	}
