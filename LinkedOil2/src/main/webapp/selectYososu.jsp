@@ -13,6 +13,7 @@ pageEncoding="UTF-8"%>
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+   <title>요소수검색-링크드오일</title>
 </head>
 <meta charset="UTF-8">  
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script> 
@@ -78,7 +79,7 @@ $('document').ready(function() {
 <form action="selectYososu.do" method="post" id="select">
 		<select name="sido1" id="sido1"></select> 
 		<select name="gugun1" id="gugun1"></select> 					   
-		<input type="submit" value="검색">
+		<input type="submit" value="검색"  style="height: 25px;width: 50px;">  
 
  </form>
 
@@ -142,11 +143,7 @@ geocoder.addressSearch(listData[i], function(result, status) {
 	<section id="list">
 	<table class="table table-hover">
 		<tr>
-		 
-
-			
-
-			<td >이름</td>
+		<td >이름</td>
 			<td >주소</td>		
 			<td  >재고수량</td>		
 			<td  >재고상태</td>			

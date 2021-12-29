@@ -8,7 +8,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <link rel="stylesheet" href="css/detailinfo.css">
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>주유소 상세-링크드오일</title>
  <link rel="stylesheet" href="css/detailGasStation.css">
 </head>
 <body>

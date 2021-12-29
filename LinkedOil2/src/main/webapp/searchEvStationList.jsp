@@ -5,14 +5,18 @@
 pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<head> <meta charset="utf-8">
+<head> 
+<title>전기차 충전소 검색-링크드오일</title>
+<meta charset="utf-8">
  <link rel="stylesheet" href="css/searchEvStationList.css">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+
 </head>
+
 <meta charset="UTF-8">  
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script> 
 <!--  시도 선택을 위한 js-->
@@ -71,8 +75,8 @@ $('document').ready(function() {
 </script>
 
 <body>
-
-  <%@ include file="header.jsp" %>
+	
+	<%@ include file = "header.jsp" %>
 
 <div id=container>
 	<!-- 검색창 -->
@@ -171,7 +175,7 @@ geocoder.addressSearch(listData[i], function(result, status) {
 				
 		
 		
-<c:forEach var="e" items="${list}">
+	<c:forEach var="e" items="${list}">
 			<tr>				
 				<td><a style="text-decoration: none; color : black; " href="detailEvStation.do?ev_id=${e.ev_id }">${e.ev_name}</a></td>
 				<td >${e.ev_addr }</td>
@@ -182,23 +186,22 @@ geocoder.addressSearch(listData[i], function(result, status) {
 		</tbody>
 	</table>
 	
-	<div class="pagination"> 
+	<br>
+	<div class="pagination">
 	<c:if test = "${startPage > 1}">
-		<a href="searchEvStationList.do?pageNUM=${startPage-1}">&laquo;</a>
+		<a href="searchEvStationList.do?pageNUM=${startPage-1}">이전</a>
 	</c:if>
 		<c:forEach var="i" begin="${startPage}" end="${endPage}">
-		<a href="searchEvStationList.do?pageNUM=${i}">${i}</a>
+		<a href="searchEvStationList.do?pageNUM=${i}">${i}</a>&nbsp;&nbsp;
 		</c:forEach>
 	<c:if test = "${endPage < totalPage}">
-		<a href="searchEvStationList.do?pageNUM=${endPage+1}">&laquo;</a>
+		<a href="searchEvStationList.do?pageNUM=${endPage+1}">다음</a>
 	</c:if>
 	</div>
-		
-	</div>
-		
+	
+	</section>
+	
 </div>
-</div>
- 
 </body>
 
 </html>

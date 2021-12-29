@@ -39,22 +39,6 @@ overflow: auto;
 	font-weight:700;
 }
 
-.select{
-	margin-top : 10px;
-	margin-bottom: 20px;	
-}
-
-.select select{
-     width:500px;
-     padding:5px;
-     border:1px solid #999;
-     font-family:'Nanumgothic';
-     background:url('images/arrow_down.png') no-repeat 95% 50%;
-     border-radius:3px;
-     -webkit-appearance: none;
-     -moz-appearance: none;
-     appearance : none;
-}
 
 .pagination {
 	display:block;
@@ -87,4 +71,22 @@ overflow: auto;
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
 }
+
+
+/*
+	*스마트폰 
+	태플릿		760px
+	pc			992이상
+*/
+
+
+@media screen and (min-width:992px){
+	#container{
+		width: 800px;
+		height : 100%;
+		margin: 0 auto;
+		background: #ffffff;
+	}
+}
+
 
