@@ -11,7 +11,6 @@
     $(function(){
     	
     	$.ajax({url:"main/listWeekOilPrice.jsp",success:function(data){
-    		console.log(data);
     		i=0;
     		$.each(data, function(index,item){
     			
