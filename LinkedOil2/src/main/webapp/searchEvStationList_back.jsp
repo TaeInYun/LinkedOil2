@@ -7,8 +7,8 @@ pageEncoding="UTF-8"%>
 <html>
 <head>
 
-<meta charset="UTF-8"> 
-<link rel="stylesheet" href="css/selectYososu.css"> 
+<meta charset="UTF-8">  
+<link rel="stylesheet" href="css/searchEvStationList.css"> 
  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
@@ -76,12 +76,12 @@ $(function(){
 	 var lat;
 	 var lng;
 	 
-	 $.ajax({url:"getJsonListYososu.do",success:function(data){
+	 $.ajax({url:"getJsonListGasStation.do",success:function(data){
 		 listData = data;	
 		 $.each(data, function(index, item){
-			addr = item['addr'];
-			var name = item['name'];
-			geocoder.addressSearch(addr, function(result, status) {
+			 ev_addr = item['ev_addr'];
+			var ev_name = item['ev_name'];
+			geocoder.addressSearch(ev_addr, function(result, status) {
 				if(status == 'OK'){
 					lng = result[0].x;
 					lat = result[0].y;
@@ -92,7 +92,7 @@ $(function(){
 					console.log("lat:"+lat);
 					console.log("lng:" +lng);
 					item = {
-				        name: name, 
+							ev_name:ev_name, 
 				        latlng: new kakao.maps.LatLng(lat, lng)
 				    }
 					positions.push(item);
@@ -117,10 +117,11 @@ $(function(){
 			// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
 			var map = new kakao.maps.Map(mapContainer, mapOption); 
 			
+			
 			for (var i = 0; i < positions.length; i ++) {
 				
 				  
-				var iwContent = '<div style="padding:5px;">'+positions[i].name+'</div><a href="detailYososu.do?name='+positions[i].name+'" style="color:blue">정보보기</a></div>' 				
+				var iwContent = '<div style="padding:5px;">'+positions[i].ev_name+'</div><a href="detailGasStation.do?ev_name='+positions[i].ev_name+'" style="color:blue" target="_blank">정보보기</a></div>' 				
 			    iwPosition = positions[i].latlng; //인포윈도우 표시 위치입니다
 			    
 			    
@@ -190,87 +191,81 @@ $(function(){
  </head>
 <body>
 
-  <%@ include file="header.jsp" %>
-  
-  <div id=container>
-<!-- 검색창 -->
-<section id="selectbox">
+<%@ include file="header.jsp" %>
 
-<form action="selectYososu.do" method="post" >
-		<select name="sido1" id="sido1"></select> 
-		<select name="gugun1" id="gugun1"></select> 
-					   
-		<input type="submit" value="검색">
+
+<div id=container>
+	<!-- 검색창 -->
+	<section id="selectbox">
 		
-		
-</form>
-
- </section>
-
-<section id = "maplist">
-<div id="map" style="width:100%;height:700px;"></div>		
-						 
-		
-						 
-
+		 
 	
-	</section>					 
-						 
-						 
+	<form action="searchEvStationList.do" method="post" >
+      <select name="sido1" id="sido1"></select> 
+      <select name="gugun1" id="gugun1"></select> 
+                  
+      <input type="submit" value="검색">
+	</form>
+
+
+		 	
+	 	
+	</section>
+	
+	
+	<!-- 검색창 지도 -->
+	<section id = "maplist">
+	
+	<div id="map" style="width:100%;height:700px;"></div>
+	
+	
+									 
+</script>
+	
+	</section>									 
+									 
 <!-- ----------------------------------리스트-- ----------------- -->		
 <hr>
 	
-	 
-  	
-  	
 	
-	
-		<section id="list">
-		<table class="table table-hover">
-		<tr>	
-			
+	<section id="list">
+	<table class="table table-hover">
+		<tr>
+		 
+
 			<td>이름</td>
-			<td>주소</td>		
-			<td>재고수량</td>		
-			<td>재고상태</td>			
-			<td>가격</td>		 
-			
+			<td>주소</td>
+			<td>리뷰수</td>
+			<td>평점</td>
 				
 		
-		 <c:forEach var="y" items="${list }"> 
-		 	<tr>
-		 	  				
-			 	<td>
-			 		<a style="text-decoration: none; color : black; " href="detailYososu.do?name=${y.name}">${y.name } </a>
-			 	</td>
-			 	<td>${y.addr }</td>			 
-				<td> ${y.inventory } L</td>
-				<td>${y.color } </td>	
-				<td> ${y.price } 원</td>			
-							
-						 
-			</tr>			
-		 </c:forEach>
-		</tr>
-	</table>
 		
+<c:forEach var="e" items="${list}">
+			<tr>				
+				<td><a style="text-decoration: none; color : black; " href="detailEvStation.do?ev_id=${e.ev_id }">${e.ev_name}</a></td>
+				<td >${e.ev_addr }</td>
+				<td >${e.review_cnt }</td>
+				<td >${e.asterion_avg }</td>
+			</tr>
+		</c:forEach>
+		</tbody>
+	</table>
 	
-	
-	<br>
-	<div class="pagination">
+	<div class="pagination"> 
 	<c:if test = "${startPage > 1}">
-		<a href="selectYososu.do?pageNUM=${startPage-1}">이전</a>
+		<a href="searchEvStationList.do?pageNUM=${startPage-1}">&laquo;</a>
 	</c:if>
-	<c:forEach var="i" begin="${startPage}" end="${endPage}">
-		<a href="selectYososu.do?pageNUM=${i}">${i}</a>&nbsp;&nbsp;
+		<c:forEach var="i" begin="${startPage}" end="${endPage}">
+		<a href="searchEvStationList.do?pageNUM=${i}">${i}</a>
 		</c:forEach>
 	<c:if test = "${endPage < totalPage}">
-		<a href="selectYososu.do?pageNUM=${endPage+1}">다음</a>
+		<a href="searchEvStationList.do?pageNUM=${endPage+1}">&laquo;</a>
 	</c:if>
 	</div>
+		
 	</div>
 	
-	
+	</section>	
 </body>
 
 

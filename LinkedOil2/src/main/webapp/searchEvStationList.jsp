@@ -5,21 +5,23 @@
 pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<head> <meta charset="utf-8">
- <link rel="stylesheet" href="css/searchEvStationList.css">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+
+<meta charset="UTF-8">  
+<link rel="stylesheet" href="css/searchEvStationList.css"> 
+ <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
-</head>
-<meta charset="UTF-8">  
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script> 
-<!--  시도 선택을 위한 js-->
-<script language="javascript">
- 
-$('document').ready(function() {
-	 var area0 = ["시/도 선택","서울","인천","대전","광주","대구","울산","부산","경기","강원","충북","충남","전북","전남","경북","경남","제주"];
+  <meta charset="UTF-8"> 
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=383beb63eac8714dec4cc534f56f27f8&libraries=services"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script type="text/javascript">
+$(function(){
+	
+	var area0 = ["시/도 선택","서울","인천","대전","광주","대구","울산","부산","경기","강원","충북","충남","전북","전남","경북","경남","제주"];
 	  var area1 = ["강남구","강동구","강북구","강서구","관악구","광진구","구로구","금천구","노원구","도봉구","동대문구","동작구","마포구","서대문구","서초구","성동구","성북구","송파구","양천구","영등포구","용산구","은평구","종로구","중구","중랑구"];
 	   var area2 = ["계양구","남구","남동구","동구","부평구","서구","연수구","중구","강화군","옹진군"];
 	   var area3 = ["대덕구","동구","서구","유성구","중구"];
@@ -65,14 +67,132 @@ $('document').ready(function() {
 	   });
 	  }
 	 });
-});
+	 
+	 var geocoder = new daum.maps.services.Geocoder();	 
+	 var listData;
+	 var positions = [];
+	 
+
+	 var lat;
+	 var lng;
+	 
+	 $.ajax({url:"getJsonListGasStation.do",success:function(data){
+		 listData = data;	
+		 $.each(data, function(index, item){
+			 ev_addr = item['ev_addr'];
+			var ev_name = item['ev_name'];
+			geocoder.addressSearch(ev_addr, function(result, status) {
+				if(status == 'OK'){
+					lng = result[0].x;
+					lat = result[0].y;
+					
+					//X:126.840197816779     lng
+					//y:86 36.6788131460864   lat
+					 //center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+					console.log("lat:"+lat);
+					console.log("lng:" +lng);
+					item = {
+							ev_name:ev_name, 
+				        latlng: new kakao.maps.LatLng(lat, lng)
+				    }
+					positions.push(item);
+				}
+			});
+			
+			 
+		 });//end each
+		 
+		 
+		 setTimeout(() => {
+			console.log("OK");
+			console.log("lat:"+lat);
+			console.log("lng:" +lng);
+			
+			var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+		    mapOption = { 
+		        center: new kakao.maps.LatLng(lat, lng), // 지도의 중심좌표
+		        level: 10 // 지도의 확대 레벨
+		    };
+
+			// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
+			var map = new kakao.maps.Map(mapContainer, mapOption); 
+			
+			
+			for (var i = 0; i < positions.length; i ++) {
+				
+				  
+				var iwContent = '<div style="padding:5px;">'+positions[i].ev_name+'</div><a href="detailGasStation.do?ev_name='+positions[i].ev_name+'" style="color:blue" target="_blank">정보보기</a></div>' 				
+			    iwPosition = positions[i].latlng; //인포윈도우 표시 위치입니다
+			    
+			    
+			    
+			 	// 인포윈도우를 생성합니다
+				var infowindow = new kakao.maps.InfoWindow({
+				    position : iwPosition, 
+				    content : iwContent 
+				});
+			    
+				
+			    
+			    
+			    // 마커를 생성합니다
+			    var marker = new kakao.maps.Marker({
+			        map: map, // 마커를 표시할 지도
+			        position: positions[i].latlng
+			       
+			    });
+			    
+			 	// 마커 위에 인포윈도우를 표시합니다. 두번째 파라미터인 marker를 넣어주지 않으면 지도 위에 표시됩니다
+				infowindow.open(map, marker); 
+			}
+				        
+			
+		}, 1000);
+		 
+		
+		 
+		
+		  
+		
+		 
+		 
+		 
+		
+		 
+		 
+	 }});   //end Ajax
+	 
+	
+	/*
+	addr: "충청남도 예산군 예산읍 예산로 135"
+	color: "많음"
+	inventory: "1300"
+	lat: 36.6788315
+	lng: 126.8401942
+	name: "예산현대주유소"
+	price: 1500
+	tel: "041-332-2632"
+	*/
+	
+	
 
 	
-</script>
 
+	
+		
+});
+	
+	
+</script>
+ 
+
+
+
+ </head>
 <body>
 
-  <%@ include file="header.jsp" %>
+<%@ include file="header.jsp" %>
+
 
 <div id=container>
 	<!-- 검색창 -->
@@ -97,68 +217,17 @@ $('document').ready(function() {
 	<section id = "maplist">
 	
 	<div id="map" style="width:100%;height:700px;"></div>
-
-<!-- -----------지도 -->
-
-
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=383beb63eac8714dec4cc534f56f27f8&libraries=services"></script>
-<script>
 	
-var mapContainer = document.getElementById('map');
-var mapOption = {
-    center: new daum.maps.LatLng(37.450701, 126.570667),
-    level: 8
-};  
-
-var map = new daum.maps.Map(mapContainer, mapOption); 
-		
-		
-var geocoder = new daum.maps.services.Geocoder();
-
-
-
-//주소를 배열에 담기
-var listData = new Array();
-<c:forEach items="${list}" var="e">
-listData.push("${e.ev_addr}");
-</c:forEach>
-
-for (var i=0; i < listData.length ; i++) {
-// 주소로 좌표를 검색합니다
-geocoder.addressSearch(listData[i], function(result, status) {
-
-    // 정상적으로 검색이 완료됐으면 
-     if (status === daum.maps.services.Status.OK) {
-
-        var coords = new daum.maps.LatLng(result[0].y, result[0].x);
-
-        // 결과값으로 받은 위치를 마커로 표시합니다
-        var marker = new daum.maps.Marker({
-            map: map,
-            position: coords
-        });
-
-     /*   // 인포윈도우로 장소에 대한 설명을 표시합니다
-        var infowindow = new daum.maps.InfoWindow({
-        	content: result[0].y + "," + result[0].x
-        });
-        infowindow.open(map, marker);*/
-
-        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-        map.setCenter(coords);
-    } 
-})
-};  
-
-
-
 	
+									 
 </script>
 	
-	</section>
+	</section>									 
+									 
+<!-- ----------------------------------리스트-- ----------------- -->		
+<hr>
 	
 	
-	<!-- 검색창 리스트 -->
 	<section id="list">
 	<table class="table table-hover">
 		<tr>
@@ -195,10 +264,10 @@ geocoder.addressSearch(listData[i], function(result, status) {
 	</div>
 		
 	</div>
-		
-</div>
-</div>
- 
+	
+	</section>	
 </body>
 
+
 </html>
+
