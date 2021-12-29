@@ -14,7 +14,6 @@ pageEncoding="UTF-8"%>
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
-<<<<<<< HEAD
   <meta charset="UTF-8"> 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=383beb63eac8714dec4cc534f56f27f8&libraries=services"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -23,18 +22,6 @@ pageEncoding="UTF-8"%>
 $(function(){
 	
 	var area0 = ["시/도 선택","서울","인천","대전","광주","대구","울산","부산","경기","강원","충북","충남","전북","전남","경북","경남","제주"];
-=======
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>주유소검색-링크드오일</title>
-</head>
-<meta charset="UTF-8">  
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script> 
-<!--  시도 선택을 위한 js-->
-<script language="javascript">
- 
-$('document').ready(function() {
-	 var area0 = ["시/도 선택","서울","인천","대전","광주","대구","울산","부산","경기","강원","충북","충남","전북","전남","경북","경남","제주"];
->>>>>>> branch 'master' of https://github.com/TaeInYun/LinkedOil2.git
 	  var area1 = ["강남구","강동구","강북구","강서구","관악구","광진구","구로구","금천구","노원구","도봉구","동대문구","동작구","마포구","서대문구","서초구","성동구","성북구","송파구","양천구","영등포구","용산구","은평구","종로구","중구","중랑구"];
 	   var area2 = ["계양구","남구","남동구","동구","부평구","서구","연수구","중구","강화군","옹진군"];
 	   var area3 = ["대덕구","동구","서구","유성구","중구"];
@@ -94,7 +81,6 @@ $('document').ready(function() {
 		 $.each(data, function(index, item){
 			 station_addr = item['station_addr'];
 			var station_name = item['station_name'];
-			var station_no = item['station_no']; //
 			geocoder.addressSearch(station_addr, function(result, status) {
 				if(status == 'OK'){
 					lng = result[0].x;
@@ -135,7 +121,7 @@ $('document').ready(function() {
 			for (var i = 0; i < positions.length; i ++) {
 				
 				  
-				var iwContent = '<div style="padding:5px;">'+positions[i].station_name+'</div><a href="detailGasStation.do?station_no='+positions[i].station_no+'" style="color:blue" >정보보기</a></div>' 				
+				var iwContent = '<div style="padding:5px;">'+positions[i].station_name+'</div><a href="detailGasStation.do?station_no='+positions[i].station_name+'" style="color:blue" target="_blank">정보보기</a></div>' 				
 			    iwPosition = positions[i].latlng; //인포윈도우 표시 위치입니다
 			    
 			    
@@ -228,7 +214,7 @@ $('document').ready(function() {
 					<option value="oil_b027" selected="selected">휘발유</option>		
 					<option value="oil_d047">경유</option>				 
 			</select>
-	 	   <input type="submit" value="검색"  style="height: 25px;width: 50px;">  
+	 	<input type="submit" value="검색" size="15px">
 	 	</div>
 	 	</form>
 	 	
@@ -236,63 +222,8 @@ $('document').ready(function() {
 
 	<section id = "maplist">
 	
-<<<<<<< HEAD
 	<div id="map" style="width:100%;height:700px;"></div>
 									 
-=======
-
-	<div id="map" style="width:100%;height:500px;"></div>
-
-
-<!-- -----------지도 -->
-
-
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=383beb63eac8714dec4cc534f56f27f8&libraries=services"></script>
-<script>
-	
-var mapContainer = document.getElementById('map');
-var mapOption = {
-    center: new daum.maps.LatLng(37.450701, 126.570667),
-    level: 8
-};  
-var map = new daum.maps.Map(mapContainer, mapOption); 
-		
-		
-var geocoder = new daum.maps.services.Geocoder();
-//주소를 배열에 담기
-var listData = new Array();
-<c:forEach items="${list}" var="g">
-listData.push("${g.station_addr}");
-</c:forEach>
-for (var i=0; i < listData.length ; i++) {
-// 주소로 좌표를 검색합니다
-geocoder.addressSearch(listData[i], function(result, status) {
-    // 정상적으로 검색이 완료됐으면 
-     if (status === daum.maps.services.Status.OK) {
-        var coords = new daum.maps.LatLng(result[0].y, result[0].x);
-        // 결과값으로 받은 위치를 마커로 표시합니다
-        var marker = new daum.maps.Marker({
-            map: map,
-            position: coords
-        });
-     /*   // 인포윈도우로 장소에 대한 설명을 표시합니다
-        var infowindow = new daum.maps.InfoWindow({
-        	content: result[0].y + "," + result[0].x
-        });
-        infowindow.open(map, marker);*/
-        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-        map.setCenter(coords);
-    } 
-})
-};  
-<<<<<<< HEAD
-
-
-
-=======
->>>>>>> branch 'master' of https://github.com/TaeInYun/LinkedOil2.git
-	
->>>>>>> branch 'master' of https://github.com/TaeInYun/LinkedOil2.git
 </script>
 	
 	</section>									 
@@ -332,7 +263,7 @@ geocoder.addressSearch(listData[i], function(result, status) {
 		</tr>
 		
 	</table>
-
+ 
 	<br>
 	<div class="pagination">
 	<c:if test = "${startPage > 1}">
