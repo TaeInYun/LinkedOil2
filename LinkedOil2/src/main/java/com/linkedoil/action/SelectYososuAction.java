@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.linkedoil.dao.SearchStationDAO;
 import com.linkedoil.dao.SelectYososuDAO;
 import com.linkedoil.vo.YososuVO;
 
@@ -61,9 +62,15 @@ public class SelectYososuAction implements LinkedOilAction {
 			}
 			
 			System.out.println("pageNUM:"+pageNUM);
+			
 			ArrayList<YososuVO>list = dao.listyososu(pageNUM,sido1,gugun1);
 		 	request.setAttribute("totalPage", SelectYososuDAO.totalPage);		
 			request.setAttribute("list", list);
+			
+			request.setAttribute("totalPage", SelectYososuDAO.totalPage);
+			request.setAttribute("startPage", SelectYososuDAO.startPage);
+			request.setAttribute("endPage", SelectYososuDAO.endPage);
+			
 		 
 			if(sido1 != null && gugun1!=null) {
 				
