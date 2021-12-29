@@ -40,21 +40,21 @@ public class TodayOilPriceDAO {
      	int month = today.get(Calendar.MONTH);
      	
      	String sql = "select avg(price) from WeekAvgOilPrice where oil_code='"+oil_code+"'and substr(week,6,2)='"+month+"'";
-     	Connection conn = ConnectionProvider.getConnection();
+     	Connection conn = null;
      	Statement stmt = null;
      	ResultSet rs = null;
      	
      	try {
+     		conn=ConnectionProvider.getConnection();
      		stmt = conn.createStatement();
      		rs = stmt.executeQuery(sql);
      		
      		if(rs.next()) {
      			avg_price = rs.getDouble(1);
      		}
+     		ConnectionProvider.close(conn, stmt, rs);
  		} catch (Exception e) {
  			e.printStackTrace();
- 		}finally {
- 			ConnectionProvider.close(conn, stmt, rs);
  		}
      	return avg_price;
     	
@@ -78,21 +78,22 @@ public class TodayOilPriceDAO {
     	String sql = "select price from WeekAvgOilPrice where oil_code='"+oil_code
     					+"' and substr(week,9,1)="+ week 
     					+" and substr(week,6,2)="+month;
-    	Connection conn = ConnectionProvider.getConnection();
+    	Connection conn = null;
     	Statement stmt = null;
     	ResultSet rs = null;
     	
     	try {
+    		conn = ConnectionProvider.getConnection();
     		stmt = conn.createStatement();
     		rs = stmt.executeQuery(sql);
     		
     		if(rs.next()) {
     			avg_price = rs.getDouble(1);
     		}
+    		
+    		ConnectionProvider.close(conn, stmt, rs);
 		} catch (Exception e) {
 			e.printStackTrace();
-		}finally {
-			ConnectionProvider.close(conn, stmt, rs);
 		}
     	return avg_price;
     }

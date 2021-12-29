@@ -1,0 +1,46 @@
+@charset "EUC-KR";
+    .price-flex {
+         display: flex;
+          align-items: center;
+          justify-content: center;
+       }
+       
+      .price-up-btn {
+         width: 4rem;
+         border-radius: 1.5rem; 
+         font-size: 0.75rem; 
+         background: #eb53741f;
+         color: #EB5374;
+         font-weight: bold;
+      }
+      
+      .price-down-btn {
+         width: 4rem;
+         border-radius: 1.5rem; 
+         font-size: 0.75rem; 
+         background: #eff2ff;
+         color: #5673EB;
+         font-weight: bold;
+      }
+      
+      .price-vs-div {
+         width: 4rem;
+         text-align: left;
+         color: #464d52;
+      }
+      
+      .font-small {
+         font-size: small
+      }
+      
+      .no-wrap {
+         flex-wrap: nowrap;
+      }
+      
+      #myTabContent {
+         display: flex;
+          flex-direction: column;
+          justify-content: center;
+          height: 90%;
+       }
+   
