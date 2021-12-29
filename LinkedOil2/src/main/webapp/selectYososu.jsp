@@ -111,7 +111,7 @@ $('document').ready(function() {
 
 <!-- -----------지도 -->
 
-<div id="map" style="width:100%;height:800px;"></div>
+<div id="map" style="width:100%;height:350px;"></div>
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=383beb63eac8714dec4cc534f56f27f8&libraries=services"></script>
 <script>
