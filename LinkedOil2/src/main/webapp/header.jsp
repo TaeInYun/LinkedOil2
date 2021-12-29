@@ -9,6 +9,7 @@
 
 </head>
 <body>
+
 	<nav class="navbar navbar-light" style="background-color: #ff9d47;">
 		<div class="container">
 			<a class="navbar-brand" href="start.jsp"> <img
@@ -30,5 +31,8 @@
 			</div>
 		</div>
 	</nav>
+	
+	
+
 </body>
 </html>

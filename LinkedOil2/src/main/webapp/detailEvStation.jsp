@@ -1,67 +1,79 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="css/maplist.css">
+<link rel="stylesheet" href="css/detailinfo.css">
 <title>Insert title here</title>
 </head>
 <body>
-<div id ="wrap">
- <a href="searchEvStationList.do">자동차 충전소 리스트로 돌아가기</a>
-  <a href="likeStation.do">관심주유소 등록하기</a>-
- 	
- 	<div class="info">
- 
-	<h2>전기차 충전소 상세 페이지</h2>
+<div id="container">
+	<header>
+		<nav>
+		<ul id="main-nav">
+		<li><button type="button" class="btn btn-outline-light" onclick = "location.href = 'searchEvStationList.do'"> 전기차 충전소 검색</button></li>
+		<div id="linkedoilLogo">
+		<a href="index.jsp"><img id src="images/linkedoil_logo_white.png" width="140px" height="auto"> </a>
+		</div>
+		</ul>
+		</nav>
+	</header>
+
+	<!-- 정보 보여주는 section -->
+	<section id = "intro" >
+		<div class="page-title">
+			<h2>${ev.ev_name}</h2>
+			<p>평점&nbsp;:&nbsp;  ${ev.asterion_avg}&nbsp;  &nbsp;  리뷰&nbsp;:&nbsp; ${ev.review_cnt}<br></p>
+			<button type="button" class="btn btn-outline-dark" a href="likeStation.do">관심주유소</button>
+		</div>
+		<div class="line"></div>
+		<div class="content">
+			<p>주소&nbsp;:&nbsp;${ev.ev_addr}</p>
+			<table  class="table table-bordered" border="1">
+				<thead>
+				<tr>
+					<td>상태</td>
+					<td>충전기 방식</td>		
+					<td>충전기 타입</td>	
+				<tr>		
+				</thead>
+				<c:forEach var="c" items="${clist}">
+					<tr>
+						<td>${c.charger_status_name }</td>
+						<td>${c.charger_type_name }</td>
+						<td>${c.charger_method_name}</td>
+					</tr>
+				</c:forEach>
+			</table>
+		</div>
+	</section>
 	
-	<hr>
-		전기차충전소 아이디 : ${ev.ev_id}<br>
-		전기차충전소 이름 : ${ev.ev_name}<br>
-		전기차충전소 주소 : ${ev.ev_addr}<br>
-		별점 : ${ev.review_cnt}<br>
-		평점 : ${ev.asterion_avg}<br>
-	<hr>
-	<div class="space_line">
- 	<div class="chargerinfo">	
-		<table border="1" width="60%">
-		<tr>
-			
-			<td>상태</td>
-			<td>충전기 방식</td>		
-			<td>충전기 타입</td>		
-		
-		<c:forEach var="c" items="${clist}">
-			<tr>
-				<td>${c.charger_status_name }</td>
-				<td>${c.charger_type_name }</td>
-				<td>${c.charger_method_name}</td>
-			</tr>
-		</c:forEach>
-			</tr>
-	</table>
-	</div>	
+	<!-- 지도 보여주는 section -->	
+	<section id = "mapinfo">
+	
+	 <div id="map" style="width:100%;height:400px;">
 
- <div id="map">
-
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5ce43d6c6e81f2fef309da06d4726f64&libraries=services"></script>
-<script>
-var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5ce43d6c6e81f2fef309da06d4726f64&libraries=services"></script>
+	<script>
+	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = {
         center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
         level: 3 // 지도의 확대 레벨
     };  
 
-// 지도를 생성합니다    
-var map = new kakao.maps.Map(mapContainer, mapOption); 
-
-// 주소-좌표 변환 객체를 생성합니다
-var geocoder = new kakao.maps.services.Geocoder();
-
-// 주소로 좌표를 검색합니다
-geocoder.addressSearch('${ev.ev_addr}', function(result, status) {
+	// 지도를 생성합니다    
+	var map = new kakao.maps.Map(mapContainer, mapOption); 
+	
+	// 주소-좌표 변환 객체를 생성합니다
+	var geocoder = new kakao.maps.services.Geocoder();
+	
+	// 주소로 좌표를 검색합니다
+	geocoder.addressSearch('${ev.ev_addr}', function(result, status) {
 
     // 정상적으로 검색이 완료됐으면 
      if (status === kakao.maps.services.Status.OK) {
@@ -86,7 +98,9 @@ geocoder.addressSearch('${ev.ev_addr}', function(result, status) {
 });    
 	</script>
 	</div>
-	</div>
+	</section>
+	
 </div>
+
 </body>
 </html>

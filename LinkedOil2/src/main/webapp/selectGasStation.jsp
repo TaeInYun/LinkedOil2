@@ -5,7 +5,14 @@
 pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<head>
+<head> <meta charset="utf-8">
+<link rel="stylesheet" href="css/selectGasStation.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+</head>
 <meta charset="UTF-8">  
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script> 
 <!--  시도 선택을 위한 js-->
@@ -64,10 +71,28 @@ $('document').ready(function() {
 </script>
 
 <body>
-  
+  <%@ include file="header.jsp" %>
 <!-- -----------지도 -->
+<form action="selectGasStation.do" method="post" id="select">
+		<select name="sido1" id="sido1"></select> 
+		<select name="gugun1" id="gugun1"></select>
+		<select name="user_brand" id="user_brand">		 
+				<option value="SK" selected="selected">SK</option>		
+				<option value="GS" >GS</option> 
+				<option value="현대" >현대오일</option>		 
+				<option value="S-O" >S-OIL</option>
+				<option value="알뜰" >자영알뜰</option>		
+		</select>
+			
+		<select name="oil" id="oil" >		 
+				<option value="oil_b027" selected="selected">휘발유</option>		
+				<option value="oil_d047">경유</option>				 
+		</select>
+	 
+					   
+ <input type="submit" value="검색">
 
-<div id="map" style="width:100%;height:350px;"></div>
+<div id="map"></div>
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=383beb63eac8714dec4cc534f56f27f8&libraries=services"></script>
 <script>
@@ -75,7 +100,7 @@ $('document').ready(function() {
 var mapContainer = document.getElementById('map');
 var mapOption = {
     center: new daum.maps.LatLng(37.450701, 126.570667),
-    level: 10
+    level:8
 };  
 
 var map = new daum.maps.Map(mapContainer, mapOption); 
@@ -116,54 +141,36 @@ geocoder.addressSearch(listData[i], function(result, status) {
 
 };     
 </script>
+ 
 
-<form action="selectGasStation.do" method="post" >
-		<select name="sido1" id="sido1"></select> 
-		<select name="gugun1" id="gugun1"></select>
-		<select name="user_brand" id="user_brand">		 
-				<option value="SK" selected="selected">SK</option>		
-				<option value="GS" >GS</option> 
-				<option value="현대" >현대오일</option>		 
-				<option value="S-O" >S-OIL</option>
-				<option value="알뜰" >자영알뜰</option>		
-		</select>
-			
-		<select name="oil" id="oil" >		 
-				<option value="oil_b027" selected="selected">휘발유</option>		
-				<option value="oil_d047">경유</option>				 
-		</select>
-	 
-					   
-		<input type="submit" value="검색">
+
+		 
 </form>
-
-									 
+</div>									 
 <!-- ----------------------------------리스트-- ----------------- -->		
-<hr>
-	<b>결과 리스트</b><br>
-	
-	<table border="1" width="60%">
+ 
+	 
+	<div id="mapCon">
+	<table class="table table-hover"   width="60%">
 		<tr>
-		<!--  		 
-			<td>번호</td>
-			<td>셀프여부</td>		
-			<td>고급휘발유</td>	
-			<td>등유</td>	 -->
-			
-			<td>지역</td>
-			<td>이름</td>		
-			<td>주소</td>		
-			<td>브랜드</td>			
-			<td>휘발유</td>		 
-			<td>경유</td>
+		 
+			<!-- 
+			<th  style="text-align:  center; ">지역</th>
+				 -->
+			<th  style="text-align:  center; ">이름</th>		
+			<th  style="text-align:  center; ">주소</th>		
+			<th  style="text-align:  center; ">브랜드</th>			
+			<th  style="text-align:  center; ">휘발유</th>		 
+			<th  style="text-align:  center; ">경유</th>
 				
 		
 		 <c:forEach var="g" items="${list}"> 
 		 	<tr>
-		 	  				
+		 	  	<!-- 		
 			 	<td>${g.station_local } </td>
+			 	 -->	
 			 	<td>
-			 		<a href="detailGasStation.do?station_no=${g.station_no}">${g.station_name}</a> 
+			 		<a style="text-decoration: none; color : black; " href="detailGasStation.do?station_no=${g.station_no}">${g.station_name}</a> 
 			 	</td>			 
 				<td> ${g.station_addr } </td>			
 				<td> ${g.station_brand } </td>			
@@ -178,6 +185,7 @@ geocoder.addressSearch(listData[i], function(result, status) {
 	</table>
 	<br>
 	<br>
+	<div class="pagination">
 	<c:if test = "${startPage > 1}">
 		<a href="selectGasStation.do?pageNUM=${startPage-1}">이전</a>
 	</c:if>
@@ -187,6 +195,8 @@ geocoder.addressSearch(listData[i], function(result, status) {
 	<c:if test = "${endPage < totalPage}">
 		<a href="selectGasStation.do?pageNUM=${endPage+1}">다음</a>
 	</c:if>
+	</div>
+	</div>
 </body>
 
 </html>

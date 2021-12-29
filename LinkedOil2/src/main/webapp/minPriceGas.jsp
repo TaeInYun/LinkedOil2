@@ -6,25 +6,85 @@
 <html>
 <head>
 <meta charset="EUC-KR">
+	<link rel="stylesheet" href="css/minPriceGas.css">
+	 <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 <title>Insert title here</title>
 </head>
 <body>
-<h2>전국 주유소 최저가 리스트</h2>
+ 
+	<div id="name">
+	<h2>전국 최저가 주유소</h2>
+	</div>
+ 
+<div id="map"></div>
 
-	 <table border="1" width="60%">
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=383beb63eac8714dec4cc534f56f27f8&libraries=services"></script>
+<script>
+	
+var mapContainer = document.getElementById('map');
+var mapOption = {
+    center: new daum.maps.LatLng(37.450701, 126.570667),
+    level: 10
+};  
+
+var map = new daum.maps.Map(mapContainer, mapOption); 
+		
+var geocoder = new daum.maps.services.Geocoder();
+
+//주소를 배열에 담기
+var listData = new Array();
+<c:forEach items="${minList}" var="g">
+listData.push("${g.station_addr}");
+</c:forEach>
+
+for (var i=0; i < listData.length ; i++) {
+// 주소로 좌표를 검색합니다
+geocoder.addressSearch(listData[i], function(result, status) {
+
+    // 정상적으로 검색이 완료됐으면 
+     if (status === daum.maps.services.Status.OK) {
+
+        var coords = new daum.maps.LatLng(result[0].y, result[0].x);
+
+        // 결과값으로 받은 위치를 마커로 표시합니다
+        var marker = new daum.maps.Marker({
+            map: map,
+            position: coords
+        });
+
+     /*   // 인포윈도우로 장소에 대한 설명을 표시합니다
+        var infowindow = new daum.maps.InfoWindow({
+        	content: result[0].y + "," + result[0].x
+        });
+        infowindow.open(map, marker);*/
+
+        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+        map.setCenter(coords);
+    } 
+})
+
+};     
+</script>
+<div id="mapCon">
+	 <table border="1"  class="table table-hover">
 	 <tr>
 	  
-		<td>고유번호</td>		
-		<td>지역</td>		
-		<td>이름</td>			
-		<td>위치</td>			 	
-		<td>휘발유</td>			 
+		<th style="text-align:  center; ">고유번호</th>		
+		<th style="text-align:  center;">지역</th>		
+		<th style="text-align:  center;">이름</th>			
+		<th style="text-align:  center;">위치</th>			 	
+		<th style="text-align:  center;">휘발유</th>			 
 		
 		<c:forEach var="g" items="${minList}">
 		<tr>
 			 	<td>${g.station_no } </td>  
 			 	<td>${g.station_local } </td>
-			 	<td><a href="detailGasStation.do?station_no=${g.station_no}">${g.station_name }</a></td>			 
+			 	<td><a style="text-decoration: none; color : black;"href="detailGasStation.do?station_no=${g.station_no}">${g.station_name }</a></td>			 
 				<td> ${g.station_addr } </td>
 				<td> ${g.oil_b027 } </td>	
 			</tr>		
@@ -36,5 +96,6 @@
 	 
 	 
 	 </table>
+	 </div>
 </body>
 </html>
