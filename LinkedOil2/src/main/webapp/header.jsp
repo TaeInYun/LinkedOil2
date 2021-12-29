@@ -13,7 +13,7 @@
 		String nickname = (String)session.getAttribute("nickname");
 	%>
 	<nav class="navbar navbar-light" style="background-color: #ff9d47;">
-		<div class="container">
+		<div class="container header__list">
 			<a class="navbar-brand" href="start.jsp"> <img
 				src="images/linkedoil_logo_white.png" width="220" height="38"
 				alt="로고">
