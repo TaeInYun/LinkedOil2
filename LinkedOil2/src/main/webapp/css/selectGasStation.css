@@ -1,0 +1,40 @@
+#map{
+	 width:45%;
+	 height:450px;
+	 float: left;
+	 margin-top: 100px;
+	 margin-left: 50px;
+}
+.table{
+	float: right;
+	width: 30%;
+}
+.pagination{
+	float:   inherit;
+}
+ 
+td{
+	padding: 1px;
+	font-size: 0.63em;
+	table-layout: fixed;
+	width: 300px;
+	text-align: center;
+}
+th{	
+	padding: 5px;
+	font-size: 0.63em;
+	text-align: center;
+}
+ 
+#mapCon{
+	margin-top:30px;
+ 	width: 45%; 	 
+ 	float: right;
+  	padding: 30px;
+ }
+ 
+ #select{
+ margin-top: 30px;
+ margin-left: 10px;
+ 
+ }

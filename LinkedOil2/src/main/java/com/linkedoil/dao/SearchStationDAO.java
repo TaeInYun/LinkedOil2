@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import com.google.gson.Gson;
 import com.linkedoil.db.ConnectionProvider;
 import com.linkedoil.vo.EvStationVO;
 import com.linkedoil.vo.GasStationVO;
@@ -13,10 +14,10 @@ import com.linkedoil.vo.SearchStationVO;
 
 public class SearchStationDAO {
 	
-	public static int pageSIZE = 10;	//한 화면에 보여줄 레코드의 수
+	public static int pageSIZE = 5;	//한 화면에 보여줄 레코드의 수
 	public static int totalRecord;		//전체 레코드의 수
 	public static int totalPage;		//전체 페이지의 수
-	public static int pageGroup = 10; // 한 화면에 보여줄 페이지의 수를 10개씩
+	public static int pageGroup = 5; // 한 화면에 보여줄 페이지의 수를 10개씩
 	
 	public static int startPage;
 	public static int endPage;
@@ -26,6 +27,10 @@ public class SearchStationDAO {
 	public int getTotalEvRecord(String sido1, String gugun1) {
 		int n= 0 ;
 		String sql ="select count(*) from ev_station ";		
+		
+	/*	if(keyword != null) {
+			sql += "  where ev_addr like '%"+keyword+"%' ";
+		} */
 		
 		if(sido1 != null && gugun1 != null) {
 			sql += "  where ev_addr like '%"+sido1+"%'  and ev_addr like '%"+gugun1+"%'    ";
@@ -112,6 +117,7 @@ public class SearchStationDAO {
 				vo.setAsterion_avg(rs.getDouble(5));
 				list.add(vo); 
 			}
+			
 			ConnectionProvider.close(conn, pstmt, rs);
 		} catch (Exception e) {
 			System.out.println("예외발생:"+e.getMessage());

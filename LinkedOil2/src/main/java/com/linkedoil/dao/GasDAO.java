@@ -12,11 +12,11 @@ import com.linkedoil.vo.GasStationVO;
 
 public class GasDAO {
 	
-	public static int pageSize = 10;  
+	public static int pageSize = 5;  
 	public static int totalRecord; 
 	public static int totalPage;  
 	
-	public static int pageGroup = 10; // 한 화면에 보여줄 페이지의 수를 10개씩
+	public static int pageGroup = 5; // 한 화면에 보여줄 페이지의 수를 10개씩
 	
 	public static int startPage;
 	public static int endPage;

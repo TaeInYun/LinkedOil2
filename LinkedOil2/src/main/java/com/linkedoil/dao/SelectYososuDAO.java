@@ -10,10 +10,10 @@ import com.linkedoil.vo.DetailYososuVO;
 import com.linkedoil.vo.YososuVO;
 
 public class SelectYososuDAO {
-	public static int pageSize = 10;
+	public static int pageSize = 5;
 	public static int totalRecord;
 	public static int totalPage;
-	public static int pageGroup = 10;
+	public static int pageGroup = 5;
 	
 	public static int startPage;
 	public static int endPage;

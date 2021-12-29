@@ -17,7 +17,7 @@ public class MemberDAO {
 		
 		int no = 0;
 		
-		String sql = "select no from member where email=? and nickname=?";
+		String sql = "select nvl(count(*),0) from member where email=? or nickname=?";
 		try {
 			conn = ConnectionProvider.getConnection();
 			pstmt = conn.prepareStatement(sql);
