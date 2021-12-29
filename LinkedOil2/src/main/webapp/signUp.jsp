@@ -101,19 +101,19 @@
 			<h3 class="form__title">
 		  		<label for="myOil">MY 유종:</label>
 		  	</h3>
-		  	<div>
-				<input type="checkbox"  name="myOil" id="myOil" value="B027">
-				<label for="myOil">휘발유</label>
-				<input type="checkbox" name="myOil" id="myOil" value="D047">
-				<label for="myOil">경유</label>
-				<input type="checkbox"  name="myOil" id="myOil" value="K015">
-				<label for="myOil">LPG</label>
-				<input type="checkbox" name="myOil" id="myOil" value="B034">
-				<label for="myOil">고급휘발유</label>
-				<input type="checkbox" name="myOil" id="myOil" value="Y000">
-				<label for="myOil">요소수</label>
-				<input type="checkbox" name="myOil" id="myOil" value="E001">
-				<label for="myOil">전기</label>
+		  	<div class="checkbox">
+				<input type="checkbox"  name="myOil" id="B027" value="B027">
+				<label for="B027">휘발유</label>
+				<input type="checkbox" name="myOil" id="D047" value="D047">
+				<label for="D047">경유</label>
+				<input type="checkbox"  name="myOil" id="K015" value="K015">
+				<label for="K015">LPG</label>
+				<input type="checkbox" name="myOil" id="B034" value="B034">
+				<label for="B034">고급휘발유</label>
+				<input type="checkbox" name="myOil" id="Y000" value="Y000">
+				<label for="Y000">요소수</label>
+				<input type="checkbox" name="myOil" id="E001" value="E001">
+				<label for="E001">전기</label>
 			</div>
 			<p class="form__msg"> *MY 유종은 마이페이지에서 설정 가능합니다. </p>
 		</div>
