@@ -1,0 +1,101 @@
+@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
+
+*{
+	font-family: 'Noto Sans KR', sans-serif;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	
+}
+
+#continer{
+	width: 100%;
+	margin: 0 auto;
+	}
+	
+#section{
+	width: 100%;
+
+}
+	
+#selectbox{
+	display: flex;
+	width : 100%;
+	height :120px;
+	justify-content: center;
+ 	align-items: center;
+	font-size: 0.75em;
+	
+}
+
+#maplist{
+	float: left;
+	width: 45%;
+	height: 390px;
+	overflow: hidden;
+	margin-left: 40PX;
+	margin: 19PX;
+}
+
+#list{
+	padding-left : 10px;
+	padding-right : 10px;	
+	float: right;	
+	width: 45%;
+	font-size: 0.85em;
+	margin: 19PX;
+}
+td{
+	padding: 1px;
+	font-size: 0.65em;
+	table-layout: fixed;
+	width: 300px;
+	text-align: center;
+}
+th{	
+	padding: 5px;
+	font-size: 0.85em;
+	text-align: center;
+}
+
+.pagination {
+	display:block;
+	width:100%;
+	height:auto;
+}
+
+.pagination a {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  border: 1px solid #ddd;
+}
+
+.pagination a.active {
+  background-color: #4CAF50;
+  color: white;
+  border: 1px solid #4CAF50;
+}
+
+.pagination a:hover:not(.active) {background-color: #ddd;}
+
+.pagination a:first-child {
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+}
+
+.pagination a:last-child {
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
+ 
+ 
+ 
+/*
+	*스마트폰 
+	태플릿		760px
+	pc			992이상
+*/
+
+ 

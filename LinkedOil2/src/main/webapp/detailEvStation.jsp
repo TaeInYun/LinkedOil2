@@ -16,44 +16,44 @@
 	<header>
 		<nav>
 		<ul id="main-nav">
-		<li><button type="button" class="btn btn-outline-light" a href="searchEvStationList.do"> 자동차 충전소 검색</button></li>
+		<li><button type="button" class="btn btn-outline-light" onclick = "location.href = 'searchEvStationList.do'"> 전기차 충전소 검색</button></li>
 		<div id="linkedoilLogo">
-		<a href="index.jsp"><img id src="images/로고.png" width="120px" height="auto"> </a>
+		<a href="index.jsp"><img id src="images/linkedoil_logo_white.png" width="140px" height="auto"> </a>
 		</div>
 		</ul>
 		</nav>
 	</header>
-	<div>
+
+	<!-- 정보 보여주는 section -->
 	<section id = "intro" >
 		<div class="page-title">
-		<h2>${ev.ev_name}</h2>
-		<p>평점&nbsp;:&nbsp;  ${ev.asterion_avg}&nbsp;  &nbsp;  리뷰&nbsp;:&nbsp; ${ev.review_cnt}<br></p>
-		<button type="button" class="btn btn-outline-dark" a href="likeStation.do">관심주유소</button>
+			<h2>${ev.ev_name}</h2>
+			<p>평점&nbsp;:&nbsp;  ${ev.asterion_avg}&nbsp;  &nbsp;  리뷰&nbsp;:&nbsp; ${ev.review_cnt}<br></p>
+			<button type="button" class="btn btn-outline-dark" a href="likeStation.do">관심주유소</button>
 		</div>
+		<div class="line"></div>
 		<div class="content">
-		<p>주소&nbsp;:&nbsp;${ev.ev_addr}</p>
-		
-		<table  class="table table-bordered" border="1">
-		<thead>
-		<tr>
-			<td>상태</td>
-			<td>충전기 방식</td>		
-			<td>충전기 타입</td>	
-		<tr>		
-		</thead>
-		<c:forEach var="c" items="${clist}">
-			
-				<td>${c.charger_status_name }</td>
-				<td>${c.charger_type_name }</td>
-				<td>${c.charger_method_name}</td>
-			</tr>
-		</c:forEach>
-			</tr>
-	</table>
+			<p>주소&nbsp;:&nbsp;${ev.ev_addr}</p>
+			<table  class="table table-bordered" border="1">
+				<thead>
+				<tr>
+					<td>상태</td>
+					<td>충전기 방식</td>		
+					<td>충전기 타입</td>	
+				<tr>		
+				</thead>
+				<c:forEach var="c" items="${clist}">
+					<tr>
+						<td>${c.charger_status_name }</td>
+						<td>${c.charger_type_name }</td>
+						<td>${c.charger_method_name}</td>
+					</tr>
+				</c:forEach>
+			</table>
 		</div>
 	</section>
 	
-	
+	<!-- 지도 보여주는 section -->	
 	<section id = "mapinfo">
 	
 	 <div id="map" style="width:100%;height:400px;">
@@ -98,12 +98,9 @@
 });    
 	</script>
 	</div>
-	
-	
 	</section>
 	
-	</div>
-
 </div>
+
 </body>
 </html>

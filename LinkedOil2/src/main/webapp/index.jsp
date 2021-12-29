@@ -6,10 +6,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
+
 <title>Linked Oil</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-   <link rel="stylesheet" href="css/styles.css">
+   <link rel="stylesheet" href="css/styles.css" rel="mainstylesheet">
    <style>
       .price-flex {
          display: flex;
@@ -82,6 +83,8 @@
    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
    <script src="js/modernizr.custom.js"></script>
    <script type="text/javascript">
+
+   
     
     var arr = [['date','휘발유']];
     function setCodeName(c){
@@ -138,6 +141,7 @@
 
 </head>
 <body>
+
    <%@ include file="header.jsp" %>
  
    <div class="container">
@@ -200,11 +204,11 @@
                             <button class="nav-link
                                <c:if test="${status.index == 0}">
                                   active
-                               </c:if>
-                               "
+                               </c:if>"
                             id="${t.oil_name }-tab" data-bs-toggle="tab" data-bs-target="#${t.oil_name }" type="button" role="tab" 
                             aria-controls="${t.oil_name }" aria-selected="true">
                                ${t.oil_name}
+
                          </button>
                           </li>
                      </c:forEach>
@@ -282,7 +286,10 @@
                </div>
             </div>
          </div>
+         
+
       </div>
    </div>
+
 </body>
 </html>

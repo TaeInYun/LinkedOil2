@@ -3,78 +3,105 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<link rel="stylesheet" href="css/detailinfo.css">
 <meta charset="UTF-8">
 <title>Insert title here</title>
  <link rel="stylesheet" href="css/detailGasStation.css">
 </head>
 <body>
- <a href="selectGasStation.do">주유소 리스트로 돌아가기</a>
+<div id="container">
+	<header>
+		<nav>
+		<ul id="main-nav">
+		<li><button type="button" class="btn btn-outline-light"  onclick = "location.href = 'selectGasStation.do'"> 주유소 검색</li>
+		<div id="linkedoilLogo">
+		<a href="index.jsp"><img id src="images/linkedoil_logo_white.png" width="140px" height="auto"> </a>
+		</div>
+		</ul>
+		</nav>
+	</header>
 
- <div>
- <div class="left">
-  
-	<div class="name"><h2>${g.station_name}</h2></div>
-	<div class="list">
-	  
-		 <div class="data">${g.station_local }</div>
-	 	 <hr> 	
-		<div class="data"> ${g.station_addr }<br>
-		<hr>
-		<div class="data">  ${g.station_brand } <br>				
-		<hr>
-		<div class="data"> ${g.station_self }	<br> 	 
-		<hr>
-		<div class="data">  ${g.oil_b037 }<br>		 
-		<hr>
-		<div class="data"> ${g.oil_b027 }<br>
-		<hr>
-		<div class="data"> 	${g.oil_d047 }<br>				
-		<hr>
-		<div class="data">  ${g.oil_c004}<br>
-</div>		
-</div>
- <div id="map">
+	<!-- 정보 보여주는 section -->
+	<section id = "intro" >
+		<div class="page-title">
+			<h2>${g.station_name}</h2>
+			<p>평점&nbsp;:&nbsp;  0&nbsp;  &nbsp;  리뷰&nbsp;:&nbsp; 0.0<br></p>
+			<button type="button" class="btn btn-outline-dark" a href="likeStation.do">관심주유소</button>
+		</div>
+		<div class="line"></div>
+		<div class="content">
+			<p>주소 : ${g.station_addr}<br>
+			상표 : ${g.station_brand } <br>	
+			셀프여부 : ${g.station_self }	<br> </p>
 
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5ce43d6c6e81f2fef309da06d4726f64&libraries=services"></script>
-<script>
-var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-    mapOption = {
-        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-        level: 3 // 지도의 확대 레벨
-    };  
+			<table class="table table-bordered" border="1" >
+			<thead>
+				<tr>
+					<td>고급휘발유</td>
+					<td>휘발유</td>
+					<td>경유</td>
+					<td>실내등유</td>
+				</tr>
+				</thead>
+					<tr>
+					<td>${g.oil_b037 }</td>
+					<td>${g.oil_b027 }</td>
+					<td>${g.oil_d047 }</td>
+					<td>${g.oil_c004}</td>
+				</tr>
+			</table>
+		</div>
+	</section>
+ 
+	<!-- 지도 보여주는 section -->
+	<section id = "mapinfo">
+	<div id="map" style="width:100%;height:400px;">
+	
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5ce43d6c6e81f2fef309da06d4726f64&libraries=services"></script>
+	<script>
+	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+	    mapOption = {
+	        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+	        level: 3 // 지도의 확대 레벨
+	    };  
+	
+	// 지도를 생성합니다    
+	var map = new kakao.maps.Map(mapContainer, mapOption); 
+	
+	// 주소-좌표 변환 객체를 생성합니다
+	var geocoder = new kakao.maps.services.Geocoder();
+	
+	// 주소로 좌표를 검색합니다
+	geocoder.addressSearch('${g.station_addr}', function(result, status) {
+	
+	    // 정상적으로 검색이 완료됐으면 
+	     if (status === kakao.maps.services.Status.OK) {
+	
+	        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+	
+	        // 결과값으로 받은 위치를 마커로 표시합니다
+	        var marker = new kakao.maps.Marker({
+	            map: map,
+	            position: coords
+	        });
+	
+	        // 인포윈도우로 장소에 대한 설명을 표시합니다
+	        var infowindow = new kakao.maps.InfoWindow({
+	            content: '<div style="width:150px;text-align:center;padding:6px 0;">${g.station_name}</div>'
+	        });
+	        infowindow.open(map, marker);
+	
+	        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+	        map.setCenter(coords);
+	    } 
+	});    
+	</script>
+	</div>
+	</section>	
 
-// 지도를 생성합니다    
-var map = new kakao.maps.Map(mapContainer, mapOption); 
-
-// 주소-좌표 변환 객체를 생성합니다
-var geocoder = new kakao.maps.services.Geocoder();
-
-// 주소로 좌표를 검색합니다
-geocoder.addressSearch('${g.station_addr}', function(result, status) {
-
-    // 정상적으로 검색이 완료됐으면 
-     if (status === kakao.maps.services.Status.OK) {
-
-        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-
-        // 결과값으로 받은 위치를 마커로 표시합니다
-        var marker = new kakao.maps.Marker({
-            map: map,
-            position: coords
-        });
-
-        // 인포윈도우로 장소에 대한 설명을 표시합니다
-        var infowindow = new kakao.maps.InfoWindow({
-            content: '<div style="width:150px;text-align:center;padding:6px 0;">${g.station_name}</div>'
-        });
-        infowindow.open(map, marker);
-
-        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-        map.setCenter(coords);
-    } 
-});    
-</script>
-</div>
 </div>
 
 </body>

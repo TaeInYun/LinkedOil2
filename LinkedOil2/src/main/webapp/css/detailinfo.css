@@ -27,9 +27,9 @@ header a{
 
 #linkedoilLogo{
 	display: inline-block;
-	float: left;
+	float:left;
 	margin: 0 auto;
-	margin-left: 20%;
+	margin-left: 25%;
 	margin-top: 1%;
 }
 
@@ -47,9 +47,6 @@ header a{
 }
 
 
-
-
-
 #container{
 	width: 100%;
 	margin: 0 auto;
@@ -57,11 +54,11 @@ header a{
 
 .page-title{
 	text-align: center;
-	border-bottom: 1px solid #efefef ;
+	margin: 0 auto;
 }
 
 .page-title button{
-	margin-bottom: 30px;
+	margin-bottom: 20px;
 }
 
 h2{
@@ -70,19 +67,32 @@ h2{
 	font-weight: 600;
 }
 
-p{
-	margin : 5px;
-	font-size: 1rem;
-	line-height: 2.5;
-}
 
 .content{
 	margin: 0 auto;
+	margin-bottom: 20px;
+	margin-top : 20px;
+	
 }
 
 .content p{
-	margin-bottom: 10px;
-	
+	width : 600px;
+	margin-bottom: 5px;
+	margin-top : 5px;
+	font-size: 1rem;
+	line-height: 2;
+	word-wrap: break-word;
+}
+
+
+.line{
+	border-bottom: 1px solid #efefef;
+	margin: 5px 0px 5px 0px;
+}
+
+table{
+	margin-top: 10px;
+	 table-layout:fixed ;
 }
 
 section{
