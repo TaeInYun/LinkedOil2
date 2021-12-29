@@ -23,6 +23,7 @@
     var arr = [['date','휘발유']];
     function setCodeName(c){
        arr = [['date',c]];
+       console.log(c);
        $.ajax({url:"listWeekOilPrice.do?oil_code_name="+c,success:function(data){
           console.log(data);
           i=0;
@@ -117,33 +118,77 @@
          </figure>
       </li>
    </ul>
-   <table class="table table-striped">
-      <tr>
-         <c:forEach var="t" items="${list }">
-            <td>${t.oil_name }</td>
-         </c:forEach>
-      </tr>
-      <tr>
-         <c:forEach var="t" items="${list }">
-            <td>${t.price }</td>
-         </c:forEach>
-      </tr>
-      <tr>
-         <c:forEach var="t" items="${list }">
-            <td>어제보다 ${t.api_diff }원</td>
-         </c:forEach>
-      </tr>
-      <tr>
-         <c:forEach var="t" items="${list }">
-            <td>지난주보다 ${t.week_diff }원</td>
-         </c:forEach>
-      </tr>
-      <tr>
-         <c:forEach var="t" items="${list }">
-            <td>지난달보다 ${t.month_diff }원</td>
-         </c:forEach>
-      </tr>
-   </table>
+      <div class="row m-0 w-100">
+      <div class="col">
+         <div class="card h-100">
+            <div class="card-body">
+               <ul class="nav nav-tabs font-small " id="myTab" role="tablist">
+                  <c:forEach  var="t"  items="${list }" varStatus="status">
+                     <li class="nav-item" role="presentation">
+                         <button class="nav-link
+                            <c:if test="${status.index == 0}">
+                               active
+                            </c:if>
+                            "
+                         id="${t.oil_name }-tab" data-bs-toggle="tab" data-bs-target="#${t.oil_name }" type="button" role="tab" 
+                         aria-controls="${t.oil_name }" aria-selected="true">
+                            ${t.oil_name}
+                         </button>
+                       </li>
+                  </c:forEach>
+               </ul>
+               
+               <div class="tab-content" id="myTabContent" >
+                  <c:forEach  var="t"  items="${list }" varStatus="status">
+                       <div class="tab-pane fade show 
+                       
+                        <c:if test="${status.index == 0}">
+                            active
+                         </c:if>
+                        " id="${t.oil_name}" role="tabpanel" aria-labelledby="${t.oil_name}-tab">
+                             <div class="row">
+                                <div class="col text-center pr-0"  style="padding-right: 0">
+                                   <div class="" style="color: gray; font-size: large;">오늘의 유가</div>
+                                   <h3 style="font-size: xx-large; font-weight: bold">${t.price }원</h3>
+                                </div>
+                                <div class="col text-center" style="display: flex;
+                                     font-size: small;
+                                     padding-left: 0;
+                                     flex-direction: column;
+                                     justify-content: center;">
+                                   <div class="price-flex mb-1" >
+                                      <div class="price-vs-div">
+                                         vs 어제 
+                                      </div>
+                                      <div class="btn btn-sm py-0 price-down-btn" >
+                                         ${t.api_diff }
+                                      </div>
+                                   </div>
+                                   <div class="price-flex mb-1">
+                                      <div class="price-vs-div">
+                                         vs 1주전
+                                      </div>
+                                      <div class="btn btn-sm py-0 price-up-btn" >
+                                         ${t.week_diff }
+                                      </div>
+                                   </div>
+                                   <div class="price-flex">
+                                      <div class="price-vs-div">
+                                         vs 1달전
+                                      </div>
+                                      <div class="btn btn-sm py-0 price-up-btn" >
+                                         ${t.month_diff }
+                                      </div>
+                                   </div>
+                                </div>
+                             </div>
+                       </div>
+                    </c:forEach>
+               </div>
+            </div>
+         </div>
+         </div>
+
    <div>
       <ul>
          <li><a href="#" onclick="setCodeName('고급휘발유')">고급휘발유</a></li>
