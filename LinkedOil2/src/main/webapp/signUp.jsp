@@ -4,7 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="css/styles.css">
+<title>회원가입-링크드오일</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -55,66 +57,67 @@
 </script>
 </head>
 <body>
-	<%@ include file="header.jsp" %>
-	<!-- <h3>LINKED OIL</h3> -->
-	<form action="insertMember.do" method="post" name="loginForm">
-		<div class="form-group">
-		  <label for="email">아이디(이메일):</label>
-		  <input type="email" class="form-control" placeholder="이메일을 입력해주세요" id="email"  name="email" required="required">
-		  <input type="button" class="btn btn-primary" value="중복확인" onclick="checkEmail(this.form)">
-		</div>
-		<div class="form-group">
-		  <label for="pwd">비밀번호:</label>
-		  <input type="password" class="form-control" placeholder="비밀번호를 입력해주세요" id="pwd" name="pwd" required="required">
-		</div>
-		<div class="form-group">
-		  <label for="pwd2">비밀번호 확인:</label>
-		  <input type="password" class="form-control" placeholder="비밀번호를 한번 더 입력해주세요" id="pwd2" required="required">
-		</div>
-		<div class="form-group">
-		  <label for="name">이름:</label>
-		  <input type="text" class="form-control" placeholder="이름을 입력해주세요" id="name" name="name" required="required">
-		</div>
-		<div class="form-group">
-		  <label for="nickname">닉네임:</label>
-		  <input type="text" class="form-control" placeholder="사용하실 닉네임을 입력해주세요" id="nickname" name="nickname" required="required">
-		  <input type="button" class="btn btn-primary" value="중복확인" onclick="checkNickname(this.form)">
-		</div>
-		<div class="form-group">
-		  <label for="myOil">MY 유종:</label>
-			<div class="form-check-inline">
-			  <label class="form-check-label">
-			    <input type="checkbox" class="form-check-input" name="myOil" value="B027">휘발유
-			  </label>
+	<div class="header">
+		<a href="start.jsp"><img class="logo" alt="링크드오일로고" src="images/로고.png"></a>
+	</div>
+	<form action="insertMember.do" method="post" name="loginForm" class="form">
+		<div>
+			<h3 class="form__title">
+		  		<label for="email">아이디(이메일):</label>
+		  	</h3>
+		  	<div class="int_check">
+		  		<input type="email" placeholder="이메일을 입력해주세요" id="email" class="form-init" name="email" required="required">
+		  		<input type="button" value="중복 확인" class="form__submit form__submit--sm" onclick="checkEmail(this.form)">
 			</div>
-			<div class="form-check-inline">
-			  <label class="form-check-label">
-			    <input type="checkbox" class="form-check-input" name="myOil" value="D047">경유
-			  </label>
-			</div>
-			<div class="form-check-inline">
-			  <label class="form-check-label">
-			    <input type="checkbox" class="form-check-input" name="myOil" value="K015">LPG
-			  </label>
-			</div>
-			<div class="form-check-inline">
-			  <label class="form-check-label">
-			    <input type="checkbox" class="form-check-input" name="myOil" value="B034">고급휘발유
-			  </label>
-			</div>
-			<div class="form-check-inline">
-			  <label class="form-check-label">
-			    <input type="checkbox" class="form-check-input" name="myOil" value="Y000">요소수
-			  </label>
-			</div>
-			<div class="form-check-inline">
-			  <label class="form-check-label">
-			    <input type="checkbox" class="form-check-input" name="myOil" value="E001">전기
-			  </label>
-			</div>
-			<p> MY 유종은 마이페이지에서 설정 가능합니다. </p>
 		</div>
-		<input type="button" value="회원가입" onclick="checkForm()">
+		<div>
+			<h3 class="form__title">
+		 		 <label for="pwd">비밀번호:</label>
+			</h3>
+		  	<input type="password" placeholder="비밀번호를 입력해주세요"  class="form-init" id="pwd" name="pwd" required="required">
+		</div>
+		<div>
+			<h3 class="form__title">
+		  		<label for="pwd2">비밀번호 확인:</label>
+		  	</h3>
+		  	<input type="password"  placeholder="비밀번호를 한번 더 입력해주세요" class="form-init" id="pwd2" required="required">
+		</div>
+		<div>
+			<h3 class="form__title">
+		  		<label for="name">이름:</label>
+		  	</h3>
+		  	<input type="text" placeholder="이름을 입력해주세요" id="name" class="form-init"  name="name" required="required">
+		</div>
+		<div>
+			<h3 class="form__title">
+		  		<label for="nickname">닉네임:</label>
+		  	</h3>
+		  	<div class="int_check">
+		  		<input type="text" placeholder="사용하실 닉네임을 입력해주세요" id="nickname" class="form-init" name="nickname" required="required">
+		  		<input type="button" value="중복 확인"  class="form__submit form__submit--sm" onclick="checkNickname(this.form)">
+			</div>		
+		</div>
+		<div >
+			<h3 class="form__title">
+		  		<label for="myOil">MY 유종:</label>
+		  	</h3>
+		  	<div>
+				<input type="checkbox"  name="myOil" id="myOil" value="B027">
+				<label for="myOil">휘발유</label>
+				<input type="checkbox" name="myOil" id="myOil" value="D047">
+				<label for="myOil">경유</label>
+				<input type="checkbox"  name="myOil" id="myOil" value="K015">
+				<label for="myOil">LPG</label>
+				<input type="checkbox" name="myOil" id="myOil" value="B034">
+				<label for="myOil">고급휘발유</label>
+				<input type="checkbox" name="myOil" id="myOil" value="Y000">
+				<label for="myOil">요소수</label>
+				<input type="checkbox" name="myOil" id="myOil" value="E001">
+				<label for="myOil">전기</label>
+			</div>
+			<p class="form__msg"> *MY 유종은 마이페이지에서 설정 가능합니다. </p>
+		</div>
+		<input type="button" value="회원가입" class="form__submit" onclick="checkForm()">
 	</form>
 </body>
 </html>

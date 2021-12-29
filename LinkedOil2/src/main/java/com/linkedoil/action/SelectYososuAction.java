@@ -30,13 +30,10 @@ public class SelectYososuAction implements LinkedOilAction {
 		 request.setCharacterEncoding("utf-8");
 		
 		 String sido1 = request.getParameter("sido1");
-		 System.out.println("검색 시도 :  "+sido1);
 		 
 		 String gugun1 = request.getParameter("gugun1");	
-		 System.out.println("검색 군구: "+gugun1);
 		 
 		 String keyword = request.getParameter("keyword");
-		 System.out.println("검색어:"+keyword);
 		 
 		 if(keyword==null && session.getAttribute("keyword")!=null) {
 				keyword =(String)session.getAttribute("keyword");
@@ -77,10 +74,6 @@ public class SelectYososuAction implements LinkedOilAction {
 				session.setAttribute("sido1", sido1);
 				session.setAttribute("gugun1", gugun1);			
 			}
-			
-			
-			
-			
 			
 		return "selectYososu.jsp";
 	}

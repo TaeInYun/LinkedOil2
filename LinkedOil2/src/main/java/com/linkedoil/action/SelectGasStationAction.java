@@ -32,16 +32,12 @@ public class SelectGasStationAction implements LinkedOilAction {
 			 request.setCharacterEncoding("utf-8");
 			
 			 String sido1 = request.getParameter("sido1");
-			 System.out.println("검색 시도 :  "+sido1);
 			 
 			 String gugun1 = request.getParameter("gugun1");	
-			 System.out.println("검색 군구: "+gugun1);
 			 
 			 String user_brand = request.getParameter("user_brand");
-			 System.out.println("검색 브랜드:  "+user_brand);
 			 
 			 String oil = request.getParameter("oil");
-			 System.out.println("검색 유종: "+oil);
 			 
 			 
 				

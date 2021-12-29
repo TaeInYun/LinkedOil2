@@ -8,8 +8,10 @@
 @import "default.css";
 @import "component.css";
 
+/*components*/
+@import "components/form.css";
+
 /*screens*/
-@import "screens/login.css";
 
 body{
 	background: #fff;

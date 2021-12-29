@@ -5,16 +5,19 @@
 <head>
 <meta charset="UTF-8">
  <link rel="stylesheet" href="css/styles.css">
-<title>비밀번호 찾기 -Linked Oil</title>
+<title>비밀번호 찾기-링크드오일</title>
 </head>
 <body>
-	 <form action="pwdFind.do" method="post" class="loginForm">	 
-		<img class="logo" alt="링크드오일로고" src="images/로고.png">
-		
-		<h1>비밀번호 찾기</h1>
-	 	<input type="text" size="30" name="email" placeholder="가입하신 이메일을 입력하세요"> <br>
-		<input type="submit" class="loginForm__submit" value="비밀번호 찾기">
-	 </form>
+	<div class="header">
+		<a href="start.jsp"><img class="logo" alt="링크드오일로고" src="images/로고.png"></a>
+	</div>
+	<form action="pwdFind.do" method="post" class="form">
+	<h3 class="form__title">	 
+		비밀번호 찾기
+	</h3>
+		<input type="text" class="form-init" name="email" placeholder="가입하신 이메일을 입력하세요" required="required"> <br>
+	<input type="submit" class="form__submit" value="비밀번호 찾기" required="required">
+	</form>
 	 
 	
 </body>

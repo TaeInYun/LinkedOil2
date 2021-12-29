@@ -31,10 +31,8 @@ public class SearchEvStationListAction implements LinkedOilAction {
 		
 		 
 		 String sido1 = request.getParameter("sido1");
-		 System.out.println("검색 시도 :  "+sido1);
 		 
 		 String gugun1 = request.getParameter("gugun1");	
-		 System.out.println("검색 군구: "+gugun1);
 			
 		 
 			if(sido1 == null && session.getAttribute("sido1")!=null) {			
