@@ -5,7 +5,14 @@
 pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<head>
+<head> <meta charset="utf-8">
+ <link rel="stylesheet" href="css/searchEvStationList.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+</head>
 <meta charset="UTF-8">  
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script> 
 <!--  시도 선택을 위한 js-->
@@ -64,10 +71,35 @@ $('document').ready(function() {
 </script>
 
 <body>
-  
+
+  <%@ include file="header.jsp" %>
+
+<div id=container>
+	<!-- 검색창 -->
+	<section id="selectbox">
+		
+		 
+	
+	<form action="searchEvStationList.do" method="post" >
+      <select name="sido1" id="sido1"></select> 
+      <select name="gugun1" id="gugun1"></select> 
+                  
+      <input type="submit" value="검색">
+	</form>
+
+
+		 	
+	 	
+	</section>
+	
+	
+	<!-- 검색창 지도 -->
+	<section id = "maplist">
+	
+	<div id="map" style="width:100%;height:700px;"></div>
+
 <!-- -----------지도 -->
 
-<div id="map" style="width:100%;height:350px;"></div>
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=383beb63eac8714dec4cc534f56f27f8&libraries=services"></script>
 <script>
@@ -75,17 +107,20 @@ $('document').ready(function() {
 var mapContainer = document.getElementById('map');
 var mapOption = {
     center: new daum.maps.LatLng(37.450701, 126.570667),
-    level: 10
+    level: 8
 };  
 
 var map = new daum.maps.Map(mapContainer, mapOption); 
 		
+		
 var geocoder = new daum.maps.services.Geocoder();
+
+
 
 //주소를 배열에 담기
 var listData = new Array();
-<c:forEach items="${list}" var="g">
-listData.push("${g.station_addr}");
+<c:forEach items="${list}" var="e">
+listData.push("${e.ev_addr}");
 </c:forEach>
 
 for (var i=0; i < listData.length ; i++) {
@@ -113,80 +148,57 @@ geocoder.addressSearch(listData[i], function(result, status) {
         map.setCenter(coords);
     } 
 })
+};  
 
-};     
-</script>
 
-<form action="selectGasStation.do" method="post" >
-		<select name="sido1" id="sido1"></select> 
-		<select name="gugun1" id="gugun1"></select>
-		<select name="user_brand" id="user_brand">		 
-				<option value="SK" selected="selected">SK</option>		
-				<option value="GS" >GS</option> 
-				<option value="현대" >현대오일</option>		 
-				<option value="S-O" >S-OIL</option>
-				<option value="알뜰" >자영알뜰</option>		
-		</select>
-			
-		<select name="oil" id="oil" >		 
-				<option value="oil_b027" selected="selected">휘발유</option>		
-				<option value="oil_d047">경유</option>				 
-		</select>
-	 
-					   
-		<input type="submit" value="검색">
-</form>
 
-									 
-<!-- ----------------------------------리스트-- ----------------- -->		
-<hr>
-	<b>결과 리스트</b><br>
 	
-	<table border="1" width="60%">
+</script>
+	
+	</section>
+	
+	
+	<!-- 검색창 리스트 -->
+	<section id="list">
+	<table class="table table-hover">
 		<tr>
-		<!--  		 
-			<td>번호</td>
-			<td>셀프여부</td>		
-			<td>고급휘발유</td>	
-			<td>등유</td>	 -->
-			
-			<td>지역</td>
-			<td>이름</td>		
-			<td>주소</td>		
-			<td>브랜드</td>			
-			<td>휘발유</td>		 
-			<td>경유</td>
+		 
+
+			<td>이름</td>
+			<td>주소</td>
+			<td>리뷰수</td>
+			<td>평점</td>
 				
 		
-		 <c:forEach var="g" items="${list}"> 
-		 	<tr>
-		 	  				
-			 	<td>${g.station_local } </td>
-			 	<td>
-			 		<a href="detailGasStation.do?station_no=${g.station_no}">${g.station_name}</a> 
-			 	</td>			 
-				<td> ${g.station_addr } </td>			
-				<td> ${g.station_brand } </td>			
-						
-				<td> ${g.oil_b027 } </td>			
-				<td> ${g.oil_d047 } </td>			
-						 
-			</tr>			
-		 </c:forEach>
-		</tr>
 		
+<c:forEach var="e" items="${list}">
+			<tr>				
+				<td><a style="text-decoration: none; color : black; " href="detailEvStation.do?ev_id=${e.ev_id }">${e.ev_name}</a></td>
+				<td >${e.ev_addr }</td>
+				<td >${e.review_cnt }</td>
+				<td >${e.asterion_avg }</td>
+			</tr>
+		</c:forEach>
+		</tbody>
 	</table>
-	<br>
-	<br>
+	
+	<div class="pagination"> 
 	<c:if test = "${startPage > 1}">
-		<a href="selectGasStation.do?pageNUM=${startPage-1}">이전</a>
+		<a href="searchEvStationList.do?pageNUM=${startPage-1}">&laquo;</a>
 	</c:if>
 		<c:forEach var="i" begin="${startPage}" end="${endPage}">
-		<a href="selectGasStation.do?pageNUM=${i}">${i}</a>&nbsp;&nbsp;
+		<a href="searchEvStationList.do?pageNUM=${i}">${i}</a>
 		</c:forEach>
 	<c:if test = "${endPage < totalPage}">
-		<a href="selectGasStation.do?pageNUM=${endPage+1}">다음</a>
+		<a href="searchEvStationList.do?pageNUM=${endPage+1}">&laquo;</a>
 	</c:if>
+	</div>
+		
+	</div>
+		
+</div>
+</div>
+ 
 </body>
 
 </html>

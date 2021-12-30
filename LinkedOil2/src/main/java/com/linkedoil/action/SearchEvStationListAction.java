@@ -54,7 +54,7 @@ public class SearchEvStationListAction implements LinkedOilAction {
 		
 		ArrayList<SearchStationVO> list  = dao.searchEvStationList(pageNUM,sido1,gugun1);
 		request.setAttribute("totalPage", SearchStationDAO.totalPage);
-		request.setAttribute("list", list);
+		session.setAttribute("list", list); //이거변경
 		
 		request.setAttribute("totalPage", SearchStationDAO.totalPage);
 		request.setAttribute("startPage", SearchStationDAO.startPage);
