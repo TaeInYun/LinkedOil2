@@ -50,7 +50,7 @@
 				</tr>
 		  	</table>
 		</div>
-		<div id="map" class="box-map"></div>
+		<div id="map" class="box-map" ></div>
 		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=383beb63eac8714dec4cc534f56f27f8&libraries=services"></script>
 		<script>
 	

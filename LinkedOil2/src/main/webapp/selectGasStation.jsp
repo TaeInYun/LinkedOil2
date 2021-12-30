@@ -8,7 +8,7 @@ pageEncoding="UTF-8"%>
 <head>
 
 <meta charset="UTF-8">  
-<link rel="stylesheet" href="css/selectYososu.css"> 
+<link rel="stylesheet" href="css/searchEvStationList.css"> 
  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
@@ -121,7 +121,7 @@ $(function(){
 			for (var i = 0; i < positions.length; i ++) {
 				
 				  
-				var iwContent = '<div style="padding:5px;">'+positions[i].station_name+'</div><a href="detailGasStation.do?station_no='+positions[i].station_name+'" style="color:blue" target="_blank">정보보기</a></div>' 				
+				var iwContent = '<div style="padding:5px;">'+positions[i].station_name+'</div>' 				
 			    iwPosition = positions[i].latlng; //인포윈도우 표시 위치입니다
 			    
 			    
