@@ -121,7 +121,7 @@ $(function(){
 			for (var i = 0; i < positions.length; i ++) {
 				
 				  
-				var iwContent = '<div style="padding:5px;">'+positions[i].ev_name+'</div><a href="detailGasStation.do?ev_name='+positions[i].ev_name+'" style="color:blue" target="_blank">정보보기</a></div>' 				
+				var iwContent = '<div style="padding:5px;">'+positions[i].ev_name+'</div>' 				
 			    iwPosition = positions[i].latlng; //인포윈도우 표시 위치입니다
 			    
 			    
@@ -270,4 +270,7 @@ $(function(){
 
 
 </html>
+
+
+
 
