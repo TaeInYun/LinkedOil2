@@ -34,6 +34,9 @@
 						<li class="nav-item active">
 							<a class="nav-link" href="logout.jsp">로그아웃</a>
 						</li>
+						<li class="nav-item active">
+							<a class="nav-link" href="getNickname.jsp">마이페이지</a>
+						</li>
 					</ul>
 			<%		
 				}else{

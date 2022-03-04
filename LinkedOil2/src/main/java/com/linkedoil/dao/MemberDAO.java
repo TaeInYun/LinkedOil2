@@ -11,6 +11,28 @@ import com.linkedoil.vo.MemberVO;
  
 public class MemberDAO {
 	
+	public MemberVO getMyInfo(String nickname) {
+		MemberVO vo = null;
+		String sql = "select * from member where nickname=?";
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			conn = ConnectionProvider.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, nickname);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				vo = new MemberVO(rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5));
+			}
+		} catch (Exception e) {
+			e.getStackTrace();
+		}finally {
+			ConnectionProvider.close(conn, pstmt, rs);
+		}
+		return vo;
+	}
 	public int getNo(String email, String nickname) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;

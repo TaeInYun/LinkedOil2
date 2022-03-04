@@ -4,7 +4,7 @@
 @import "default.css";
 @import "component.css";
 @import "maplist.css";
-
+@import "minPriceGas.css";
 /*components*/
 @import "components/form.css";
 
